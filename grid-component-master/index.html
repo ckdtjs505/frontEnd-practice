@@ -1,50 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Single Price Grid Component</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
-  Join our community
+    <link
+      href="https://fonts.googleapis.com/css2?family=Karla&display=swap"
+      rel="stylesheet"
+    />
 
-  30-day, hassle-free money back guarantee
+    <title>Frontend Mentor | Single Price Grid Component</title>
 
-  Gain access to our full library of tutorials along with expert code reviews. 
-  Perfect for any developers who are serious about honing their skills.
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      html {
+        font-family: "Karla", sans-serif;
+        background-color: #f0f0f0;
+      }
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+      section {
+        display: grid;
+        grid-template-rows: 0.7fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        margin: 240px auto 40px auto;
+        width: 640px;
+        color: white;
+        border-radius: 0.8rem;
+        box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),
+          0 8px 16px -8px rgba(0, 0, 0, 0.3),
+          0 -6px 16px -6px rgba(0, 0, 0, 0.025);
+      }
 
-  Monthly Subscription
+      .main {
+        grid-column: 1 / 3;
+        padding: 2rem;
+        color: gray;
+        line-height: 1.8rem;
+        background-color: white;
+        border-top-left-radius: 0.8rem;
+        border-top-right-radius: 0.8rem;
+      }
+      .main-title {
+        font-size: 1.4rem;
+        color: #29b5b3;
+        margin-bottom: 0.5rem;
+      }
+      .main-subtitle {
+        font-size: 1.1rem;
+        color: #bfdf32;
+        margin-bottom: 0.3rem;
+      }
 
-  &dollar;29 per month
+      .subscription {
+        padding: 2rem;
+        background-color: #2bb3b1;
+        border-bottom-left-radius: 0.8rem;
+      }
+      .sub-title {
+        font-size: 1.2rem;
+        margin-bottom: 0.9rem;
+      }
+      .subscription strong {
+        font-size: 2rem;
+      }
+      .subscription span {
+        vertical-align: middle;
+      }
+      .subscription button {
+        width: 100%;
+        height: 40px;
+        background-color: #bfdf32;
+        border: none;
+        border-radius: 0.4rem;
+        color: white;
+        margin-top: 1.5rem;
+      }
+      .subscription .content {
+        margin-top: 0.5rem;
+        color: hsl(204, 43%, 93%);
+      }
 
-  Full access for less than &dollar;1 a day
+      .about {
+        padding: 2rem;
+        background-color: #4abebd;
+        border-bottom-right-radius: 0.8rem;
+      }
+      .about .content {
+        color: hsl(204, 43%, 93%);
+        font-size: 0.9rem;
+        line-height: 1.2rem;
+      }
 
-  Sign Up
+      @media screen and (max-width: 768px) {
+        section {
+          display: inline;
+        }
+        .subscription {
+          border-bottom-left-radius: 0rem;
+        }
+        .about {
+          border-bottom-left-radius: 0.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="main">
+        <div class="main-title">Join our community</div>
+        <div class="main-subtitle">
+          30-day, hassle-free money back guarantee
+        </div>
+        <div class="content">
+          Gain access to our full library of tutorials along with expert code
+          reviews.<br />
+          Perfect for any developers who are serious about honing their skills.
+        </div>
+      </div>
+      <div class="subscription">
+        <div class="sub-title">Monthly Subscription</div>
+        <div><strong> &dollar;29 </strong> <span> per month </span></div>
+        <div class="content">Full access for less than &dollar;1 a day</div>
+        <button>Sign Up</button>
+      </div>
+      <div class="about">
+        <div class="sub-title">Why Us</div>
+        <div class="content">
+          Tutorials by industry experts<br />
+          Peer &amp; expert code review<br />
+          Coding exercises<br />
+          Access to our GitHub repos<br />
+          Community forum<br />
+          Flashcard decks<br />
+          New videos every week
+        </div>
+      </div>
+    </section>
 
-  Why Us
-
-  Tutorials by industry experts
-  Peer &amp; expert code review
-  Coding exercises
-  Access to our GitHub repos
-  Community forum
-  Flashcard decks
-  New videos every week
-  
-  <footer>
-    <p class="attribution">
-      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-      Coded by <a href="#">Your Name Here</a>.
-    </p>
-  </footer>
-</body>
+    <footer>
+      <p class="attribution">
+        Challenge by
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+          >Frontend Mentor</a
+        >. Coded by <a href="#">changsun</a>.
+      </p>
+    </footer>
+  </body>
 </html>
