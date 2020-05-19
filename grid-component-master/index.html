@@ -107,7 +107,14 @@
 
       @media screen and (max-width: 768px) {
         section {
-          display: inline;
+          display: grid;
+          grid-template-rows: 1fr 1fr 1fr;
+          grid-template-columns: 1fr;
+          width: 90%;
+          margin-top: 5rem;
+        }
+        .main {
+          grid-column: 1 / 1;
         }
         .subscription {
           border-bottom-left-radius: 0rem;
