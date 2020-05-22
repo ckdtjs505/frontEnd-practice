@@ -1,0 +1,44 @@
+header {
+  height: 3rem;
+  margin-right: auto;
+  border: solid red;
+  padding-top: 1.5rem;
+  padding-right: 11rem;
+  padding-left: 11rem;
+  padding-bottom: 1.5rem;
+}
+
+/* 해더 로고 */
+header img {
+  margin-top: 0.7rem;
+  float: left;
+}
+
+/* 리스트 데이터 */
+header .serviceList li {
+  margin-top: 1rem;
+  float: left;
+  margin-left: 1rem;
+}
+
+header .login {
+  float: right;
+}
+
+header .login li {
+  margin-top: 1rem;
+  float: left;
+  margin-right: 1rem;
+}
+
+header > div {
+  margin: auto;
+}
+
+.attribution {
+  font-size: 11px;
+  text-align: center;
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
