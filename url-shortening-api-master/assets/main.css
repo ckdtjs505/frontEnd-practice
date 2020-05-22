@@ -1,11 +1,16 @@
 header {
   height: 3rem;
   margin-right: auto;
-  border: solid red;
   padding-top: 1.5rem;
-  padding-right: 11rem;
-  padding-left: 11rem;
   padding-bottom: 1.5rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+}
+
+.container {
+  padding-left: 5rem;
+  padding-right: 5rem;
+  max-width: 1240px;
 }
 
 /* 해더 로고 */
@@ -18,7 +23,13 @@ header img {
 header .serviceList li {
   margin-top: 1rem;
   float: left;
-  margin-left: 1rem;
+  margin-left: 2rem;
+  color: gray;
+}
+
+header .serviceList li:hover {
+  cursor: pointer;
+  color: black;
 }
 
 header .login {
@@ -28,7 +39,33 @@ header .login {
 header .login li {
   margin-top: 1rem;
   float: left;
-  margin-right: 1rem;
+  margin-right: 2rem;
+  color: gray;
+}
+
+header .login li:hover {
+  cursor: pointer;
+  color: black;
+}
+
+header .login button {
+  margin-top: -1rem;
+  width: 5rem;
+  height: 2.2rem;
+  border-radius: 1.5rem;
+  background-color: hsl(180, 66%, 49%);
+  color: white;
+  border: none;
+  font-weight: 700;
+}
+
+header .login button:hover {
+  color: white;
+  cursor: pointer;
+}
+
+header .login button:focus {
+  outline: none;
 }
 
 header > div {
