@@ -13,6 +13,13 @@ header {
   max-width: 1240px;
 }
 
+.container .fas {
+  display: none;
+}
+.container .fas:hover {
+  cursor: pointer;
+}
+
 /* 해더 로고 */
 header img {
   margin-top: 0.7rem;
@@ -70,6 +77,58 @@ header .login button:focus {
 
 header > div {
   margin: auto;
+}
+
+@media screen and (max-width: 800px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    max-width: 1240px;
+  }
+  .subList {
+    display: none;
+    background-color: hsl(257, 27%, 26%);
+    position: absolute;
+    top: 5rem;
+    border-radius: 0.5rem;
+    width: 88%;
+    left: 6%;
+    right: 1%;
+  }
+
+  header .serviceList li {
+    display: block;
+    margin-left: 0rem;
+    color: white;
+    float: unset;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  header .login {
+    margin: auto;
+    border-top: gray 0.1px solid;
+    width: 90%;
+    float: unset;
+  }
+  header .login li {
+    margin-top: 1rem;
+    float: unset;
+    margin-right: 0rem;
+    color: white;
+
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  header .login button {
+    width: 80%;
+  }
+  .container .fas {
+    margin-top: 1rem;
+    display: block;
+    float: right;
+  }
 }
 
 .attribution {
