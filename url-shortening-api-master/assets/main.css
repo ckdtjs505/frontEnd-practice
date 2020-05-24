@@ -7,55 +7,44 @@ header {
   font-weight: 700;
 }
 
-.container {
+header .container {
   padding-left: 5rem;
   padding-right: 5rem;
   max-width: 1240px;
 }
 
-.container .fas {
+header .container .fas {
   display: none;
 }
-.container .fas:hover {
+
+header .container .fas:hover {
   cursor: pointer;
 }
 
 /* 해더 로고 */
-header img {
+header .container img {
   margin-top: 0.7rem;
   float: left;
 }
 
 /* 리스트 데이터 */
-header .serviceList li {
+header .container .navbar li {
   margin-top: 1rem;
   float: left;
   margin-left: 2rem;
   color: gray;
 }
 
-header .serviceList li:hover {
+header .container .navbar li:hover {
   cursor: pointer;
   color: black;
 }
 
-header .login {
+header .container .login {
   float: right;
 }
 
-header .login li {
-  margin-top: 1rem;
-  float: left;
-  margin-right: 2rem;
-  color: gray;
-}
-
-header .login li:hover {
-  cursor: pointer;
-  color: black;
-}
-
-header .login button {
+header .container .login button {
   margin-top: -1rem;
   width: 5rem;
   height: 2.2rem;
@@ -66,12 +55,12 @@ header .login button {
   font-weight: 700;
 }
 
-header .login button:hover {
+header .container .login button:hover {
   color: white;
   cursor: pointer;
 }
 
-header .login button:focus {
+header .container .login button:focus {
   outline: none;
 }
 
@@ -80,12 +69,20 @@ header > div {
 }
 
 @media screen and (max-width: 800px) {
-  .container {
+  header .container {
     padding-left: 2rem;
     padding-right: 2rem;
     max-width: 1240px;
   }
-  .subList {
+
+  /* header 3-bar button 노출 */
+  header .container .fas {
+    margin-top: 1rem;
+    display: block;
+    float: right;
+  }
+
+  header .container .navbar {
     display: none;
     background-color: hsl(257, 27%, 26%);
     position: absolute;
@@ -96,7 +93,8 @@ header > div {
     right: 1%;
   }
 
-  header .serviceList li {
+  /* header 목차 리스트 */
+  header .container .navbar li {
     display: block;
     margin-left: 0rem;
     color: white;
@@ -105,29 +103,16 @@ header > div {
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
-  header .login {
+
+  header .container .login {
     margin: auto;
     border-top: gray 0.1px solid;
     width: 90%;
     float: unset;
   }
-  header .login li {
-    margin-top: 1rem;
-    float: unset;
-    margin-right: 0rem;
-    color: white;
 
-    text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
-  header .login button {
+  header .container .login button {
     width: 80%;
-  }
-  .container .fas {
-    margin-top: 1rem;
-    display: block;
-    float: right;
   }
 }
 
