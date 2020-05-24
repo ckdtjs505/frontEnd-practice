@@ -143,10 +143,19 @@
       >. Coded by <a href="#">Your Name Here</a>.
     </div>
     <script>
+      const sublist = document.querySelector(".subList");
       document.querySelector(".fas").addEventListener("click", function () {
-        const sublist = document.querySelector(".subList");
         if (sublist.style.display === "block") sublist.style.display = "none";
         else sublist.style.display = "block";
+      });
+
+      window.addEventListener("resize", function () {
+        // mobile 대응
+        if (document.body.offsetWidth >= 800) {
+          sublist.style.display = "block";
+        } else {
+          sublist.style.display = "none";
+        }
       });
     </script>
   </body>
