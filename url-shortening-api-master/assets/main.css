@@ -72,11 +72,11 @@ section .container {
   padding-left: 5rem;
   padding-right: 5rem;
   height: 500px;
-  display: flex;
 }
 
 section .container .contents {
-  width: 60%;
+  width: 45%;
+  float: left;
 }
 
 section .container .contents h1 {
@@ -104,6 +104,7 @@ section .container .contents button {
   font-size: 1.2rem;
   font-weight: 700;
   margin-top: 1rem;
+  margin-bottom: 5rem;
 }
 
 section .container .contents button:hover {
@@ -116,7 +117,8 @@ section .container .contents button:focus {
 }
 
 section .container img {
-  margin-right: -25rem;
+  float: right;
+  margin-right: -10rem;
 }
 
 @media screen and (max-width: 800px) {
@@ -164,6 +166,51 @@ section .container img {
 
   header .container .login button {
     width: 80%;
+  }
+
+  section .container {
+    display: block;
+    text-align: center;
+    padding-left: 1.5rem;
+    padding-right: 1.5em;
+  }
+
+  section .container .contents {
+    width: 100%;
+    margin: auto;
+  }
+
+  section .container .contents h1 {
+    font-size: 3.8rem;
+    font-weight: 900;
+    margin-top: 5rem;
+  }
+
+  section .container .contents h2 {
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+  }
+
+  section .container img {
+    margin-right: 0rem;
+  }
+}
+
+@media screen and (max-width: 1330px) {
+  section .container {
+    display: block;
+    text-align: center;
+    padding-left: 1.5rem;
+    padding-right: 1.5em;
+  }
+  section .container .contents {
+    width: 100%;
+    margin: auto;
+  }
+
+  section .container img {
+    float: unset;
+    margin-right: 0rem;
   }
 }
 
