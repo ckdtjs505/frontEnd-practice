@@ -66,7 +66,7 @@ header .container .login button:focus {
 }
 
 /* 메인 화면 */
-section .container {
+section.main-header .container {
   margin: auto;
   max-width: 1240px;
   padding-left: 5rem;
@@ -74,18 +74,18 @@ section .container {
   height: 500px;
 }
 
-section .container .contents {
+section.main-header .container .contents {
   width: 45%;
   float: left;
 }
 
-section .container .contents h1 {
+section.main-header .container .contents h1 {
   font-size: 4.5rem;
   font-weight: 900;
   margin-top: 5rem;
 }
 
-section .container .contents h2 {
+section.main-header .container .contents h2 {
   font-size: 1.2rem;
   line-height: 1.8rem;
   margin-top: 1rem;
@@ -94,7 +94,7 @@ section .container .contents h2 {
   font-weight: 500;
 }
 
-section .container .contents button {
+section.main-header .container .contents button {
   width: 10rem;
   height: 3rem;
   border-radius: 1.5rem;
@@ -107,18 +107,46 @@ section .container .contents button {
   margin-bottom: 5rem;
 }
 
-section .container .contents button:hover {
+section.main-header .container .contents button:hover {
   color: white;
   cursor: pointer;
 }
 
-section .container .contents button:focus {
+section.main-header .container .contents button:focus {
   outline: none;
 }
 
-section .container img {
+section.main-header .container img {
   float: right;
   margin-right: -10rem;
+}
+
+section.input-box {
+  margin: auto;
+  max-width: 1240px;
+  background-color: black;
+  background-image: url("../images/bg-boost-desktop.svg");
+  border-radius: 0.3rem;
+  height: 6rem;
+}
+
+section.input-box .container {
+  height: 2rem;
+  width: 90%;
+  margin: auto;
+}
+
+section.input-box .container input {
+  height: 2rem;
+  width: 65%;
+  margin-top: 2rem;
+  margin-left: auto;
+}
+
+section.input-box .container button {
+  height: 2rem;
+  width: 30%;
+  margin-left: auto;
 }
 
 @media screen and (max-width: 800px) {
@@ -168,47 +196,47 @@ section .container img {
     width: 80%;
   }
 
-  section .container {
+  section.main-header .container {
     display: block;
     text-align: center;
     padding-left: 1.5rem;
     padding-right: 1.5em;
   }
 
-  section .container .contents {
+  section.main-header .container .contents {
     width: 100%;
     margin: auto;
   }
 
-  section .container .contents h1 {
+  section.main-header .container .contents h1 {
     font-size: 3.8rem;
     font-weight: 900;
     margin-top: 5rem;
   }
 
-  section .container .contents h2 {
+  section.main-header .container .contents h2 {
     font-size: 1.2rem;
     line-height: 1.8rem;
   }
 
-  section .container img {
+  section.main-header .container img {
     margin-right: 0rem;
   }
 }
 
 @media screen and (max-width: 1330px) {
-  section .container {
+  section.main-header .container {
     display: block;
     text-align: center;
     padding-left: 1.5rem;
     padding-right: 1.5em;
   }
-  section .container .contents {
+  section.main-header .container .contents {
     width: 100%;
     margin: auto;
   }
 
-  section .container img {
+  section.main-header .container img {
     float: unset;
     margin-right: 0rem;
   }
