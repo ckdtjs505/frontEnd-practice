@@ -161,6 +161,25 @@ section.input-box .container input[type="text"] {
   padding-right: 1rem;
 }
 
+section.output-box {
+  margin: auto;
+  max-width: 1240px;
+  border-radius: 0.5rem;
+  height: 8rem;
+}
+
+section.output-box .container {
+  margin-top: 1rem;
+  height: 2rem;
+}
+
+section.output-box .container .input-url {
+  float: left;
+}
+
+section.output-box .container .output-url {
+  float: right;
+}
 @media screen and (max-width: 800px) {
   header .container {
     padding-left: 2rem;
