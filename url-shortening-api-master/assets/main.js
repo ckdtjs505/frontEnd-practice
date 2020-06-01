@@ -3,6 +3,8 @@ const div = document.createElement("div");
 const inputBox = document.querySelector(".input-box input");
 const button = document.querySelector(".input-box button");
 
+let urlList = [];
+
 const createShortURLDom = url => {
   console.log(url);
   const outputBox = document.querySelector(".output-box");
@@ -31,16 +33,18 @@ const getShortlyUrl = url => {
 };
 
 button.addEventListener("click", () => {
-  let urlList = [];
-
   getShortlyUrl(inputBox.value).then(data => {
-    let currentUrlData = JSON.parse(localStorage.getItem("localUrl"));
-    if (currentUrlData !== null)
-      currentUrlData.forEach(ele => {
-        urlList.push(ele);
-      });
+    if (urlList.length >= 3) urlList.pop();
     urlList.push(data);
     localStorage.setItem("localUrl", JSON.stringify(urlList));
     createShortURLDom(data);
   });
 });
+
+let currentUrlData = JSON.parse(localStorage.getItem("localUrl"));
+if (currentUrlData !== null || currentUrlData.lenght < 3) {
+  currentUrlData.forEach(ele => {
+    urlList.push(ele);
+    createShortURLDom(ele);
+  });
+}
