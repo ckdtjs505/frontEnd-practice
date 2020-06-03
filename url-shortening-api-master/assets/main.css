@@ -170,7 +170,6 @@ section.main-body .output-box {
   margin: auto;
   max-width: 1240px;
   border-radius: 0.5rem;
-  height: 8rem;
 }
 
 section.main-body .output-box .container {
@@ -210,6 +209,10 @@ section.main-body .output-box .container .output-url button {
   border-radius: 0.3rem;
   width: 4rem;
   height: 2rem;
+}
+
+section.main-body .output-box .container .output-url button:hover {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 800px) {
@@ -331,6 +334,11 @@ section.main-body .output-box .container .output-url button {
 
   section.main-body .input-box .container {
     margin-top: 25rem;
+  }
+
+  section.main-body .output-box .container {
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
 }
 
