@@ -175,16 +175,43 @@ section.main-body .output-box {
 
 section.main-body .output-box .container {
   margin-top: 1rem;
-  height: 2rem;
+  height: 1.5rem;
+  background-color: white;
+  padding: 1rem;
+  font-weight: 900;
 }
 
 section.main-body .output-box .container .input-url {
+  margin-top: 0.2rem;
   float: left;
 }
 
 section.main-body .output-box .container .output-url {
+  margin-top: 0.2rem;
   float: right;
+  text-decoration: none;
+  outline: none;
 }
+
+section.main-body .output-box .container .output-url a {
+  text-decoration: none;
+  outline: none;
+  margin-right: 1rem;
+  color: hsl(180, 66%, 49%);
+}
+
+section.main-body .output-box .container .output-url button {
+  margin-top: -0.7rem;
+  margin-right: 1rem;
+  background-color: hsl(180, 66%, 49%);
+  outline: none;
+  color: white;
+  border: none;
+  border-radius: 0.3rem;
+  width: 4rem;
+  height: 2rem;
+}
+
 @media screen and (max-width: 800px) {
   header .container {
     padding-left: 2rem;
