@@ -230,13 +230,23 @@ section.main-body .explanation .explanation-header div {
   line-height: 1.5rem;
   font-weight: bold;
   color: gray;
-  margin-bottom: 2rem;
+  margin-bottom: 6rem;
 }
+
 section.main-body .explanation .explanation-content {
-  background-color: white;
   display: flex;
-  width: 50rem;
-  margin: auto;
+  justify-content: center;
+  padding-bottom: 5rem;
+}
+
+section.main-body .explanation .explanation-content .explanation-data {
+  margin-right: 1rem;
+  margin-left: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: white;
+  width: 20rem;
 }
 
 section.main-body .explanation .explanation-content .explanation-img {
@@ -244,14 +254,27 @@ section.main-body .explanation .explanation-content .explanation-img {
   height: 5rem;
   border-radius: 2.5rem;
   background-color: indigo;
+  margin-top: -3rem;
 }
 
 section.main-body .explanation .explanation-content .explanation-img img {
   margin-top: 1rem;
 }
 
-section.main-body .explanation .explanation-content .explanation-img img {
-  margin-top: 1rem;
+section.main-body .explanation .explanation-content .explanation-data h1 {
+  font-weight: 900;
+  font-size: 1.2rem;
+  text-align: left;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+section.main-body .explanation .explanation-content .explanation-data h3 {
+  text-align: left;
+  line-height: 1.5rem;
+  font-weight: bold;
+  color: gray;
+  margin-bottom: 3rem;
 }
 
 @media screen and (max-width: 800px) {
