@@ -232,6 +232,27 @@ section.main-body .explanation .explanation-header div {
   color: gray;
   margin-bottom: 2rem;
 }
+section.main-body .explanation .explanation-content {
+  background-color: white;
+  display: flex;
+  width: 50rem;
+  margin: auto;
+}
+
+section.main-body .explanation .explanation-content .explanation-img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 2.5rem;
+  background-color: indigo;
+}
+
+section.main-body .explanation .explanation-content .explanation-img img {
+  margin-top: 1rem;
+}
+
+section.main-body .explanation .explanation-content .explanation-img img {
+  margin-top: 1rem;
+}
 
 @media screen and (max-width: 800px) {
   header .container {
