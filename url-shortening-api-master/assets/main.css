@@ -215,6 +215,24 @@ section.main-body .output-box .container .output-url button:hover {
   cursor: pointer;
 }
 
+section.main-body .explanation {
+  margin-top: 5rem;
+  text-align: center;
+}
+
+section.main-body .explanation .explanation-header h1 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+}
+
+section.main-body .explanation .explanation-header div {
+  line-height: 1.5rem;
+  font-weight: bold;
+  color: gray;
+  margin-bottom: 2rem;
+}
+
 @media screen and (max-width: 800px) {
   header .container {
     padding-left: 2rem;
