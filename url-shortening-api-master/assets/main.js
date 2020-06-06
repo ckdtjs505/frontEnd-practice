@@ -1,3 +1,5 @@
+document.documentElement.style.overflowX = "hidden";
+
 const div = document.createElement("div");
 
 const inputBox = document.querySelector(".input-box input");
