@@ -38,6 +38,8 @@ button.addEventListener("click", () => {
   if (inputBox.value === "") return alert("값을 입력하세요");
 
   getShortlyUrl(inputBox.value).then(data => {
+    if (data.hashid === undefined) return alert("유효하지 않은 값을 입력");
+
     createShortURLDom(data);
 
     // 데이터의 길이가 3개부터는 한개를 지운다
