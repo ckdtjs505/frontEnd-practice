@@ -370,6 +370,24 @@ section.main-body .explanation .explanation-content .explanation-data h3 {
     font-weight: 700;
     float: unset;
   }
+
+  section.main-body .explanation .explanation-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 2rem;
+  }
+
+  section.main-body .explanation .explanation-content .explanation-data {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 4rem;
+  }
+
+  section.main-body .explanation .explanation-content .explanation-img {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 @media screen and (max-width: 1330px) {
