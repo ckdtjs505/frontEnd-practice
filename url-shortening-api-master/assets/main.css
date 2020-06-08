@@ -173,21 +173,28 @@ section.main-body .output-box {
 }
 
 section.main-body .output-box .container {
+  display: flex;
+  justify-content: space-between;
   margin-top: 1rem;
-  height: 1.5rem;
   background-color: white;
   padding: 1rem;
   font-weight: 900;
 }
 
 section.main-body .output-box .container .input-url {
+  display: inline-block;
   margin-top: 0.2rem;
-  float: left;
+  max-width: 700px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 section.main-body .output-box .container .output-url {
+  display: flex;
+  justify-content: space-between;
+  min-width: 280px;
   margin-top: 0.2rem;
-  float: right;
   text-decoration: none;
   outline: none;
 }
@@ -195,7 +202,6 @@ section.main-body .output-box .container .output-url {
 section.main-body .output-box .container .output-url a {
   text-decoration: none;
   outline: none;
-  margin-right: 1rem;
   color: hsl(180, 66%, 49%);
 }
 
@@ -478,6 +484,21 @@ footer .footer-body .img-list img {
     flex-direction: column;
     text-align: center;
     width: 100%;
+  }
+
+  section.main-body .output-box .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  section.main-body .output-box .container .input-url {
+    border-bottom: #f0f1f6 solid;
+    padding-bottom: 1rem;
+  }
+
+  section.main-body .output-box .container .output-url {
+    padding-top: 1rem;
+    display: flex;
   }
 }
 
