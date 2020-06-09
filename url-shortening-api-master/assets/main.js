@@ -65,3 +65,24 @@ if (currentUrlData !== null || currentUrlData.lenght <= 3) {
     createShortURLDom(ele);
   });
 }
+
+let copyButtons = document.querySelectorAll(".output-url button");
+
+copyButtons.forEach(btn => {
+  btn.addEventListener("click", e => {
+    let tempEle = document.createElement("textarea");
+    tempEle.innerText = e.target.previousSibling.previousSibling.innerText;
+    e.target.innerText = "Copied!";
+    e.target.style.backgroundColor = "#3A3053";
+
+    document.body.appendChild(tempEle);
+
+    tempEle.select();
+    document.execCommand("copy");
+
+    setTimeout(() => {
+      e.target.innerText = "Copy";
+      e.target.style.backgroundColor = "#2BD1D1";
+    }, 2000);
+  });
+});
