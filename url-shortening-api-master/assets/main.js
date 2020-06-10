@@ -1,7 +1,5 @@
 document.documentElement.style.overflowX = "hidden";
 
-const div = document.createElement("div");
-
 const inputBox = document.querySelector(".input-box input");
 const outputBox = document.querySelector(".output-box");
 const button = document.querySelector(".input-box button");
@@ -9,7 +7,6 @@ const button = document.querySelector(".input-box button");
 let urlList = [];
 
 const createShortURLDom = url => {
-  console.log(url);
   const urlLink = "https://rel.ink/";
   const containerDom = document.createElement("div");
   const html = `
@@ -46,7 +43,6 @@ button.addEventListener("click", () => {
     if (data.hashid === undefined) return alert("유효하지 않은 값을 입력");
 
     createShortURLDom(data);
-
     shortURLDomEvent(data);
 
     // 데이터의 길이가 3개부터는 한개를 지운다
@@ -63,6 +59,25 @@ button.addEventListener("click", () => {
   });
 });
 
+const copyButtonHandler = e => {
+  let tempEle = document.createElement("textarea");
+  tempEle.innerText = e.target.previousSibling.previousSibling.innerText;
+  e.target.innerText = "Copied!";
+  e.target.style.backgroundColor = "#3A3053";
+
+  // 복사
+  document.body.appendChild(tempEle);
+  tempEle.select();
+  document.execCommand("copy");
+  tempEle.remove();
+
+  // 2초뒤 상태 복귀
+  setTimeout(() => {
+    e.target.innerText = "Copy";
+    e.target.style.backgroundColor = "#2BD1D1";
+  }, 2000);
+};
+
 // localStorage에는 string으로 저장되어 json parse가 필요
 let currentUrlData = JSON.parse(localStorage.getItem("localUrl"));
 
@@ -70,28 +85,6 @@ if (currentUrlData !== null || currentUrlData.lenght <= 3) {
   currentUrlData.forEach(ele => {
     urlList.push(ele);
     createShortURLDom(ele);
+    shortURLDomEvent(ele);
   });
 }
-
-let copyButtons = document.querySelectorAll(".output-url button");
-
-const copyButtonHandler = e => {
-  let tempEle = document.createElement("textarea");
-  tempEle.innerText = e.target.previousSibling.previousSibling.innerText;
-  e.target.innerText = "Copied!";
-  e.target.style.backgroundColor = "#3A3053";
-
-  document.body.appendChild(tempEle);
-
-  tempEle.select();
-  document.execCommand("copy");
-
-  setTimeout(() => {
-    e.target.innerText = "Copy";
-    e.target.style.backgroundColor = "#2BD1D1";
-  }, 2000);
-};
-
-copyButtons.forEach(btn => {
-  btn.addEventListener("click", copyButtonHandler);
-});
