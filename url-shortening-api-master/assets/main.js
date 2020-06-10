@@ -26,6 +26,11 @@ const createShortURLDom = url => {
   outputBox.prepend(containerDom);
 };
 
+const shortURLDomEvent = () => {
+  const newCopybutton = document.querySelector(".output-url button");
+  newCopybutton.addEventListener("click", copyButtonHandler);
+};
+
 const getShortlyUrl = url => {
   return fetch("https://rel.ink/api/links/", {
     method: "POST",
@@ -41,6 +46,8 @@ button.addEventListener("click", () => {
     if (data.hashid === undefined) return alert("유효하지 않은 값을 입력");
 
     createShortURLDom(data);
+
+    shortURLDomEvent(data);
 
     // 데이터의 길이가 3개부터는 한개를 지운다
     if (urlList.length === 3) {
@@ -68,21 +75,23 @@ if (currentUrlData !== null || currentUrlData.lenght <= 3) {
 
 let copyButtons = document.querySelectorAll(".output-url button");
 
+const copyButtonHandler = e => {
+  let tempEle = document.createElement("textarea");
+  tempEle.innerText = e.target.previousSibling.previousSibling.innerText;
+  e.target.innerText = "Copied!";
+  e.target.style.backgroundColor = "#3A3053";
+
+  document.body.appendChild(tempEle);
+
+  tempEle.select();
+  document.execCommand("copy");
+
+  setTimeout(() => {
+    e.target.innerText = "Copy";
+    e.target.style.backgroundColor = "#2BD1D1";
+  }, 2000);
+};
+
 copyButtons.forEach(btn => {
-  btn.addEventListener("click", e => {
-    let tempEle = document.createElement("textarea");
-    tempEle.innerText = e.target.previousSibling.previousSibling.innerText;
-    e.target.innerText = "Copied!";
-    e.target.style.backgroundColor = "#3A3053";
-
-    document.body.appendChild(tempEle);
-
-    tempEle.select();
-    document.execCommand("copy");
-
-    setTimeout(() => {
-      e.target.innerText = "Copy";
-      e.target.style.backgroundColor = "#2BD1D1";
-    }, 2000);
-  });
+  btn.addEventListener("click", copyButtonHandler);
 });
