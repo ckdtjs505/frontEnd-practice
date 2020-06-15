@@ -90,7 +90,7 @@ body {
   border-color: blue;
 }
 
-.content-step-one .scisors {
+.content-step-one .scissors {
   border-color: yellow;
 }
 
@@ -135,8 +135,8 @@ body {
   border-color: blue;
 }
 
-.content-step-two .user-pick .scisors,
-.content-step-two .computer-pick .scisors {
+.content-step-two .user-pick .scissors,
+.content-step-two .computer-pick .scissors {
   border-color: yellow;
 }
 
