@@ -3,6 +3,9 @@ const stepTwo = document.querySelector(".content-step-two");
 let stepOneDom = document.createElement("div");
 let stepTwoDom = document.createElement("div");
 
+let value = ["rock", "scissors", "paper"];
+const computerValue = value[Math.floor(Math.random() * 3)];
+
 const createStepOneUI = () => {
   // UI 생성
   stepOneDom.classList.add("content-step-one");
@@ -26,6 +29,35 @@ const createStepOneUI = () => {
 };
 
 const createStepTwoUI = value => {
+  let result;
+  if (computerValue === value) {
+    result = "Draw";
+  } else {
+    switch (computerValue) {
+      case "rock":
+        if (value === "paper") {
+          result = "YOU WIN";
+        } else {
+          result = "YOU LOSE";
+        }
+        break;
+      case "scissors":
+        if (value === "rock") {
+          result = "YOU WIN";
+        } else {
+          result = "YOU LOSE";
+        }
+        break;
+      case "paper":
+        if (value === "scissors") {
+          result = "YOU WIN";
+        } else {
+          result = "YOU LOSE";
+        }
+        break;
+    }
+  }
+
   stepTwoDom.classList.add("content-step-two");
   stepTwoDom.innerHTML = `
   <div class="user-pick">
@@ -36,14 +68,14 @@ const createStepTwoUI = value => {
   </div>
 
   <div class="content-step-three">
-    YOU LOSE
+    ${result}
     <button>PLAY AGAIN</button>
   </div>
 
   <div class="computer-pick">
     THE HOUSE PICKED
-    <div class="computer-value none">
-      <img src="./images/icon-scissors.svg" alt="" />
+    <div class="computer-value ${computerValue}">
+      <img src="./images/icon-${computerValue}.svg" alt="" />
     </div>
   </div>
   `;
