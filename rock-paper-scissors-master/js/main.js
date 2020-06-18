@@ -5,6 +5,7 @@ let stepTwoDom = document.createElement("div");
 
 let value = ["rock", "scissors", "paper"];
 const computerValue = value[Math.floor(Math.random() * 3)];
+let score;
 
 const createStepOneUI = () => {
   // UI 생성
@@ -24,8 +25,8 @@ const createStepOneUI = () => {
   document.body.appendChild(stepOneDom);
 
   // Score 값 셋팅
-  let score = document.querySelector(".value");
-  score.innerHTML = "0";
+  let scoreDom = document.querySelector(".value");
+  scoreDom.innerHTML = score;
 };
 
 const createStepTwoUI = value => {
@@ -57,6 +58,14 @@ const createStepTwoUI = value => {
         break;
     }
   }
+
+  if (result === "YOU WIN") {
+    ++score;
+  } else if (result === "YOU LOSE") {
+    --score;
+  }
+
+  localStorage.setItem("score", score);
 
   stepTwoDom.classList.add("content-step-two");
   stepTwoDom.innerHTML = `
@@ -90,13 +99,24 @@ const eventBindStepOne = () => {
       console.log(this.className);
       stepOneDom.remove();
       createStepTwoUI(this.className);
+      eventBindStepTwo();
     });
+  });
+};
+
+const eventBindStepTwo = () => {
+  let playAgainButton = stepTwoDom.querySelector(".content-step-three button");
+
+  playAgainButton.addEventListener("click", () => {
+    location.reload();
+    console.log("click");
   });
 };
 
 // 처음시작할 때
 if (stepOne === null && stepTwo === null) {
-  console.log("STEP 1 : ", stepOne);
+  score = !localStorage.getItem("score") ? 0 : localStorage.getItem("score");
+
   createStepOneUI();
   eventBindStepOne();
 }
