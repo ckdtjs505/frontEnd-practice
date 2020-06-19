@@ -40,7 +40,7 @@ body {
   font-size: 3rem;
 }
 
-.rules_box {
+.rules_on_Button {
   width: 4rem;
   color: white;
   text-align: center;
@@ -52,7 +52,7 @@ body {
   bottom: 2rem;
 }
 
-.rules_box:hover {
+.rules_on_Button:hover {
   cursor: pointer;
 }
 
@@ -174,4 +174,41 @@ body {
   color: red;
   cursor: pointer;
   border-radius: 0.5rem;
+}
+
+.rules {
+  background-color: white;
+  position: absolute;
+  width: 20%;
+  height: 42%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  border-radius: 0.5rem;
+}
+
+.rules_header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem;
+  font-size: 2rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+}
+
+.rules img {
+  display: flex;
+  padding: 1rem;
+  margin: auto;
+}
+
+.over {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 5;
 }

@@ -1,10 +1,13 @@
 const stepOne = document.querySelector(".content-step-one");
 const stepTwo = document.querySelector(".content-step-two");
+
 let stepOneDom = document.createElement("div");
 let stepTwoDom = document.createElement("div");
+let scoreDom = document.querySelector(".value");
 
 let value = ["rock", "scissors", "paper"];
 const computerValue = value[Math.floor(Math.random() * 3)];
+
 let score;
 
 const createStepOneUI = () => {
@@ -25,7 +28,6 @@ const createStepOneUI = () => {
   document.body.appendChild(stepOneDom);
 
   // Score 값 셋팅
-  let scoreDom = document.querySelector(".value");
   scoreDom.innerHTML = score;
 };
 
@@ -66,6 +68,7 @@ const createStepTwoUI = value => {
   }
 
   localStorage.setItem("score", score);
+  scoreDom.innerHTML = score;
 
   stepTwoDom.classList.add("content-step-two");
   stepTwoDom.innerHTML = `
@@ -86,14 +89,17 @@ const createStepTwoUI = value => {
     <div class="computer-value ${computerValue}">
       <img src="./images/icon-${computerValue}.svg" alt="" />
     </div>
-  </div>
-  `;
+  </div>`;
 
   document.body.appendChild(stepTwoDom);
 };
 
 const eventBindStepOne = () => {
   let userButton = stepOneDom.querySelectorAll("div");
+  let rule = document.querySelector(".over");
+  let rulesOnButton = document.querySelector(".rules_on_Button");
+  let rulesOffButton = document.querySelector(".rules_off_Button");
+
   userButton.forEach(e => {
     e.addEventListener("click", function () {
       console.log(this.className);
@@ -101,6 +107,14 @@ const eventBindStepOne = () => {
       createStepTwoUI(this.className);
       eventBindStepTwo();
     });
+  });
+
+  rulesOnButton.addEventListener("click", () => {
+    rule.style.display = "block";
+  });
+
+  rulesOffButton.addEventListener("click", () => {
+    rule.style.display = "none";
   });
 };
 
