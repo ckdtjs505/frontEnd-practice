@@ -217,7 +217,7 @@ body {
   z-index: 5;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
   .content-step-one {
     background-size: 200px;
   }
