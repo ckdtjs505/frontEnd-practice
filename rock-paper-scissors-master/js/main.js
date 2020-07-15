@@ -2,16 +2,9 @@ class rockScissorsPaper {
   constructor() {
     this.value = ["rock", "scissors", "paper"];
     this.computerValue = this.value[Math.floor(Math.random() * 3)];
-    this.scroe;
+    this.score = localStorage.getItem("score") | 0;
 
     this.build();
-    // 처음시작할 때
-    if (this.stepOne === null && this.stepTwo === null) {
-      this.score = !localStorage.getItem("score")
-        ? 0
-        : localStorage.getItem("score");
-      this.setStepOne();
-    }
   }
 
   build() {
@@ -152,5 +145,3 @@ class rockScissorsPaper {
     });
   }
 }
-
-new rockScissorsPaper();
