@@ -26,6 +26,46 @@ class rockScissorsPaper {
     this.eventBindStepTwo();
   }
 
+  getGameResult = value => {
+    if (this.computerValue === value) {
+      return "Draw";
+    } else {
+      switch (this.computerValue) {
+        case "rock":
+          if (value === "paper") {
+            return "YOU WIN";
+          } else {
+            return "YOU LOSE";
+          }
+        case "scissors":
+          if (value === "rock") {
+            return "YOU WIN";
+          } else {
+            return "YOU LOSE";
+          }
+        case "paper":
+          if (value === "scissors") {
+            return "YOU WIN";
+          } else {
+            return "YOU LOSE";
+          }
+      }
+    }
+  };
+
+  setScore() {
+    let result = this.getGameResult(value);
+
+    if (result === "YOU WIN") {
+      ++this.score;
+    } else if (result === "YOU LOSE") {
+      --this.score;
+    }
+
+    localStorage.setItem("score", this.score);
+    this.scoreDom.innerHTML = this.score;
+  }
+
   createStepOneUI() {
     // UI 생성
     this.stepOneDom.classList.add("content-step-one");
@@ -48,44 +88,6 @@ class rockScissorsPaper {
   }
 
   createStepTwoUI(value) {
-    let result;
-    if (this.computerValue === value) {
-      result = "Draw";
-    } else {
-      switch (this.computerValue) {
-        case "rock":
-          if (value === "paper") {
-            result = "YOU WIN";
-          } else {
-            result = "YOU LOSE";
-          }
-          break;
-        case "scissors":
-          if (value === "rock") {
-            result = "YOU WIN";
-          } else {
-            result = "YOU LOSE";
-          }
-          break;
-        case "paper":
-          if (value === "scissors") {
-            result = "YOU WIN";
-          } else {
-            result = "YOU LOSE";
-          }
-          break;
-      }
-    }
-
-    if (result === "YOU WIN") {
-      ++this.score;
-    } else if (result === "YOU LOSE") {
-      --this.score;
-    }
-
-    localStorage.setItem("score", this.score);
-    this.scoreDom.innerHTML = this.score;
-
     this.stepTwoDom.classList.add("content-step-two");
     this.stepTwoDom.innerHTML = `
     <div class="user-pick">
@@ -96,7 +98,7 @@ class rockScissorsPaper {
     </div>
   
     <div class="content-step-three">
-      ${result}
+      ${this.getGameResult(value)}
       <button>PLAY AGAIN</button>
     </div>
   
