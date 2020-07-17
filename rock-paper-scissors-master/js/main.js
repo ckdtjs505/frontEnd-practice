@@ -3,27 +3,43 @@ class rockScissorsPaper {
     this.value = ["rock", "scissors", "paper"];
     this.computerValue = this.value[Math.floor(Math.random() * 3)];
     this.score = localStorage.getItem("score") | 0;
+    this.gameResult = null;
 
     this.build();
+    this.eventBind();
   }
 
   build() {
     this.stepOne = document.querySelector(".content-step-one");
     this.stepTwo = document.querySelector(".content-step-two");
 
-    this.stepOneDom = document.createElement("div");
-    this.stepTwoDom = document.createElement("div");
     this.scoreDom = document.querySelector(".value");
+    this.setScore();
   }
 
-  setStepOne() {
-    this.createStepOneUI();
-    this.eventBindStepOne();
-  }
+  eventBind() {
+    this.stepOne.querySelectorAll("div").forEach(btn => {
+      btn.addEventListener("click", e => {
+        console.log(e.currentTarget.className);
+        this.stepOne.style.display = "none";
 
-  setStepTwo() {
-    this.createStepTwoUI();
-    this.eventBindStepTwo();
+        this.createStepTwoUI(e.currentTarget.className);
+        this.stepTwo.style.display = "flex";
+      });
+    });
+
+    document.querySelector(".rules_on_Button").addEventListener("click", () => {
+      document.querySelector(".over").style.display = "block";
+    });
+
+    document.querySelector(".rules_off_Button").addEventListener("click", () => {
+      document.querySelector(".over").style.display = "none";
+    });
+
+    this.stepTwo.querySelector(".content-step-three button").addEventListener("click", () => {
+      location.reload();
+      console.log("click");
+    });
   }
 
   getGameResult = value => {
@@ -54,96 +70,27 @@ class rockScissorsPaper {
   };
 
   setScore() {
-    let result = this.getGameResult(value);
-
-    if (result === "YOU WIN") {
-      ++this.score;
-    } else if (result === "YOU LOSE") {
-      --this.score;
-    }
-
     localStorage.setItem("score", this.score);
-    this.scoreDom.innerHTML = this.score;
-  }
-
-  createStepOneUI() {
-    // UI 생성
-    this.stepOneDom.classList.add("content-step-one");
-    this.stepOneDom.innerHTML = `
-        <div class="paper">
-          <img src="./images/icon-paper.svg" alt="">
-        </div>
-          <div class="scissors">
-        <img src="./images/icon-scissors.svg" alt="">
-          </div>
-        <div class="rock">
-          <img src="./images/icon-rock.svg" alt="">
-        </div>
-    `;
-
-    document.body.appendChild(this.stepOneDom);
-
-    // Score 값 셋팅
-    this.scoreDom.innerHTML = this.score;
+    this.scoreDom.innerHTML = localStorage.getItem("score");
   }
 
   createStepTwoUI(value) {
-    this.stepTwoDom.classList.add("content-step-two");
-    this.stepTwoDom.innerHTML = `
-    <div class="user-pick">
-      YOU PICKED
-      <div class="user-value ${value}">
-        <img src="./images/icon-${value}.svg" alt="" />
-      </div>
-    </div>
-  
-    <div class="content-step-three">
-      ${this.getGameResult(value)}
-      <button>PLAY AGAIN</button>
-    </div>
-  
-    <div class="computer-pick">
-      THE HOUSE PICKED
-      <div class="computer-value ${this.computerValue}">
-        <img src="./images/icon-${this.computerValue}.svg" alt="" />
-      </div>
-    </div>`;
+    let result = this.getGameResult(value);
+    if (result === "YOU WIN") ++this.score;
+    if (result === "YOU LOSE") --this.score;
+    this.setScore();
 
-    document.body.appendChild(this.stepTwoDom);
-  }
+    // 유저가 선택한 값 UI 노출
+    this.stepTwo.querySelector(".user-value").classList.add = value;
+    this.stepTwo.querySelector(".user-value img").src = `./images/icon-${value}.svg`;
 
-  eventBindStepOne() {
-    let userButton = this.stepOneDom.querySelectorAll("div");
-    let rule = document.querySelector(".over");
-    let rulesOnButton = document.querySelector(".rules_on_Button");
-    let rulesOffButton = document.querySelector(".rules_off_Button");
+    // 결과 값 노출
+    this.stepTwo.querySelector(".content-step-three div").innerText = result;
 
-    userButton.forEach(btn => {
-      btn.addEventListener("click", e => {
-        console.log(e.currentTarget.className);
-        this.stepOneDom.remove();
-        this.createStepTwoUI(e.currentTarget.className);
-        this.eventBindStepTwo();
-      });
-    });
-
-    rulesOnButton.addEventListener("click", () => {
-      rule.style.display = "block";
-    });
-
-    rulesOffButton.addEventListener("click", () => {
-      rule.style.display = "none";
-    });
-  }
-
-  eventBindStepTwo() {
-    let playAgainButton = this.stepTwoDom.querySelector(
-      ".content-step-three button"
-    );
-
-    playAgainButton.addEventListener("click", () => {
-      location.reload();
-      console.log("click");
-    });
+    // 컴퓨터가 선택한 값 UI 노출
+    this.stepTwo.querySelector(".computer-value").classList.add = this.computerValue;
+    this.stepTwo.querySelector(
+      ".computer-value img"
+    ).src = `./images/icon-${this.computerValue}.svg`;
   }
 }
