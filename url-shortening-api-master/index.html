@@ -5,12 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- displays site properly based on user's device -->
 
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="./images/favicon-32x32.png"
-    />
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
 
     <link rel="stylesheet" href="./assets/reset.css" />
     <link rel="stylesheet" href="./assets/main.css" />
@@ -18,10 +13,7 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap"
       rel="stylesheet"
     />
-    <script
-      src="https://kit.fontawesome.com/9444b6d8a1.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/9444b6d8a1.js" crossorigin="anonymous"></script>
 
     <title>Frontend Mentor | Shortly URL shortening API Challenge</title>
   </head>
@@ -56,8 +48,8 @@
             shorter links
           </h1>
           <h2>
-            Build your brand’s recognition and get detailed insights on how your
-            links are performing.
+            Build your brand’s recognition and get detailed insights on how your links are
+            performing.
           </h2>
           <button>Get Started</button>
         </div>
@@ -78,8 +70,8 @@
         <div class="explanation-header">
           <h1>Advanced Statistics</h1>
           <div>
-            Track how your links are performing across the web with our advanced
-            statistics dashboard.
+            Track how your links are performing across the web with our advanced statistics
+            dashboard.
           </div>
         </div>
 
@@ -90,9 +82,8 @@
             </div>
             <h1>Brand Recognition</h1>
             <h3>
-              Boost your brand recognition with each click. Generic links don’t
-              mean a thing. Branded links help instil confidence in your
-              content.
+              Boost your brand recognition with each click. Generic links don’t mean a thing.
+              Branded links help instil confidence in your content.
             </h3>
           </div>
 
@@ -102,9 +93,8 @@
             </div>
             <h1>Detailed Records</h1>
             <h3>
-              Gain insights into who is clicking your links. Knowing when and
-              where people engage with your content helps inform better
-              decisions.
+              Gain insights into who is clicking your links. Knowing when and where people engage
+              with your content helps inform better decisions.
             </h3>
           </div>
 
@@ -114,8 +104,8 @@
             </div>
             <h1>Fully Customizable</h1>
             <h3>
-              Improve brand awareness and content discoverability through
-              customizable links, supercharging audience engagement.
+              Improve brand awareness and content discoverability through customizable links,
+              supercharging audience engagement.
             </h3>
           </div>
         </div>
@@ -167,27 +157,10 @@
       </div>
     </footer>
 
+    <script src="./assets/navbar.js"></script>
+    <script src="./assets/shortUrl.js"></script>
     <script>
-      const headerNavbar = document.querySelector(".navbar");
-      // header 3-bar click event bind
-      document.querySelector(".fas").addEventListener("click", function () {
-        if (headerNavbar.style.display === "block")
-          headerNavbar.style.display = "none";
-        else headerNavbar.style.display = "block";
-      });
-
-      // TO DO LIST - 로직 수정(디바운스 적용)
-      window.addEventListener("resize", function () {
-        if (window.innerWidth >= 800) {
-          // PC - 해더 메뉴바 노출
-          headerNavbar.style.display = "block";
-        } else {
-          // MOBILE - 해더 메뉴바 미노출
-          headerNavbar.style.display = "none";
-        }
-      });
+      new shortUrl();
     </script>
-
-    <script src="./assets/main.js"></script>
   </body>
 </html>
