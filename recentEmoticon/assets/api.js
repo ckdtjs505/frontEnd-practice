@@ -7,5 +7,3 @@ class emoticonApi {
     }
 }
 
-
-export 
