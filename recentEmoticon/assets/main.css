@@ -9,12 +9,16 @@
     margin: auto;
 }
 
-.container {
+.emoticonContainer{
+    margin: auto;
+    width: 200px;
+}
+
+.emoticonList {
     height: 500px;
     border: 1px solid;
-    width: 200px;
     overflow: auto;
-    margin: auto;
+   
 }
 
 .loader {
