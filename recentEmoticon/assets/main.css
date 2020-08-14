@@ -14,6 +14,17 @@
     width: 200px;
 }
 
+.emoticonContainer .tap {
+    display: grid;
+    grid-template-columns: repeat(6, 45px);
+}
+
+.emoticonContainer .tap li {
+    width: 100%;
+    height: 100%;
+}
+
+
 .emoticonList {
     height: 500px;
     border: 1px solid;
