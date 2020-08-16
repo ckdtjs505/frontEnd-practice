@@ -10,7 +10,7 @@ class Emoticon {
 
     buildUI(){
         this.emoticonContainer = document.querySelector('.emoticonContainer');
-        this.onEmoticonTap = this.emoticonContainer.querySelector('.tap .on');
+        this.onEmoticonTap = this.emoticonContainer.querySelector('.emoticonTap .on');
         this.emoticonList = this.emoticonContainer.querySelector('.emoticonList');
         
         this.setEmoticonData( this.onEmoticonTap.getAttribute('data-type') );
@@ -18,15 +18,13 @@ class Emoticon {
 
     event(){
         // 이모티콘 리스트 이벤트 바인딩 
-        this.emoticonList.querySelectorAll('.list').forEach( ele => {
-            ele.addEventListener("click", function(e){
-                if( e.target === this)  return;
-                document.querySelector('input').value += e.target.innerText;
-            })
+        this.emoticonList.addEventListener("click", function(e){
+            if( e.target === this)  return;
+            document.querySelector('input').value += e.target.innerText;
         })
         
         // 이모티콘 탭 이벤트 바인딩
-        this.emoticonContainer.querySelector('.tap').addEventListener("click",(e) => {
+        this.emoticonContainer.querySelector('.emoticonTap').addEventListener("click",(e) => {
             if( e.target === this)  return;
             this.setEmoticonData( e.target.getAttribute('data-type') );
         });
@@ -45,7 +43,7 @@ class Emoticon {
                 </span>`
             )
                 
-            document.querySelector('.list ').innerHTML = this.emoticonList.join('');
+            document.querySelector('.emoticonList').innerHTML = this.emoticonList.join('');
         })
     }
 }

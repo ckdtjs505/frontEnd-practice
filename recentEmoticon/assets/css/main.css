@@ -1,0 +1,94 @@
+div {
+    /* border: 1px solid black;  */
+}
+
+.emoticonContainer {
+    width: 200px;
+    height: 600px;
+    margin: auto;
+    border: 1px solid black; 
+}
+
+/* 이모티콘 해더 탭 영역 */
+.emoticonContainer .emoticonHeader .emoticonTitle {
+    padding: 10px;
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+
+.emoticonContainer .emoticonHeader .emoticonTap {
+    display: flex;
+    overflow: auto;
+    height: 2rem;
+}
+
+.emoticonContainer .emoticonHeader .emoticonTap button{
+    height: 100%;
+}
+
+.emoticonContainer .emoticonHeader .emoticonTap .on{
+    border-bottom: blue solid;
+}
+
+/* 이모티콘 리스트 영역 */
+.emoticonContainer .emoticonBox {
+    width: 100%;
+}
+
+.emoticonContainer .emoticonBox .emoticonList{
+    padding: 0.5rem;
+    height: 500px;
+    display: grid;
+    grid-template-rows: repeat(6, 30px);
+    grid-template-columns: repeat(6, 30px);
+    grid-auto-rows: 30px; 
+    overflow: auto;
+}
+
+.emoticonContainer .emoticonBox .emoticonList .loader{
+    margin-left: 3rem;
+    margin-top: 13rem;
+}
+
+
+/* .list {
+    display: grid;
+    grid-template-rows: repeat(6, 30px);
+    grid-template-columns: repeat(6, 30px);
+    grid-auto-rows: 30px; 
+}
+
+.list span {
+    margin: auto;
+}
+
+.emoticonContainer{
+    margin: auto;
+    width: 200px;
+}
+
+.emoticonContainer .tap {
+    display: grid;
+    grid-template-columns: repeat(6, 45px);
+}
+
+.emoticonContainer .tap button {
+    width: 100%;
+    height: 100%;
+}
+
+.emoticonContainer .tap button.on {
+    background-color: black;
+    color: white;
+}
+
+
+.emoticonList {
+    height: 500px;
+    border: 1px solid;
+    overflow: auto;
+   
+}
+
+
+ */

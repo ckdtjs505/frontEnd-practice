@@ -3,27 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/reset.css">
-    <link rel="stylesheet" href="./assets/main.css">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
     <title>Recent Emoticon</title>
 </head>
 <body>
-    <h1>최근사용 이모티콘</h1>
     <div class="emoticonContainer">
-        <ul class="tap" style="left: 0px;">
-            <li ><button data-type="recentEmoticon" type="button">최근사용</button></li>
-            <li ><button data-type="smileys-emotion" class="on" type="button">얼굴</button></li>
-        </ul>
-        <div class="emoticonList">
-            <div class="list" id="list">
+        <div class="emoticonHeader">
+            <div class="emoticonTitle">이모티콘</div>
+            <ul class="emoticonTap">
+                <li ><button data-type="recentEmoticon" type="button">🧭</button></li>
+                <li ><button data-type="smileys-emotion" class="on" type="button">😀</button></li>
+            </ul>
+        </div>
+        <div class="emoticonBox">
+            <div class="emoticonList">
                 <div class="loader"></div>
-            </div>      
+            </div>
         </div>
     </div>
 
+ 
     <input type="text">
 
-    <script src="./assets/main.js">  </script>
+    <script src="./assets/js/main.js">  </script>
     <script> new Emoticon(); </script>
 </body>
 </html>

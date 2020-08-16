@@ -1,9 +1,0 @@
-
-
-class emoticonApi {
-    constructor(){ }
-    getEmoticon(){
-        
-    }
-}
-
