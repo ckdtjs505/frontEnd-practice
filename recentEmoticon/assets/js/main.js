@@ -12,7 +12,7 @@ class Emoticon {
         this.emoticonContainer = document.querySelector('.emoticonContainer');
         this.onEmoticonTap = this.emoticonContainer.querySelector('.emoticonTap .on');
         this.emoticonList = this.emoticonContainer.querySelector('.emoticonList');
-        
+        console.log(this.emoticonList)
         this.setEmoticonData( this.onEmoticonTap.getAttribute('data-type') );
     }
 
@@ -26,6 +26,14 @@ class Emoticon {
         // 이모티콘 탭 이벤트 바인딩
         this.emoticonContainer.querySelector('.emoticonTap').addEventListener("click",(e) => {
             if( e.target === this)  return;
+            //이모티콘 탭 활성화
+            this.onEmoticonTap.classList.remove("on");
+            this.onEmoticonTap = e.target.classList.add("on");
+            this.onEmoticonTap =e.target;
+
+            // 데이터 불러오기 전 로딩 UI
+            this.emoticonList.innerHTML = `<div class="loader"></div>`
+            // 데이터 불러오기
             this.setEmoticonData( e.target.getAttribute('data-type') );
         });
  
@@ -35,15 +43,20 @@ class Emoticon {
         fetch(`https://emoji-api.com/categories/${list}?access_key=b44e8c37cf2639a8c1382bad72b6ab8ef837ea75`)
         .then( response => response.json())
         .then( data => { 
-            this.emoticonList =  data.map( ele => `
-                <span> 
-                    <a href="javascript:;">
-                        ${ele.character}
-                    </a>
-                </span>`
+            console.log(data)
+            let emoticonList =  data.map( ele => {
+                let errorEmoticonList = [`🥲`,`🥸`,`🪨`,`🪵`,`🛖`,`♨️`,`🛻`,`🛼`,`🦬`,`🦣`,`🦫`,`🪶`,`🦤`,`🦭`,`🪲`,`🪳`,`🪳`,`🪱`,`🪰`,`🪴`];
+                if ( !errorEmoticonList.includes(ele.character)  )
+                    return  `
+                        <span> 
+                            <a href="javascript:;">
+                                ${ele.character}
+                            </a>
+                        </span>`
+                }
             )
                 
-            document.querySelector('.emoticonList').innerHTML = this.emoticonList.join('');
+            this.emoticonList.innerHTML = emoticonList.join('');
         })
     }
 }
