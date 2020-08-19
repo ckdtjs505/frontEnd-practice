@@ -1,4 +1,5 @@
 import { getEmoticonsData } from './api';
+import errorEmoticonList from './constant';
 
 class Emoticon {
     constructor(){
@@ -23,26 +24,28 @@ class Emoticon {
         })
         
         // 이모티콘 탭 이벤트 바인딩
-        this.emoticonContainer.querySelector('.emoticonTap').addEventListener("click",(e) => {
-            if( e.target === this)  return;
-            //이모티콘 탭 활성화
-            this.onEmoticonTap.classList.remove("on");
-            this.onEmoticonTap = e.target.classList.add("on");
-            this.onEmoticonTap =e.target;
+        this.emoticonContainer.querySelectorAll('.emoticonTap li').forEach( ele => {
+            ele.addEventListener("click",(e) => {
+                // 같은 탭 클릭시 처리
+                if( e.target ===  this.onEmoticonTap) return;
+                //이모티콘 탭 활성화
+                this.onEmoticonTap.classList.remove("on");
+                this.onEmoticonTap = e.target.classList.add("on");
+                this.onEmoticonTap = e.target;
 
-            // 데이터 불러오기 전 로딩 UI
-            this.emoticonList.innerHTML = `<div class="loader"></div>`
-            // 데이터 불러오기
-            this.setEmoticonData( e.target.getAttribute('data-type') );
-        });
- 
+                // 데이터 불러오기 전 로딩 UI
+                this.emoticonList.innerHTML = `<div class="loader"></div>`;
+                // 데이터 불러오기
+                this.setEmoticonData( e.target.getAttribute('data-type') );
+            });
+        })
+      
     }
 
     async setEmoticonData( list ){
         await getEmoticonsData(list).then( data => { 
             let emoticonList = data.map( ele => {
-                let errorEmoticonList = [`🥲`,`🥸`,`🪨`,`🪵`,`🛖`,`♨️`,`🛻`,`🛼`,`🦬`,`🦣`,`🦫`,`🪶`,`🦤`,`🦭`,`🪲`,`🪳`,`🪳`,`🪱`,`🪰`,`🪴`];
-                if ( !errorEmoticonList.includes(ele.character)  )
+                if ( !errorEmoticonList().includes(ele.character)  )
                     return  `
                         <span> 
                             <a href="javascript:;">
@@ -50,8 +53,7 @@ class Emoticon {
                             </a>
                         </span>`
                 }
-            )
-                
+            );
             this.emoticonList.innerHTML = emoticonList.join('');
         })
     }
