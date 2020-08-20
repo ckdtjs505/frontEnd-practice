@@ -12,7 +12,6 @@ class Emoticon {
         this.emoticonContainer = document.querySelector('.emoticonContainer');
         this.onEmoticonTap = this.emoticonContainer.querySelector('.emoticonTap .on');
         this.emoticonList = this.emoticonContainer.querySelector('.emoticonList');
-        console.log(this.emoticonList)
         this.setEmoticonData( this.onEmoticonTap.getAttribute('data-type') );
     }
 
