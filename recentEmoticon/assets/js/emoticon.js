@@ -12,6 +12,10 @@ class Emoticon {
         this.emoticonContainer = document.querySelector('.emoticonContainer');
         this.onEmoticonTap = this.emoticonContainer.querySelector('.emoticonTap .on');
         this.emoticonList = this.emoticonContainer.querySelector('.emoticonList');
+        this.chatContainer = document.querySelector('.chatContainer');
+        this.emoticonInput = this.chatContainer.querySelector('input');
+        this.emoticonOutput = this.chatContainer.querySelector('.output');
+        this.emoticonSendButton = this.chatContainer.querySelector('button');
         this.setEmoticonData( this.onEmoticonTap.getAttribute('data-type') );
     }
 
@@ -38,7 +42,15 @@ class Emoticon {
                 this.setEmoticonData( e.target.getAttribute('data-type') );
             });
         })
-      
+
+        // 이모티콘 전송 버튼 
+        this.emoticonSendButton.addEventListener("click", () => {
+            // create 생성 
+            const outputDom = document.createElement('span');
+            outputDom.innerText = this.emoticonInput.value;
+            this.emoticonOutput.appendChild(outputDom);
+            this.emoticonInput.value = '';
+        })
     }
 
     async setEmoticonData( list ){
