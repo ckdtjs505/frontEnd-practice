@@ -66,6 +66,8 @@ body {
 .chatContainer .output{
     display: flex;
     flex-direction: column;
+    overflow: auto;
+    height: 800px;
 }
 
 .chatContainer .output span{

@@ -46,14 +46,34 @@ class Emoticon {
         // 이모티콘 전송 버튼 
         this.emoticonSendButton.addEventListener("click", () => {
             // create 생성 
-            const outputDom = document.createElement('span');
-            outputDom.innerText = this.emoticonInput.value;
-            this.emoticonOutput.appendChild(outputDom);
-            this.emoticonInput.value = '';
+            this.sendMessage();
+        })
+
+        this.emoticonInput.addEventListener("keyup", (e)=>{
+            const {key} = e;
+            if( key === "Enter"){
+                this.sendMessage();
+            }
         })
     }
 
+    sendMessage(){
+        const outputDom = document.createElement('span');
+        if( this.emoticonInput.value === ''){
+            return;
+        }
+        outputDom.innerText = this.emoticonInput.value;
+        this.emoticonOutput.appendChild(outputDom);
+        this.emoticonInput.value = '';
+    }
+
     async setEmoticonData( list ){
+        if( list === "recentEmoticon"){
+            // 최근사용 이모티콘이 없습니다. 
+            this.emoticonList.innerHTML = `최근사용 이모티콘이 없습니다.`;
+            this.emoticonList.style.display = "block"
+            return;
+        }
         await getEmoticonsData(list).then( data => { 
             let emoticonList = data.map( ele => {
                 if ( !errorEmoticonList().includes(ele.character)  )
@@ -66,6 +86,7 @@ class Emoticon {
                 }
             );
             this.emoticonList.innerHTML = emoticonList.join('');
+            this.emoticonList.style.display = "grid"
         })
     }
 }
