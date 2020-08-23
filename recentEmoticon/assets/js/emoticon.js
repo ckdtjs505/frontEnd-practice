@@ -1,5 +1,5 @@
 import { getEmoticonsData } from './api';
-import errorEmoticonList from './constant';
+import {chatInfo} from './chatInfo';
 
 class Emoticon {
     constructor(){
@@ -62,6 +62,10 @@ class Emoticon {
         if( this.emoticonInput.value === ''){
             return;
         }
+        let reg = new RegExp('/' + chatInfo.emoticonList.join("|") + '/', 'g');
+        let emoticons = this.emoticonInput.value.match(reg);
+        chatInfo.setRecentEmoticon(emoticons);
+
         outputDom.innerText = this.emoticonInput.value;
         this.emoticonOutput.appendChild(outputDom);
         this.emoticonInput.value = '';
@@ -69,14 +73,31 @@ class Emoticon {
 
     async setEmoticonData( list ){
         if( list === "recentEmoticon"){
-            // 최근사용 이모티콘이 없습니다. 
-            this.emoticonList.innerHTML = `최근사용 이모티콘이 없습니다.`;
-            this.emoticonList.style.display = "block"
+            if( chatInfo.getRecentEmoticon().length === 0 ){
+                // 최근사용 이모티콘이 없습니다. 
+                this.emoticonList.innerHTML = `최근사용 이모티콘이 없습니다.`;
+                this.emoticonList.style.display = "block"
+            }else {
+                let emoticonList = chatInfo.getRecentEmoticon();
+                emoticonList.map( ele => {
+                    if ( !chatInfo.errorEmoticonList.includes(ele)  )
+                        return  `
+                            <span> 
+                                <a href="javascript:;">
+                                    ${ele}
+                                </a>
+                            </span>`
+                    }
+                );
+                this.emoticonList.innerHTML = emoticonList.join('');
+                this.emoticonList.style.display = "grid"
+            }
+            
             return;
         }
         await getEmoticonsData(list).then( data => { 
             let emoticonList = data.map( ele => {
-                if ( !errorEmoticonList().includes(ele.character)  )
+                if ( !chatInfo.errorEmoticonList.includes(ele.character)  )
                     return  `
                         <span> 
                             <a href="javascript:;">
