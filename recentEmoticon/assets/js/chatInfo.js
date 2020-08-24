@@ -62,9 +62,19 @@ export const chatInfo = {
         ],
     recentEmotcions : [],
     getRecentEmoticon(){
-        return JSON.parse( localStorage.getItem("setRecentEmoticon") );
+        try {
+            this.recentEmotcions = JSON.parse( localStorage.getItem("setRecentEmoticon"));
+            if( !Array.isArray(this.recentEmotcions) )
+                throw Error()
+        } catch (error) {
+            console.log("parseError", error);
+            this.recentEmotcions = [];
+            localStorage.setItem("setRecentEmoticon", JSON.stringify(this.recentEmotcions) )
+        }
+        return [ ...new Set( this.recentEmotcions)];
     },
-    setRecentEmoticon(emoticons){
-        localStorage.setItem("setRecentEmoticon", JSON.stringify(emoticons) );
-    }
+
+    // setRecentEmoticon(emoticons){
+    //     localStorage.setItem("setRecentEmoticon", JSON.stringify(this.recentEmotcions) );
+    // }
 }

@@ -72,43 +72,39 @@ class Emoticon {
     }
 
     async setEmoticonData( list ){
-        if( list === "recentEmoticon"){
-            if( chatInfo.getRecentEmoticon().length === 0 ){
-                // 최근사용 이모티콘이 없습니다. 
-                this.emoticonList.innerHTML = `최근사용 이모티콘이 없습니다.`;
-                this.emoticonList.style.display = "block"
-            }else {
-                let emoticonList = chatInfo.getRecentEmoticon();
-                emoticonList.map( ele => {
-                    if ( !chatInfo.errorEmoticonList.includes(ele)  )
-                        return  `
-                            <span> 
-                                <a href="javascript:;">
-                                    ${ele}
-                                </a>
-                            </span>`
-                    }
-                );
-                this.emoticonList.innerHTML = emoticonList.join('');
-                this.emoticonList.style.display = "grid"
-            }
-            
-            return;
-        }
-        await getEmoticonsData(list).then( data => { 
-            let emoticonList = data.map( ele => {
-                if ( !chatInfo.errorEmoticonList.includes(ele.character)  )
-                    return  `
-                        <span> 
-                            <a href="javascript:;">
-                                ${ele.character}
-                            </a>
-                        </span>`
+        switch( list ){
+            case "recentEmoticon":
+                if( chatInfo.getRecentEmoticon().length === 0 ){
+                    // 최근사용 이모티콘이 없습니다. 
+                    this.emoticonList.innerHTML = `최근사용 이모티콘이 없습니다.`;
+                    this.emoticonList.style.display = "block"
+                }else {
+                    this.createEmotionList(chatInfo.getRecentEmoticon());
                 }
-            );
-            this.emoticonList.innerHTML = emoticonList.join('');
-            this.emoticonList.style.display = "grid"
-        })
+                break;
+            default:
+                await getEmoticonsData(list).then( data => { 
+                    this.createEmotionList(data);
+                })
+                break;
+        }
+
+    }
+    /**
+     * 이모티콘 리스트 생성 
+    **/ 
+    createEmotionList(emoticons){
+        this.emoticonList.innerHTML = emoticons.map( ele => {
+            if ( !chatInfo.errorEmoticonList.includes(ele.character || ele)  )
+                return  `
+                    <span> 
+                        <a href="javascript:;">
+                            ${ele.character || ele}
+                        </a>
+                    </span>`
+            }
+        ).join('');
+        this.emoticonList.style.display = "grid"
     }
 }
 
