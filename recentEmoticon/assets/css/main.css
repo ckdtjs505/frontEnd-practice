@@ -2,7 +2,7 @@ body {
     display: flex;
 }
 .emoticonContainer {
-    width: 200px;
+    width: 210px;
     height: 600px;
     margin-left: auto;
     border: 1px solid black; 
@@ -60,6 +60,7 @@ body {
 }
 
 .chatContainer .input{
+    display: flex;
     width: 100%;
 }
 

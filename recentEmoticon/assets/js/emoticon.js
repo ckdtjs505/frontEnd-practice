@@ -1,4 +1,3 @@
-import { getEmoticonsData } from './api';
 import {chatInfo} from './chatInfo';
 
 class Emoticon {
@@ -14,6 +13,7 @@ class Emoticon {
         this.emoticonList = this.emoticonContainer.querySelector('.emoticonList');
         this.chatContainer = document.querySelector('.chatContainer');
         this.emoticonInput = this.chatContainer.querySelector('input');
+        this.emoticonOutput = this.chatContainer.querySelector('.output');
         this.emoticonOutput = this.chatContainer.querySelector('.output');
         this.emoticonSendButton = this.chatContainer.querySelector('button');
         this.setEmoticonData( this.onEmoticonTap.getAttribute('data-type') );
@@ -49,12 +49,16 @@ class Emoticon {
             this.sendMessage();
         })
 
+        // 채팅 키입력 이벤트
         this.emoticonInput.addEventListener("keyup", (e)=>{
             const {key} = e;
             if( key === "Enter"){
                 this.sendMessage();
             }
         })
+
+        // 이모티콘 버튼 이벤트 
+
     }
 
     sendMessage(){
@@ -62,7 +66,7 @@ class Emoticon {
         if( this.emoticonInput.value === ''){
             return;
         }
-        let reg = new RegExp('/' + chatInfo.emoticonList.join("|") + '/', 'g');
+        let reg = new RegExp('/' + chatInfo.emoticonList().join("|") + '/', 'g');
         let emoticons = this.emoticonInput.value.match(reg);
         chatInfo.setRecentEmoticon(emoticons);
 
@@ -82,10 +86,14 @@ class Emoticon {
                     this.createEmotionList(chatInfo.getRecentEmoticon());
                 }
                 break;
-            default:
-                await getEmoticonsData(list).then( data => { 
-                    this.createEmotionList(data);
-                })
+            case "smileys-emotion":
+                this.createEmotionList(chatInfo.emoticonListSmileys);
+                break;
+            case "travel-places":
+                this.createEmotionList(chatInfo.emoticonListTravel);
+                break;
+            case "animals-nature":
+                this.createEmotionList(chatInfo.emoticonListAnimals);
                 break;
         }
 
