@@ -79,10 +79,11 @@ export const chatInfo = {
             this.recentEmotcions = [];
             localStorage.setItem("setRecentEmoticon", JSON.stringify(this.recentEmotcions) )
         }
-        return [ ...new Set( this.recentEmotcions)];
+        return this.recentEmotcions = [ ...new Set( this.recentEmotcions)];
     },
 
     setRecentEmoticon(emoticons){
+        console.log(this.recentEmotcions)
         localStorage.setItem("setRecentEmoticon", JSON.stringify(this.recentEmotcions) );
     }
 }

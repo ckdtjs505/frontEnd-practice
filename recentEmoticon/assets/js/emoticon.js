@@ -14,9 +14,8 @@ class Emoticon {
         this.chatContainer = document.querySelector('.chatContainer');
         this.emoticonInput = this.chatContainer.querySelector('input');
         this.emoticonOutput = this.chatContainer.querySelector('.output');
-        this.emoticonOutput = this.chatContainer.querySelector('.output');
-        this.emoticonSendButton = this.chatContainer.querySelector('button');
-        this.setEmoticonData( this.onEmoticonTap.getAttribute('data-type') );
+        this.emoticonToggleButton = this.chatContainer.querySelector('.emoticonToggleButton');
+        this.emoticonSendButton = this.chatContainer.querySelector('.sendButton');
     }
 
     event(){
@@ -58,7 +57,13 @@ class Emoticon {
         })
 
         // 이모티콘 버튼 이벤트 
-
+        this.emoticonToggleButton.addEventListener("click", ()=> {
+            if( !this.emoticonContainer.classList.contains('on') ){
+                this.showEmoticonList();
+            }else {
+                this.hideEmoticonList();
+            }
+        })
     }
 
     sendMessage(){
@@ -73,6 +78,9 @@ class Emoticon {
         outputDom.innerText = this.emoticonInput.value;
         this.emoticonOutput.appendChild(outputDom);
         this.emoticonInput.value = '';
+
+        // 이모티콘 리스트 숨기기
+        this.hideEmoticonList();
     }
 
     async setEmoticonData( list ){
@@ -113,6 +121,19 @@ class Emoticon {
             }
         ).join('');
         this.emoticonList.style.display = "grid"
+    }
+    /** 
+     * 이모티콘 리스트 숨기기 
+    */
+    hideEmoticonList(){
+        this.emoticonContainer.classList.remove("on");
+    }
+    /** 
+     * 이모티콘 리스트 보이기 
+    */
+    showEmoticonList(){
+        this.emoticonContainer.classList.add("on");
+        this.setEmoticonData( this.onEmoticonTap.getAttribute('data-type') );
     }
 }
 

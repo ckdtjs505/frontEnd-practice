@@ -8,33 +8,36 @@
     <title>Recent Emoticon</title>
 </head>
 <body>
-    <div class="emoticonContainer">
-        <div class="emoticonHeader">
-            <div class="emoticonTitle">이모티콘</div>
-            <ul class="emoticonTap">
-                <li ><button data-type="recentEmoticon" type="button">🧭</button></li>
-                <li ><button data-type="smileys-emotion" class="on" type="button">😀</button></li>
-                <li ><button data-type="travel-places"  type="button">🌍</button></li>
-                <li ><button data-type="animals-nature"  type="button">🐎</button></li>
-            </ul>
+    <div class="container">
+        <div class="emoticonContainer">
+            <div class="emoticonHeader">
+                <div class="emoticonTitle">이모티콘</div>
+                <ul class="emoticonTap">
+                    <li ><button data-type="recentEmoticon" type="button">🧭</button></li>
+                    <li ><button data-type="smileys-emotion" class="on" type="button">😀</button></li>
+                    <li ><button data-type="travel-places"  type="button">🌍</button></li>
+                    <li ><button data-type="animals-nature"  type="button">🐎</button></li>
+                </ul>
+            </div>
+            <div class="emoticonBox">
+                <div class="emoticonList">
+                    <div class="loader"></div>
+                </div>
+            </div>
         </div>
-        <div class="emoticonBox">
-            <div class="emoticonList">
-                <div class="loader"></div>
+        
+        <div class="chatContainer">
+            <div class="output"> 
+                <span> 채팅창입니다 </span>
+            </div>
+            <div class="input">
+                <input type="text" placeholder="입력해주세요">
+                <button class="emoticonToggleButton">😀</button>
+                <button class="sendButton">전송</button>
             </div>
         </div>
     </div>
-    
-    <div class="chatContainer">
-        <div class="output"> 
-            <span> 채팅창입니다 </span>
-        </div>
-        <div class="input">
-            <input type="text" placeholder="입력해주세요">
-            <button>😀</button>
-            <button>전송</button>
-        </div>
-    </div>
+   
     
 
     <script src="./dist/index.js"></script>

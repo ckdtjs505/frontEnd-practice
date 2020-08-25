@@ -1,10 +1,21 @@
 body {
     display: flex;
 }
+
+.container {
+    display: flex;
+    margin: auto;
+}
+
+
+.emoticonContainer.on {
+    display: block;
+}
+
 .emoticonContainer {
+    display: none;
     width: 210px;
     height: 600px;
-    margin-left: auto;
     border: 1px solid black; 
 }
 
@@ -55,7 +66,6 @@ body {
     justify-content: space-between;
     width: 400px;
     height: 600px;
-    margin-right: auto;
     border: 1px solid black
 }
 
