@@ -1,3 +1,3 @@
 import Emoticon from './emoticon'
 
-new Emoticon();
+window.emoticon = new Emoticon();

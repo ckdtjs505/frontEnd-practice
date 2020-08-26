@@ -5,6 +5,10 @@ class Emoticon {
         this.emoticonList;
         this.buildUI();
         this.event();
+
+        this.chatInfo = chatInfo;
+        // 최근사용 이모티콘 가져오기 
+        chatInfo.getRecentEmoticon();
     }
 
     buildUI(){
@@ -65,7 +69,7 @@ class Emoticon {
             }
         })
     }
-
+    // 메시지 전송
     sendMessage(){
         const outputDom = document.createElement('span');
         if( this.emoticonInput.value === ''){
@@ -91,7 +95,7 @@ class Emoticon {
                     this.emoticonList.innerHTML = `최근사용 이모티콘이 없습니다.`;
                     this.emoticonList.style.display = "block"
                 }else {
-                    this.createEmotionList(chatInfo.getRecentEmoticon());
+                    this.createEmotionList([...chatInfo.getRecentEmoticon()].reverse());
                 }
                 break;
             case "smileys-emotion":
