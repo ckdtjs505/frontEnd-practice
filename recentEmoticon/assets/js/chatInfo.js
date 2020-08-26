@@ -79,7 +79,7 @@ export const chatInfo = {
     */
     getRecentEmoticon(){
         try {
-            this.recentEmotcions = JSON.parse( localStorage.getItem("setRecentEmoticon"));
+            this.recentEmotcions = JSON.parse( localStorage.getItem("recentEmoticon"));
             if( !Array.isArray(this.recentEmotcions) )
                 throw Error()
         } catch (error) {
@@ -95,11 +95,18 @@ export const chatInfo = {
      * 채팅 입력시 실행 
     */
     setRecentEmoticon(emoticons){
-        // 이모티콘 저장 
+        if( !Array.isArray(emoticons)  )
+            return;
         emoticons.forEach(emoticon => {
-            const index = this.recentEmotcions.indexOf(emoticon);
-            this.recentEmotcions = [ ...this.recentEmotcions.slice(0, index), ...this.recentEmotcions.slice(index + 1), emoticon]
+            // 이모티콘 중복 제거 
+            if( this.recentEmotcions.includes(emoticon)){
+                const index = this.recentEmotcions.indexOf(emoticon);
+                this.recentEmotcions = [ ...this.recentEmotcions.slice(0, index), ...this.recentEmotcions.slice(index + 1)]
+            }
+            // 이모티콘 추가 
+            this.recentEmotcions = [...this.recentEmotcions, emoticon];
         });
+
         localStorage.setItem("recentEmoticon", JSON.stringify( this.recentEmotcions) );
     }
 }
