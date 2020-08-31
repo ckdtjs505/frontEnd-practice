@@ -24,8 +24,8 @@ class Emoticon {
 
     event(){
         // 이모티콘 리스트 이벤트 바인딩 
-        this.emoticonList.addEventListener("click", function(e){
-            if( e.target === this)  return;
+        this.emoticonList.addEventListener("click", (e) => {
+            if( this.emoticonList === e.target) return; // 자기자신 눌렀을때는 예외처리
             document.querySelector('input').value += e.target.innerText;
         })
         
