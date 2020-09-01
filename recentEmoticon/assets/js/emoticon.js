@@ -20,13 +20,31 @@ class Emoticon {
         this.emoticonOutput = this.chatContainer.querySelector('.output');
         this.emoticonToggleButton = this.chatContainer.querySelector('.emoticonToggleButton');
         this.emoticonSendButton = this.chatContainer.querySelector('.sendButton');
+        this.headerAlert = document.querySelector('header .alert');
     }
 
     event(){
-        // 이모티콘 리스트 이벤트 바인딩 
+        // 이모티콘 리스트 클릭 이벤트 바인딩 
         this.emoticonList.addEventListener("click", (e) => {
             if( this.emoticonList === e.target) return; // 자기자신 눌렀을때는 예외처리
             document.querySelector('input').value += e.target.innerText;
+
+            // 클립보드 복사 
+            let textArea = document.createElement('textarea');
+            textArea.value = e.target.innerText;
+            document.body.append( textArea );
+            textArea.select();
+            textArea.setSelectionRange(0, 1);
+
+            document.execCommand('copy');
+            document.body.removeChild( textArea );
+
+            // 클립보드 복사 얼럿 
+            this.headerAlert.style.display = "block";
+            let showAlert = setTimeout( () => {
+                clearTimeout(showAlert);
+                this.headerAlert.style.display = "none";
+            }, 3000)
         })
         
         // 이모티콘 탭 이벤트 바인딩
