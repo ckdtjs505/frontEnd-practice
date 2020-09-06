@@ -25,7 +25,8 @@ class Emoticon {
 
     event(){
         // 이모티콘 리스트 클릭 이벤트 바인딩 
-        this.emoticonList.addEventListener("click", (e) => {
+        this.emoticonList.addEventListener("click", this.debounce('click', (e) => {
+           
             if( this.emoticonList === e.target) return; // 자기자신 눌렀을때는 예외처리
             document.querySelector('input').value += e.target.innerText;
 
@@ -41,11 +42,13 @@ class Emoticon {
 
             // 클립보드 복사 얼럿 
             this.headerAlert.style.display = "block";
+
             let showAlert = setTimeout( () => {
                 clearTimeout(showAlert);
                 this.headerAlert.style.display = "none";
             }, 3000)
-        })
+
+        }, 500));
         
         // 이모티콘 탭 이벤트 바인딩
         this.emoticonContainer.querySelectorAll('.emoticonTap li').forEach( ele => {
@@ -156,6 +159,15 @@ class Emoticon {
     showEmoticonList(){
         this.emoticonContainer.classList.add("on");
         this.setEmoticonData( this.onEmoticonTap.getAttribute('data-type') );
+    }
+
+    debounce (event, func, wait) {
+        let timeoutId = null;
+        return function (event) {
+            var self = this;
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(func.bind(self, event), wait);
+        };
     }
 }
 
