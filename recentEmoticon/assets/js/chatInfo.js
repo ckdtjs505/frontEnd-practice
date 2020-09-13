@@ -80,8 +80,8 @@ export const chatInfo = {
     getRecentEmoticon(){
         try {
             this.recentEmotcions = JSON.parse( localStorage.getItem("recentEmoticon"));
-            if( !Array.isArray(this.recentEmotcions) )
-                throw Error()
+            if( !this.validationEmoticon(this.recentEmotcions) )
+                throw Error();
         } catch (error) {
             console.log("parseError", error);
             this.recentEmotcions = [];
@@ -95,8 +95,6 @@ export const chatInfo = {
      * 채팅 입력시 실행 
     */
     setRecentEmoticon(emoticons){
-        if( !Array.isArray(emoticons)  )
-            return;
         emoticons.forEach(emoticon => {
             // 이모티콘 중복 제거 
             if( this.recentEmotcions.includes(emoticon)){
@@ -108,5 +106,15 @@ export const chatInfo = {
         });
 
         localStorage.setItem("recentEmoticon", JSON.stringify( this.recentEmotcions) );
+    },
+
+    /**
+     * 채팅 이모티콘 데이터 확인 
+    */
+    validationEmoticon( emoticons ){
+        // 배열 일 때만 TRUE 값 
+        if( Array.isArray(emoticons)  )
+            return true;
+        return false;
     }
 }

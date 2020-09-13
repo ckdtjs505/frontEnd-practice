@@ -92,20 +92,29 @@ class Emoticon {
     }
     // 메시지 전송
     sendMessage(){
-        const outputDom = document.createElement('span');
-        if( this.emoticonInput.value === ''){
-            return;
-        }
-        let reg = new RegExp('/' + chatInfo.emoticonList().join("|") + '/', 'g');
-        let emoticons = this.emoticonInput.value.match(reg);
-        chatInfo.setRecentEmoticon(emoticons);
+        const reg = new RegExp('/' + chatInfo.emoticonList().join("|") + '/', 'g');
+        const emoticons = this.emoticonInput.value.match(reg);
 
-        outputDom.innerText = this.emoticonInput.value;
-        this.emoticonOutput.appendChild(outputDom);
-        this.emoticonInput.value = '';
+        // 채팅 메시지가 없으면 메시지 전송 안함.
+        if( this.emoticonInput.value === '')
+            return;
+
+        // 최근사용 이모티콘 저장 
+        if (chatInfo.validationEmoticon(emoticons)) chatInfo.setRecentEmoticon(emoticons);
+
+        // 채팅 돔 생성 
+        this.displayChatMsg();
 
         // 이모티콘 리스트 숨기기
         this.hideEmoticonList();
+    }
+
+    // 채팅 돔 생성 
+    displayChatMsg(){
+        const outputDom = document.createElement('span');
+        outputDom.innerText = this.emoticonInput.value;
+        this.emoticonOutput.appendChild(outputDom);
+        this.emoticonInput.value = '';
     }
 
     async setEmoticonData( list ){
