@@ -1,4 +1,5 @@
 import {chatInfo} from './chatInfo';
+import Util from './util';
 
 class Emoticon {
     constructor(){
@@ -31,15 +32,7 @@ class Emoticon {
             document.querySelector('input').value += e.target.innerText;
 
             // 클립보드 복사 
-            let textArea = document.createElement('textarea');
-            textArea.value = e.target.innerText;
-            document.body.append( textArea );
-            textArea.select();
-            textArea.setSelectionRange(0, 1);
-
-            document.execCommand('copy');
-            document.body.removeChild( textArea );
-
+            Util.cilpCopy(e.target.innerText);
             // 클립보드 복사 얼럿 
             this.headerAlert.style.display = "block";
 
