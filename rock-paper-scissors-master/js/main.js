@@ -56,7 +56,7 @@ class rockScissorsPaper {
 
     // PLAY AGAIN BUTTON 클릭시 - stepOne 화면 재노출
     this.stepTwo.querySelector(".content-step-three button").addEventListener("click", () => {
-      this.stepOne.style.display = "grid";
+      this.stepOne.style.display = "flex";
       this.stepTwo.style.display = "none";
       document.querySelectorAll(".content-step-one div").forEach( ele => ele.style.background = '')
       console.log("click");
