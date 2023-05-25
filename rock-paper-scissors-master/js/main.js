@@ -1,18 +1,32 @@
 class rockScissorsPaper {
   constructor() {
-    this.value = ["rock", "scissors", "paper"];
+    this.value = ["rock", "scissor", "paper"];
     this.score = localStorage.getItem("score") | 0;
     this.gameResult = null;
     this.computerValue = null;
-
+    this.selectValue = null;
     this.build();
     this.eventBind();
+
+    window.addEventListener('message', ({data}) => {
+      console.log(data)
+      if(data && data.data.event === "result_game"){
+    
+        // 컴퓨터 선택값
+        this.computerValue = data.data.args[0];
+        // 기존 UI 미노출
+        this.stepOne.style.display = "none";
+        // 결과값 노출
+        this.showStepTwoUI(this.selectValue);
+      }
+    })
   }
 
   build() {
     this.stepOne = document.querySelector(".content-step-one");
     this.stepTwo = document.querySelector(".content-step-two");
 
+    document.querySelector('.rules_on_Button').style.display = 'none'
     this.scoreDom = document.querySelector(".value");
     this.setScore();
   }
@@ -22,12 +36,11 @@ class rockScissorsPaper {
     this.stepOne.querySelectorAll("div").forEach(btn => {
       btn.addEventListener("click", e => {
         console.log(e.currentTarget.className);
-        // 컴퓨터 선택값
-        this.computerValue = this.value[Math.floor(Math.random() * 3)];
-        // 기존 UI 미노출
-        this.stepOne.style.display = "none";
-        // 결과값 노출
-        this.showStepTwoUI(e.currentTarget.className);
+        // 초기화 후
+        document.querySelectorAll(".content-step-one div").forEach( ele => ele.style.background = '')
+        // 선택한 값만 그래이로
+        e.currentTarget.style.background = 'gray'
+        this.selectValue = e.currentTarget.className
       });
     });
 
@@ -45,6 +58,7 @@ class rockScissorsPaper {
     this.stepTwo.querySelector(".content-step-three button").addEventListener("click", () => {
       this.stepOne.style.display = "grid";
       this.stepTwo.style.display = "none";
+      document.querySelectorAll(".content-step-one div").forEach( ele => ele.style.background = '')
       console.log("click");
     });
   }
@@ -65,14 +79,14 @@ class rockScissorsPaper {
           } else {
             return -1;
           }
-        case "scissors":
+        case "scissor":
           if (value === "rock") {
             return 1;
           } else {
             return -1;
           }
         case "paper":
-          if (value === "scissors") {
+          if (value === "scissor") {
             return 1;
           } else {
             return -1;
@@ -97,7 +111,7 @@ class rockScissorsPaper {
 
     // 유저가 선택한 값 UI 노출
     this.stepTwo.querySelector(".user-value").classList.add = value;
-    this.stepTwo.querySelector(".user-value img").src = `./images/icon-${value}.svg`;
+    this.stepTwo.querySelector(".user-value img").src = `./images/icon-${value === 'scissor' ?'scissors' : value }.svg`;
 
     // 결과 값 노출
     this.stepTwo.querySelector(".content-step-three div").innerText = this.showResultNumToStr(
