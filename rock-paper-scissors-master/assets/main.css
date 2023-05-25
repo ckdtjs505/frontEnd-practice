@@ -11,6 +11,15 @@ body {
   font-family: "Barlow Semi Condensed", sans-serif;
 }
 
+body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
 .score_box {
   display: flex;
   justify-content: space-between;
@@ -19,7 +28,7 @@ body {
   padding: 1rem;
   max-width: 700px;
   margin: auto;
-  margin-top: 3rem;
+  /* margin-top: 3rem; */
   font-size: 2rem;
   line-height: 1.5rem;
   color: white;
@@ -57,23 +66,31 @@ body {
 }
 
 .content-step-one {
-  display: grid;
-  margin: 3rem auto 0rem;
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  margin: 0rem auto 0rem;
+  /* grid-template-rows: 1fr 1fr; */
+  /* grid-template-columns: 1fr 1fr; */
   max-width: 600px;
-  background-image: url(../images/bg-triangle.svg);
+  /* background-image: url(../images/bg-triangle.svg); */
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .content-step-one div {
-  width: 10rem;
+
+  width: 6rem;
+  height: 6rem;
+  background-color: white;
+  border: 1rem solid;
+  border-radius: 10rem;
+  margin: auto;
+  margin-top: 1rem;
+  /* width: 10rem;
   height: 10rem;
   background-color: white;
   border: 1.5rem solid;
   border-radius: 10rem;
-  margin: auto;
+  margin: auto; */
 }
 
 .content-step-one div img {
@@ -96,8 +113,8 @@ body {
 
 .content-step-one .rock {
   border-color: red;
-  grid-column: 1 / 3;
-  margin-top: 2rem;
+  /* grid-column: 1 / 3; */
+  /* margin-top: 2rem; */
 }
 
 .content-step-two {
@@ -215,6 +232,13 @@ body {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 5;
+}
+
+.content-step-one div img {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @media screen and (max-width: 450px) {
