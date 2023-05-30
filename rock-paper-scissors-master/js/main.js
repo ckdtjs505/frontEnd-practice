@@ -10,8 +10,8 @@ class rockScissorsPaper {
 
     window.addEventListener('message', ({data}) => {
       console.log(data)
-      if(data && data.data.event === "result_game"){
-    
+      
+      if(data && data?.data?.event === "result_game"){
         // 컴퓨터 선택값
         this.computerValue = data.data.args[0];
         // 기존 UI 미노출
@@ -19,7 +19,17 @@ class rockScissorsPaper {
         // 결과값 노출
         this.showStepTwoUI(this.selectValue);
       }
+      if( data && data.data?.data?.message){
+        document.querySelector(".chat_value").innerText = data.data.data.message
+        document.querySelector(".chat_id").innerText = data.data.data.nickname
+      }
+      
     })
+
+    //const button = document.createElement('button');
+    //button.innerHTML = '새로고침'
+    //button.addEventListener('click', ()=> document.location.reload())
+    //document.body.prepend( button )
   }
 
   build() {
