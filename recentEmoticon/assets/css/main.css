@@ -1,5 +1,11 @@
 body {
     display: flex;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
 }
 
 header .alert {
@@ -34,7 +40,6 @@ header .alert {
 .container {
     display: flex;
     margin: auto;
-    margin-top: 6rem;
 }
 
 
@@ -94,9 +99,10 @@ header .alert {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 400px;
-    height: 600px;
-    border: 1px solid black
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    background-color : white;
 }
 
 .chatContainer .input{
@@ -108,7 +114,7 @@ header .alert {
     display: flex;
     flex-direction: column;
     overflow: auto;
-    height: 800px;
+    height: 120px;
 }
 
 .chatContainer .output span{
