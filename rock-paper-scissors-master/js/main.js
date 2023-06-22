@@ -9,7 +9,7 @@ class rockScissorsPaper {
     this.eventBind();
 
     window.addEventListener('message', ({data}) => {
-      console.log(data)
+      // console.log(data)
       
       if(data && data?.data?.event === "result_game"){
         // 컴퓨터 선택값
