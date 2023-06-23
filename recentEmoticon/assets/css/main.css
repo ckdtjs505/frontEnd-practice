@@ -99,7 +99,7 @@ header .alert {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 100%;
+    width: 500px;
     height: 100%;
     border: 1px solid black;
     background-color : white;
@@ -124,4 +124,8 @@ header .alert {
 
 .chatContainer input {
     width: 80%;
+}
+
+.emoticonToggleButton {
+    display: none;
 }
