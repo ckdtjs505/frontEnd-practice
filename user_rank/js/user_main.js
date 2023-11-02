@@ -1,24 +1,11 @@
-class userRSP extends rockScissorsPaper {
-    send(value){
-        // 유저는 아직 따로 쓰진 않음
+class User {
+    constructor(){
+        console.log('create user')
     }
 
-    receiver(value){
-        if( value.state === 'init' ) {
-            window.location.reload()
-        }else if( value.state === 'result') {
-            // 컴퓨터 선택값
-            this.computerValue = value.select;
-            // 기존 UI 미노출
-            this.stepOne.style.display = "none";
-            // 결과값 노출
-            this.showStepTwoUI(value.select);
+    // 버튼 클릭시 페이지 생성
+    // 데이터 영역과 ui 영역 분리
 
-            if( this.gameResult === 1) {
-                window.extensionSDK.broadcast.send('user_result', {
-                    value : this.score
-                });
-            }
-        }
-    }
+    
+
 }

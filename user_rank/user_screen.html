@@ -6,19 +6,37 @@
     <!-- displays site properly based on user's device -->
 
     <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="./images/favicon-32x32.png"
-    />
-    <link
       href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap"
       rel="stylesheet"
     />
 
     <link rel="stylesheet" href="./assets/main.css" />
 
-    <title>Frontend Mentor | Rock, Paper, Scissors</title>
+    <title>연습 용</title>
+
+    <div id="tab">
+
+      <div id="tab_button_balloon">
+        <div>
+          별풍선
+        </div>
+      </div>
+      <div id="tab_button_adballoon">
+        <div>
+          애드벌룬
+        </div>
+      </div>
+      <div id="tab_button_chatting">
+        <div>
+          채팅
+        </div>
+      </div>
+      <div id="tab_button_viewTime">
+        <div>
+          시청
+        </div>
+      </div>
+    </div>
 
     <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
     <style>
@@ -33,71 +51,16 @@
     <script src="https://static.afreecatv.com/asset/app/extension-helper/afreecatv-extension-sdk.js"></script>
   </head>
   <body>
-    <div class="score_box">
-      <div class="score_title">ROCK<br />PAPER<br />SCISSORS</div>
-      <div class="chat"> chat (<strong class="chat_id"> </strong>) 
-        <p class="chat_value"> 유저의 채팅 </p>  
-      </div>
-      <div class="score_value_box">
-        Score
-        <div class="value">0</div>
-      </div>
-    </div>
-
-    <div class="content-step-one">
-      <div class="paper">
-        <img src="./images/icon-paper.svg" alt="" />
-      </div>
-      <div class="scissors">
-        <img src="./images/icon-scissors.svg" alt="" />
-      </div>
-      <div class="rock">
-        <img src="./images/icon-rock.svg" alt="" />
-      </div>
-    </div>
-
-    <div class="content-step-two" style="display: none;">
-      <div class="user-pick">
-        YOU PICKED
-        <div class="user-value paper">
-          <img src="./images/icon-paper.svg" alt="" />
-        </div>
-      </div>
-
-      <div class="content-step-three">
-        <div>YOU LOSE</div>
-        <!-- <button>PLAY AGAIN</button> -->
-      </div>
-
-      <div class="computer-pick">
-        THE HOUSE PICKED
-        <div class="computer-value none">
-          <img src="./images/icon-scissors.svg" alt="" />
-        </div>
-      </div>
-    </div>
-
-    <div class="over" style="display: none;">
-      <div class="rules">
-        <div class="rules_header">
-          <div>RULES</div>
-          <button class="rules_off_Button">x</button>
-        </div>
-        <img src="./images/image-rules.svg" alt="" />
-      </div>
-    </div>
-
-    <div class="rules_on_Button">Rules</div>
-
-    <script src="./js/rockScissorsPaper.js"></script>
-    <script src="./js/user_main.js"></script>
-    <script>
-
+    <script defer src="./js/user_main.js">
+    </script>
+    <script defer>
       setTimeout( () => {
+        window.game = new User();
+
         const SDK = window.AFREECA.ext;
         window.extensionSDK = SDK();
         function init() {
-            window.game = new userRSP();
+            window.game = new User();
         }
         extensionSDK.handleInitialization((userInfo, broadInfo, playerInfo) => {
           init();
