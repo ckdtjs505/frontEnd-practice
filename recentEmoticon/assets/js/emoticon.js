@@ -9,7 +9,13 @@ class Emoticon {
 
         this.chatInfo = chatInfo;
         // 최근사용 이모티콘 가져오기 
-        chatInfo.getRecentEmoticon();
+        window.addEventListener('message', ({data}) => {
+            if( data.action !== 'pass') return;
+            
+            this.emoticonInput.value = JSON.stringify(data)
+            this.emoticonOutput.scrollTop = this.emoticonOutput.scrollHeight;
+            this.displayChatMsg();
+        })
     }
 
     buildUI(){
@@ -91,6 +97,12 @@ class Emoticon {
         // 채팅 메시지가 없으면 메시지 전송 안함.
         if( this.emoticonInput.value === '')
             return;
+
+        window.parent.postMessage( { 
+            action : 'chat',
+            msg : this.emoticonInput.value
+        }, '*' )
+        this.emoticonOutput.scrollTop = this.emoticonOutput.scrollHeight;
 
         // 최근사용 이모티콘 저장 
         if (chatInfo.validationEmoticon(emoticons)) chatInfo.setRecentEmoticon(emoticons);
