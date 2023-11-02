@@ -30,11 +30,12 @@
         color: hsl(228, 45%, 44%);
       }
     </style>
+    <script defer src="https://static.afreecatv.com/asset/app/extension-helper/afreecatv-extension-sdk.js"></script>
   </head>
   <body>
     <div class="score_box">
       <div class="score_title">ROCK<br />PAPER<br />SCISSORS</div>
-      <div class="score_value_box">
+      <div class="score_value_box" style="display: none;">
         Score
         <div class="value">0</div>
       </div>
@@ -85,9 +86,37 @@
 
     <div class="rules_on_Button">Rules</div>
 
-    <script src="./js/main.js"></script>
-    <script>
-      let game = new rockScissorsPaper();
+    <div id="resultBox" style="color: white; display: flex; flex-direction: column; justify-content: space-between; margin: 0.5rem;" > 
+      <div id="alert"></div>
+
+    </div>
+
+    <script defer src="./js/rockScissorsPaper.js"></script>
+    <script defer src="./js/bj_sreen_main.js"></script>
+    <script >
+
+      setTimeout( () => {
+        const SDK = window.AFREECA.ext;
+        window.extensionSDK = SDK();
+        function init() {
+            window.game = new bjRSP();
+        }
+        extensionSDK.handleInitialization((userInfo, broadInfo, playerInfo) => {
+          init();
+        });
+  
+        // extensionSDK.broadcast.listen( (action, message, formId) => {
+        //   console.log(action,message, formId)
+        // });
+
+        extensionSDK.broadcast.listen( (action, message, formId) => {
+          console.log(action,message, formId)
+          game.receiver(action, message, formId);
+        });
+
+      }, 1000)
+
     </script>
+
   </body>
 </html>
