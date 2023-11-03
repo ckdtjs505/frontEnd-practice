@@ -73,3 +73,7 @@ body::-webkit-scrollbar {
 .ag-header-cell-label {
   text-align: center;
 }
+
+.ag-icon-menu {
+  display: none !important;
+}
