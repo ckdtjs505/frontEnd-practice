@@ -10,15 +10,15 @@ class Table {
 					maxWidth: 40,
 					suppressNavigable: true,
 				},
-				{ field: 'nickName', headerName: '닉네임', maxWidth: 100 },
 				{
 					field: 'broadcastStation',
-					headerName: '방송국',
+					headerName: '',
 					maxWidth: 50,
 					cellRenderer: (params) => {
-						return '<img style="width:30px; height:30px;" src="//profile.img.afreecatv.com/LOGO/tl/tlseh58/tlseh58.jpg" alt="">';
+						return `<img style="width:25px; height:25px; border-radius: 50%;" src="//profile.img.afreecatv.com/LOGO/tl/tlseh58/tlseh58.jpg" onclick="window.open('https://bj.afreecatv.com/tlseh58')" alt="">`;
 					},
 				},
+				{ field: 'nickName', headerName: '닉네임', maxWidth: 100 },
 				{ field: 'balloonCount', headerName: '선물개수', maxWidth: 90 },
 				{ field: 'balloonSendCount', headerName: '선물횟수', maxWidth: 90 },
 				{
