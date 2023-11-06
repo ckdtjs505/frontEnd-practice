@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- displays site properly based on user's device -->
 
     <link
       href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap"
@@ -11,16 +10,10 @@
     />
     <script src="./module/enterprise.min.js"></script>
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script> -->
-    <!-- Include the core CSS, this is needed by the grid -->
     <link rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css"/>
-    <!-- Include the theme CSS, only need to import the theme you are going to use -->
-    <!-- <link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css"/> -->
       <link rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-balham.css"/>
-    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
     
     <link rel="stylesheet" href="./assets/main.css" />
 
@@ -38,6 +31,8 @@
       }
     </style>
     <script src="https://static.afreecatv.com/asset/app/extension-helper/afreecatv-extension-sdk.js"></script>
+    <script src="./js/table/table.js"></script>
+    <script src="./js/table/balloonTable.js"></script>
   </head>
   <body>
     <script defer src="./js/user_main.js">
@@ -50,22 +45,22 @@
     </header>
     <div id="tab">
 
-      <div id="tab_button_balloon">
+      <div id="tab_button_balloon" class="subtab">
         <div>
           별풍선
         </div>
       </div>
-      <div id="tab_button_adballoon">
+      <div id="tab_button_adballoon" class="subtab">
         <div>
           애드벌룬
         </div>
       </div>
-      <div id="tab_button_chatting">
+      <div id="tab_button_chatting" class="subtab">
         <div>
           채팅
         </div>
       </div>
-      <div id="tab_button_viewTime">
+      <div id="tab_button_viewTime" class="subtab">
         <div>
           시청
         </div>
@@ -73,85 +68,7 @@
     </div>
     <div id="table" class="ag-theme-balham-dark" style="height: 500px"></div>
     <script type="text/javascript">
-        // Grid Options are properties passed to the grid
-        const gridOptions = {
-          // each entry here represents one column
-          columnDefs: [
-            {
-              lockPosition: 'left',
-              valueGetter: 'node.rowIndex+1',
-              cellClass: 'locked-col',
-              maxWidth: 40,
-              suppressNavigable: true,
-            },
-            { field: "nickName", headerName: "닉네임", maxWidth: 100},
-            { field: "balloonCount", headerName: "선물개수", maxWidth: 90 },
-            { field: "balloonSendCount", headerName: "선물횟수", maxWidth: 90  },
-            {
-              field: "balloonSendPercent",
-              headerName:"선물개수비율",
-              cellRenderer: "agSparklineCellRenderer",
-              cellRendererParams: {
-                sparklineOptions: {
-                  type: "bar",
-                  fill: "#5470c6",
-                  stroke: "#91cc75",
-                  highlightStyle: {
-                    fill: "#fac858"
-                  },
-                  valueAxisDomain: [0, 1],
-                  paddingOuter: 0,
-                  padding: {
-                    top: 0,
-                    bottom: 0
-                  },
-                  axis: {
-                    strokeWidth: 0
-                  }
-                }
-              },
-              maxWidth: 115 
-            },
-          ],
-
-        
-          // default col def properties get applied to all columns
-          defaultColDef: {sortable: true, resizable: true},
-
-          // rowSelection: 'multiple', // allow rows to be selected
-          // animateRows: true, // have rows animate to new positions when sorted
-          onCellClicked: params => {
-            console.log('cell was clicked', params)
-          }
-        };
-
-        // get div to host the grid
-        const eGridDiv = document.getElementById("table");
-        // new grid instance, passing in the hosting DIV and Grid Options
-        new agGrid.Grid(eGridDiv, gridOptions);
-
-        data = [{
-            "nickName" : 'sonia',
-            "balloonCount" : 20,
-            "balloonSendCount" : 2,
-            "balloonSendPercent" : [0.2]
-          },
-          {
-            "nickName" : 'love',
-            "balloonCount" : 100,
-            "balloonSendCount" : 2,
-            "balloonSendPercent" : [0.5]
-
-          },
-          {
-            "nickName" : 'test',
-            "balloonCount" : 30,
-            "balloonSendCount" : 2,
-            "balloonSendPercent" : [0.3]
-          },
-        ]
-          // load fetched data into grid
-          gridOptions.api.setRowData(data);
+       
     </script>
     <script defer>
       setTimeout( () => {
