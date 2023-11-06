@@ -14,8 +14,11 @@ class Table {
 					field: 'broadcastStation',
 					headerName: '',
 					maxWidth: 50,
-					cellRenderer: (params) => {
-						return `<img style="width:25px; height:25px; border-radius: 50%;" src="//profile.img.afreecatv.com/LOGO/tl/tlseh58/tlseh58.jpg" onclick="window.open('https://bj.afreecatv.com/tlseh58')" alt="">`;
+					cellRenderer: ({ data: { userId } }) => {
+						return `<img style="width:25px; height:25px; border-radius: 50%;" src="//profile.img.afreecatv.com/LOGO/${userId.substring(
+							0,
+							2
+						)}/${userId}/${userId}.jpg" onclick="window.open('https://bj.afreecatv.com/${userId}')" alt="">`;
 					},
 				},
 				{ field: 'nickName', headerName: '닉네임', maxWidth: 100 },
