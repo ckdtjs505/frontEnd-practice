@@ -11,6 +11,14 @@ class Table {
 					suppressNavigable: true,
 				},
 				{ field: 'nickName', headerName: '닉네임', maxWidth: 100 },
+				{
+					field: 'broadcastStation',
+					headerName: '방송국',
+					maxWidth: 50,
+					cellRenderer: (params) => {
+						return '<img style="width:30px; height:30px;" src="//profile.img.afreecatv.com/LOGO/tl/tlseh58/tlseh58.jpg" alt="">';
+					},
+				},
 				{ field: 'balloonCount', headerName: '선물개수', maxWidth: 90 },
 				{ field: 'balloonSendCount', headerName: '선물횟수', maxWidth: 90 },
 				{
@@ -45,9 +53,9 @@ class Table {
 			paginationPageSize: 10,
 			// rowSelection: 'multiple', // al paginationPageSize: 10, low rows to be selected
 			// animateRows: true, // have rows animate to new positions when sorted
-			onCellClicked: (params) => {
-				console.log('cell was clicked', params);
-			},
+			// onCellClicked: (params) => {
+			// 	console.log('cell was clicked', params);
+			// },
 		};
 	}
 

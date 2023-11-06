@@ -21,6 +21,26 @@ class BalloonModal extends Model {
 		super.set(val);
 		localStorage.setItem('balloon', JSON.stringify(this.data));
 	}
+
+	add(addVal) {
+		let check = false;
+		this.data = this.data.map((val) => {
+			if (val.userId === addVal.userId) {
+				check = true;
+
+				return {
+					...val,
+					balloonCount: val.balloonCount + addVal.balloonCount,
+					balloonSendCount: ++val.balloonSendCount,
+				};
+			}
+			return val;
+		});
+
+		if (check === false) {
+			this.data.push(addVal);
+		}
+	}
 }
 
 class AdballoonModal extends Model {

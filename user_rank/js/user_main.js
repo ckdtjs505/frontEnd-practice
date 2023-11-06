@@ -66,7 +66,7 @@ class User {
 		// 데이터를 저장하고
 		switch (action) {
 			case 'BALLOON_GIFTED':
-				this.balloonModel.set(message);
+				this.balloonModel.add(message);
 				this.ballonTable.setRowData(this.balloonModel.data);
 				break;
 			case 'ADBALLOON_GIFTED':

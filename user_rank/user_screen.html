@@ -76,8 +76,6 @@
       const onload = () => {
         const SDK = window.AFREECA.ext;
         window.extensionSDK = SDK();
-
-        console.log(SDK)
         function init() {
           window.user = new User();
         }
@@ -98,10 +96,13 @@
       }
 
       setInterval( () => {
+        //  `https://bj.afreecatv.com/${`ckdtjs505`}`
         window.user.receive( 'BALLOON_GIFTED', {
+          userId : 'ckdtjs505',
           nickName: 'sonia',
           balloonCount: 20,
-          balloonSendCount: 2,
+          broadcastStation: 'sonia',
+          balloonSendCount: 1,
           balloonSendPercent: [0.2],
         })
       }, 5000)
