@@ -1,26 +1,7 @@
 class Table {
 	constructor() {
 		this.target = document.getElementById('table');
-		this.data = [
-			{
-				nickName: 'sonia',
-				balloonCount: 20,
-				balloonSendCount: 2,
-				balloonSendPercent: [0.2],
-			},
-			{
-				nickName: 'love',
-				balloonCount: 100,
-				balloonSendCount: 2,
-				balloonSendPercent: [0.5],
-			},
-			{
-				nickName: 'test',
-				balloonCount: 30,
-				balloonSendCount: 2,
-				balloonSendPercent: [0.3],
-			},
-		];
+
 		this.gridOptions = {
 			// each entry here represents one column
 			columnDefs: [
@@ -77,6 +58,28 @@ class Table {
 	}
 
 	setRowData(data) {
-		this.gridOptions.api.setRowData(this.data);
+		console.log(data);
+		// this.data = [
+		// 	{
+		// 		nickName: 'sonia',
+		// 		balloonCount: 20,
+		// 		balloonSendCount: 2,
+		// 		balloonSendPercent: [0.2],
+		// 	},
+		// 	{
+		// 		nickName: 'love',
+		// 		balloonCount: 100,
+		// 		balloonSendCount: 2,
+		// 		balloonSendPercent: [0.5],
+		// 	},
+		// 	{
+		// 		nickName: 'test',
+		// 		balloonCount: 30,
+		// 		balloonSendCount: 2,
+		// 		balloonSendPercent: [0.3],
+		// 	},
+		// ];
+
+		this.gridOptions.api.setRowData(data);
 	}
 }

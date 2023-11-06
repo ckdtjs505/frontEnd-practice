@@ -31,12 +31,12 @@
       }
     </style>
     <script src="https://static.afreecatv.com/asset/app/extension-helper/afreecatv-extension-sdk.js"></script>
+    <script src="./js/modal/model.js"></script>
     <script src="./js/table/table.js"></script>
     <script src="./js/table/balloonTable.js"></script>
   </head>
-  <body>
-    <script defer src="./js/user_main.js">
-    </script>
+  <body onload="onload()">
+    <script defer src="./js/user_main.js"></script>
 
     <title>연습 용</title>
 
@@ -67,28 +67,41 @@
       </div>
     </div>
     <div id="table" class="ag-theme-balham-dark" style="height: 500px"></div>
-    <script type="text/javascript">
-       
-    </script>
     <script defer>
-      setTimeout( () => {
-        window.game = new User();
-
+      const onload = () => {
         const SDK = window.AFREECA.ext;
         window.extensionSDK = SDK();
+
+        console.log(SDK)
         function init() {
-            window.game = new User();
+          window.user = new User();
         }
+        // 추후 삭제 
+        init();
+
         extensionSDK.handleInitialization((userInfo, broadInfo, playerInfo) => {
           init();
         });
-  
-        extensionSDK.broadcast.listen( (action, message, formId) => {
-          console.log(action,message, formId)
-          game.receiver(message);
-        });
 
-      }, 1000)
+        extensionSDK.chat.listen((action, message) => {
+          console.log(action, message)
+        })
+
+        extensionSDK.broadcast.listen((action, message, formId) => {
+          // game.receiver(message);
+        });
+      }
+
+      setInterval( () => {
+
+        console.log('test')
+        window.user.receive( 'BALLOON_GIFTED', {
+          nickName: 'sonia',
+          balloonCount: 20,
+          balloonSendCount: 2,
+          balloonSendPercent: [0.2],
+        })
+      }, 5000)
     </script>
   </body>
 </html>
