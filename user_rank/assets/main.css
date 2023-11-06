@@ -107,3 +107,6 @@ body::-webkit-scrollbar {
   font-weight: 400;
 }
 
+.ag-watermark {
+  display: none;
+}

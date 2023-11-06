@@ -44,8 +44,8 @@ class Table {
 
 			// default col def properties get applied to all columns
 			defaultColDef: { sortable: true, resizable: true },
-
-			// rowSelection: 'multiple', // allow rows to be selected
+			paginationPageSize: 10,
+			// rowSelection: 'multiple', // al paginationPageSize: 10, low rows to be selected
 			// animateRows: true, // have rows animate to new positions when sorted
 			onCellClicked: (params) => {
 				console.log('cell was clicked', params);

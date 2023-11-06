@@ -30,7 +30,7 @@ class AdballoonModal extends Model {
 
 	set(val) {
 		super.set(val);
-		localStorage.setItem('aballoon', JSON.stringify(this.data));
+		localStorage.setItem('adballoon', JSON.stringify(this.data));
 	}
 }
 
