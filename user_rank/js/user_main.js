@@ -6,13 +6,20 @@ class User {
 		this.chatting = document.querySelector('#tab_button_chatting');
 		this.viewTime = document.querySelector('#tab_button_viewTime');
 
-		this.content = new Table();
-		this.content.create();
-
 		this.balloonModel = new BalloonModal([]);
 		this.adballoonModel = new AdballoonModal([]);
 		this.chatModel = new ChatModal([]);
 		this.viewModel = new ViewModal([]);
+
+		this.ballonTable = new BalloonTable(this.balloonModel);
+		this.adballonTable = new AdballoonTable(this.adballoonModel);
+		this.chatTable = new ChatTable(this.chatModel);
+		this.viewTable = new ViewTable(this.viewModel);
+
+		this.ballonTable.create();
+		this.adballonTable.create();
+		this.chatTable.create();
+		this.viewTable.create();
 
 		this.addEvent();
 	}
@@ -24,6 +31,10 @@ class User {
 				document.querySelectorAll('.subtab').forEach((_sub) => {
 					_sub.classList.remove('active');
 				});
+				document.querySelectorAll('.subTable').forEach((_sub) => {
+					_sub.style.display = 'none';
+				});
+
 				this.createContent(ele.id);
 				ele.classList.add('active');
 			});
@@ -33,16 +44,20 @@ class User {
 	createContent(typeId) {
 		switch (typeId) {
 			case 'tab_button_balloon':
-				this.content.setRowData(this.balloonModel.data);
+				document.querySelector('#balloonTable').style.display = 'block';
+				this.ballonTable.setRowData(this.balloonModel.data);
 				break;
 			case 'tab_button_adballoon':
-				this.content.setRowData();
+				document.querySelector('#adballoonTable').style.display = 'block';
+				this.adballonTable.setRowData();
 				break;
 			case 'tab_button_chatting':
-				this.content.setRowData();
+				document.querySelector('#chatTable').style.display = 'block';
+				this.chatTable.setRowData();
 				break;
 			case 'tab_button_viewTime':
-				this.content.setRowData();
+				document.querySelector('#ViewTable').style.display = 'block';
+				this.viewTable.setRowData();
 				break;
 		}
 	}
@@ -52,7 +67,7 @@ class User {
 		switch (action) {
 			case 'BALLOON_GIFTED':
 				this.balloonModel.set(message);
-				this.content.setRowData(this.balloonModel.data);
+				this.ballonTable.setRowData(this.balloonModel.data);
 				break;
 			case 'ADBALLOON_GIFTED':
 				break;

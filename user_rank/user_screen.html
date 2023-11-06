@@ -33,7 +33,6 @@
     <script src="https://static.afreecatv.com/asset/app/extension-helper/afreecatv-extension-sdk.js"></script>
     <script src="./js/modal/model.js"></script>
     <script src="./js/table/table.js"></script>
-    <script src="./js/table/balloonTable.js"></script>
   </head>
   <body onload="onload()">
     <script defer src="./js/user_main.js"></script>
@@ -66,7 +65,13 @@
         </div>
       </div>
     </div>
-    <div id="table" class="ag-theme-balham-dark" style="height: 500px"></div>
+
+    <div id="table">
+      <div id="balloonTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
+      <div id="adballoonTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
+      <div id="chatTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
+      <div id="ViewTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
+    </div>
     <script defer>
       const onload = () => {
         const SDK = window.AFREECA.ext;

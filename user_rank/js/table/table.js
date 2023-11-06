@@ -1,7 +1,5 @@
 class Table {
 	constructor() {
-		this.target = document.getElementById('table');
-
 		this.gridOptions = {
 			// each entry here represents one column
 			columnDefs: [
@@ -81,5 +79,33 @@ class Table {
 		// ];
 
 		this.gridOptions.api.setRowData(data);
+	}
+}
+
+class BalloonTable extends Table {
+	constructor() {
+		super();
+		this.target = document.getElementById('balloonTable');
+	}
+}
+
+class AdballoonTable extends Table {
+	constructor() {
+		super();
+		this.target = document.getElementById('adballoonTable');
+	}
+}
+
+class ChatTable extends Table {
+	constructor() {
+		super();
+		this.target = document.getElementById('chatTable');
+	}
+}
+
+class ViewTable extends Table {
+	constructor() {
+		super();
+		this.target = document.getElementById('ViewTable');
 	}
 }
