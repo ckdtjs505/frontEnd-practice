@@ -2,14 +2,6 @@ class Model {
 	constructor(data) {
 		this.data = [...data];
 	}
-
-	set(val) {
-		this.data.push(val);
-	}
-
-	sort() {
-		// this.data.sort( )
-	}
 }
 
 class BalloonModal extends Model {
@@ -19,7 +11,6 @@ class BalloonModal extends Model {
 
 	set(val) {
 		super.set(val);
-		localStorage.setItem('balloon', JSON.stringify(this.data));
 	}
 
 	add(addVal) {
@@ -40,6 +31,8 @@ class BalloonModal extends Model {
 		if (check === false) {
 			this.data.push(addVal);
 		}
+
+		localStorage.setItem('balloon', JSON.stringify(this.data));
 	}
 }
 
