@@ -6,28 +6,6 @@ class Table {
 	}
 
 	setRowData(data) {
-		console.log(data);
-		// this.data = [
-		// 	{
-		// 		nickName: 'sonia',
-		// 		balloonCount: 20,
-		// 		balloonSendCount: 2,
-		// 		balloonSendPercent: [0.2],
-		// 	},
-		// 	{
-		// 		nickName: 'love',
-		// 		balloonCount: 100,
-		// 		balloonSendCount: 2,
-		// 		balloonSendPercent: [0.5],
-		// 	},
-		// 	{
-		// 		nickName: 'test',
-		// 		balloonCount: 30,
-		// 		balloonSendCount: 2,
-		// 		balloonSendPercent: [0.3],
-		// 	},
-		// ];
-
 		this.gridOptions.api.setRowData(data);
 	}
 }
@@ -60,11 +38,11 @@ class BalloonTable extends Table {
 						)}/${userId}/${userId}.jpg" onclick="window.open('https://bj.afreecatv.com/${userId}')" alt="">`;
 					},
 				},
-				{ field: 'nickName', headerName: '닉네임', maxWidth: 100 },
-				{ field: 'balloonCount', headerName: '선물개수', maxWidth: 90 },
-				{ field: 'balloonSendCount', headerName: '선물횟수', maxWidth: 90 },
+				{ field: 'userNickname', headerName: '닉네임', maxWidth: 100 },
+				{ field: 'count', headerName: '선물개수', maxWidth: 90 },
+				{ field: 'sendCount', headerName: '선물횟수', maxWidth: 90 },
 				{
-					field: 'balloonSendPercent',
+					field: 'sendPercent',
 					headerName: '선물개수비율',
 					cellRenderer: 'agSparklineCellRenderer',
 					cellRendererParams: {
@@ -130,11 +108,11 @@ class AdballoonTable extends Table {
 						)}/${userId}/${userId}.jpg" onclick="window.open('https://bj.afreecatv.com/${userId}')" alt="">`;
 					},
 				},
-				{ field: 'nickName', headerName: '닉네임', maxWidth: 100 },
-				{ field: 'balloonCount', headerName: '선물개수', maxWidth: 90 },
-				{ field: 'balloonSendCount', headerName: '선물횟수', maxWidth: 90 },
+				{ field: 'userNickname', headerName: '닉네임', maxWidth: 100 },
+				{ field: 'count', headerName: '선물개수', maxWidth: 90 },
+				{ field: 'sendCount', headerName: '선물횟수', maxWidth: 90 },
 				{
-					field: 'balloonSendPercent',
+					field: 'sendPercent',
 					headerName: '선물개수비율',
 					cellRenderer: 'agSparklineCellRenderer',
 					cellRendererParams: {
@@ -163,11 +141,6 @@ class AdballoonTable extends Table {
 			// default col def properties get applied to all columns
 			defaultColDef: { sortable: true, resizable: true },
 			paginationPageSize: 10,
-			// rowSelection: 'multiple', // al paginationPageSize: 10, low rows to be selected
-			// animateRows: true, // have rows animate to new positions when sorted
-			// onCellClicked: (params) => {
-			// 	console.log('cell was clicked', params);
-			// },
 		};
 	}
 }
@@ -200,8 +173,8 @@ class ChatTable extends Table {
 						)}/${userId}/${userId}.jpg" onclick="window.open('https://bj.afreecatv.com/${userId}')" alt="">`;
 					},
 				},
-				{ field: 'nickName', headerName: '닉네임', maxWidth: 100 },
-				{ field: 'ChatSendCount', headerName: '채팅수', maxWidth: 90 },
+				{ field: 'userNickname', headerName: '닉네임', maxWidth: 100 },
+				{ field: 'sendCount', headerName: '채팅수', maxWidth: 90 },
 			],
 
 			// default col def properties get applied to all columns
@@ -244,7 +217,7 @@ class ViewTable extends Table {
 						)}/${userId}/${userId}.jpg" onclick="window.open('https://bj.afreecatv.com/${userId}')" alt="">`;
 					},
 				},
-				{ field: 'nickName', headerName: '닉네임', maxWidth: 100 },
+				{ field: 'userNickname', headerName: '닉네임', maxWidth: 100 },
 				{ field: 'viewTime', headerName: '시청시간', maxWidth: 90 },
 			],
 

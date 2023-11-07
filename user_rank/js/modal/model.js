@@ -7,6 +7,7 @@ class Model {
 class BalloonModal extends Model {
 	constructor(data) {
 		super(data);
+		this.totalCount = 0;
 	}
 
 	set(val) {
@@ -15,21 +16,27 @@ class BalloonModal extends Model {
 
 	add(addVal) {
 		let check = false;
+		this.totalCount = this.totalCount + addVal.count;
+
 		this.data = this.data.map((val) => {
 			if (val.userId === addVal.userId) {
 				check = true;
-
 				return {
 					...val,
-					balloonCount: val.balloonCount + addVal.balloonCount,
-					balloonSendCount: ++val.balloonSendCount,
+					count: val.count + addVal.count,
+					sendCount: val.sendCount + 1,
+					sendPercent: [val.count + addVal.count / this.totalCount],
 				};
 			}
 			return val;
 		});
 
 		if (check === false) {
-			this.data.push(addVal);
+			this.data.push({
+				...addVal,
+				sendCount: 1,
+				sendPercent: [addVal.count / this.totalCount],
+			});
 		}
 
 		localStorage.setItem('balloon', JSON.stringify(this.data));
@@ -39,10 +46,34 @@ class BalloonModal extends Model {
 class AdballoonModal extends Model {
 	constructor(data) {
 		super(data);
+		this.totalCount = 0;
 	}
 
-	set(val) {
-		super.set(val);
+	add(addVal) {
+		let check = false;
+		this.totalCount = this.totalCount + addVal.count;
+
+		this.data = this.data.map((val) => {
+			if (val.userId === addVal.userId) {
+				check = true;
+				return {
+					...val,
+					count: val.count + addVal.count,
+					sendCount: val.sendCount + 1,
+					sendPercent: [val.count + addVal.count / this.totalCount],
+				};
+			}
+			return val;
+		});
+
+		if (check === false) {
+			this.data.push({
+				...addVal,
+				sendCount: 1,
+				sendPercent: [addVal.count / this.totalCount],
+			});
+		}
+
 		localStorage.setItem('adballoon', JSON.stringify(this.data));
 	}
 }
@@ -52,8 +83,27 @@ class ChatModal extends Model {
 		super(data);
 	}
 
-	set(val) {
-		super.set(val);
+	add(addVal) {
+		let check = false;
+
+		this.data = this.data.map((val) => {
+			if (val.userId === addVal.userId) {
+				check = true;
+				return {
+					...val,
+					sendCount: val.sendCount + 1,
+				};
+			}
+			return val;
+		});
+
+		if (check === false) {
+			this.data.push({
+				...addVal,
+				sendCount: 1,
+			});
+		}
+
 		localStorage.setItem('chat', JSON.stringify(this.data));
 	}
 }
@@ -63,8 +113,25 @@ class ViewModal extends Model {
 		super(data);
 	}
 
-	set(val) {
-		super.set(val);
+	add(addVal) {
+		let check = false;
+
+		this.data = this.data.map((val) => {
+			if (val.userId === addVal.userId) {
+				check = true;
+				return {
+					...addVal,
+				};
+			}
+			return val;
+		});
+
+		if (check === false) {
+			this.data.push({
+				...addVal,
+			});
+		}
+
 		localStorage.setItem('view', JSON.stringify(this.data));
 	}
 }

@@ -99,11 +99,25 @@
         //  `https://bj.afreecatv.com/${`ckdtjs505`}`
         window.user.receive( 'BALLOON_GIFTED', {
           userId : 'ckdtjs505',
-          nickName: 'sonia',
-          balloonCount: 20,
-          broadcastStation: 'sonia',
-          balloonSendCount: 1,
-          balloonSendPercent: [0.2],
+          userNickname: 'sonia',
+          count: 20,
+        })
+
+        window.user.receive('ADBALLOON_GIFTED', {
+          userId: 'ckdtjs505',
+          userNickname : 'sonia',
+          count: 10,
+        })
+
+        window.user.receive('MESSAGE', {
+          userId: 'ckdtjs505',
+          userNickname: 'sonia',
+        })
+
+        window.user.receive('VIEW_TIME', {
+          userId: 'ckdtjs505',
+          userNickname: 'sonia',
+          viewTime : '15시간 23분'
         })
       }, 5000)
     </script>

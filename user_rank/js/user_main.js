@@ -49,15 +49,15 @@ class User {
 				break;
 			case 'tab_button_adballoon':
 				document.querySelector('#adballoonTable').style.display = 'block';
-				this.adballonTable.setRowData();
+				this.adballonTable.setRowData(this.adballoonModel.data);
 				break;
 			case 'tab_button_chatting':
 				document.querySelector('#chatTable').style.display = 'block';
-				this.chatTable.setRowData();
+				this.chatTable.setRowData(this.chatModel.data);
 				break;
 			case 'tab_button_viewTime':
 				document.querySelector('#ViewTable').style.display = 'block';
-				this.viewTable.setRowData();
+				this.viewTable.setRowData(this.viewModel.data);
 				break;
 		}
 	}
@@ -70,8 +70,16 @@ class User {
 				this.ballonTable.setRowData(this.balloonModel.data);
 				break;
 			case 'ADBALLOON_GIFTED':
+				this.adballoonModel.add(message);
+				this.adballonTable.setRowData(this.adballoonModel.data);
 				break;
 			case 'MESSAGE':
+				this.chatModel.add(message);
+				this.chatTable.setRowData(this.chatModel.data);
+				break;
+			case 'VIEW_TIME':
+				this.viewModel.add(message);
+				this.viewTable.setRowData(this.viewModel.data);
 				break;
 		}
 	}
