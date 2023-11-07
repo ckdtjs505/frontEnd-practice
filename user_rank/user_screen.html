@@ -79,9 +79,6 @@
         function init() {
           window.user = new User();
         }
-        // 추후 삭제 
-        init();
-
         extensionSDK.handleInitialization((userInfo, broadInfo, playerInfo) => {
           init();
         });
