@@ -36,11 +36,21 @@
 <body onload="onload()">
   <script defer src="./js/user_main.js"></script>
 
-  <title>연습 용</title>
-
+  <title>유저 랭킹🏆</title>
   <header>
-    <div id="title"> 오늘의 유저 랭킹🥇 </div>
+    <div id="title"> 유저 랭킹🏆 
+      <div id="titleTip"> (현재 방송 기준)</div>
+    </div>
+    
   </header>
+
+  <div id="userRank">
+    <div>
+      <span id="first"> 🥇SONIA  </span>
+      <span id="second"> 🥈귀요미  </span>
+      <span id="third"> 🥉특이한친구 </span>
+    </div>
+  </div>
   <div id="tab">
 
     <div id="tab_button_balloon" class="subtab">
@@ -105,25 +115,25 @@
       });
     }
 
-    setInterval(() => {
-      // window.user.receive('VIEW_TIME', {
-      //   userId: 'ckdtjs505',
-      //   userNickname: 'sonia',
-      //   viewTime: '15시간 23분'
-      // })
+    // setInterval(() => {
+    //   // window.user.receive('VIEW_TIME', {
+    //   //   userId: 'ckdtjs505',
+    //   //   userNickname: 'sonia',
+    //   //   viewTime: '15시간 23분'
+    //   // })
 
-      window.user.receive('BATTLE_MISSION_GIFTED', {
-        userId: 'ckdtjs505',
-        userNickname: 'sonia',
-        count: 5
-      })
+    //   window.user.receive('BATTLE_MISSION_GIFTED', {
+    //     userId: 'ckdtjs505',
+    //     userNickname: 'sonia',
+    //     count: 5
+    //   })
 
-      window.user.receive('CHALLENGE_MISSION_GIFTED', {
-        userId: 'ckdtjs505',
-        userNickname: 'sonia',
-        count: 8
-      })
-    }, 5000)
+    //   window.user.receive('CHALLENGE_MISSION_GIFTED', {
+    //     userId: 'ckdtjs505',
+    //     userNickname: 'sonia',
+    //     count: 8
+    //   })
+    // }, 5000)
   </script>
 </body>
 

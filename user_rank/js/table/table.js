@@ -275,49 +275,49 @@ class ChallengeMissionTable extends Table {
 	}
 }
 
-class ChatTable extends Table {
-	constructor() {
-		super();
-		this.target = document.getElementById('chatTable');
-		this.gridOptions = {
-			// each entry here represents one column
-			columnDefs: [
-				{
-					lockPosition: 'left',
-					valueGetter: 'node.rowIndex+1',
-					cellClass: 'locked-col',
-					minWidth: 40,
-					maxWidth: 40,
-					suppressNavigable: true,
-					sortable: false,
-				},
-				{
-					field: 'broadcastStation',
-					headerName: '',
-					maxWidth: 49,
-					sortable: false,
-					cellRenderer: ({ data: { userId } }) => {
-						return `<img style="width:25px; height:25px; border-radius: 50%;" src="//profile.img.afreecatv.com/LOGO/${userId.substring(
-							0,
-							2
-						)}/${userId}/${userId}.jpg" onclick="window.open('https://bj.afreecatv.com/${userId}')" alt="">`;
-					},
-				},
-				{ field: 'userNickname', headerName: '닉네임', maxWidth: 100 },
-				{ field: 'sendCount', headerName: '채팅수', maxWidth: 90 },
-			],
+// class ChatTable extends Table {
+// 	constructor() {
+// 		super();
+// 		this.target = document.getElementById('chatTable');
+// 		this.gridOptions = {
+// 			// each entry here represents one column
+// 			columnDefs: [
+// 				{
+// 					lockPosition: 'left',
+// 					valueGetter: 'node.rowIndex+1',
+// 					cellClass: 'locked-col',
+// 					minWidth: 40,
+// 					maxWidth: 40,
+// 					suppressNavigable: true,
+// 					sortable: false,
+// 				},
+// 				{
+// 					field: 'broadcastStation',
+// 					headerName: '',
+// 					maxWidth: 49,
+// 					sortable: false,
+// 					cellRenderer: ({ data: { userId } }) => {
+// 						return `<img style="width:25px; height:25px; border-radius: 50%;" src="//profile.img.afreecatv.com/LOGO/${userId.substring(
+// 							0,
+// 							2
+// 						)}/${userId}/${userId}.jpg" onclick="window.open('https://bj.afreecatv.com/${userId}')" alt="">`;
+// 					},
+// 				},
+// 				{ field: 'userNickname', headerName: '닉네임', maxWidth: 100 },
+// 				{ field: 'sendCount', headerName: '채팅수', maxWidth: 90 },
+// 			],
 
-			// default col def properties get applied to all columns
-			defaultColDef: { sortable: true, resizable: true },
-			paginationPageSize: 10,
-			// rowSelection: 'multiple', // al paginationPageSize: 10, low rows to be selected
-			// animateRows: true, // have rows animate to new positions when sorted
-			// onCellClicked: (params) => {
-			// 	console.log('cell was clicked', params);
-			// },
-		};
-	}
-}
+// 			// default col def properties get applied to all columns
+// 			defaultColDef: { sortable: true, resizable: true },
+// 			paginationPageSize: 10,
+// 			// rowSelection: 'multiple', // al paginationPageSize: 10, low rows to be selected
+// 			// animateRows: true, // have rows animate to new positions when sorted
+// 			// onCellClicked: (params) => {
+// 			// 	console.log('cell was clicked', params);
+// 			// },
+// 		};
+// 	}
+// }
 
 class ViewTable extends Table {
 	constructor() {
