@@ -53,11 +53,21 @@
         애드벌룬
       </div>
     </div>
-    <div id="tab_button_chatting" class="subtab">
+    <div id="tab_button_battleMission" class="subtab">
+      <div>
+        배틀미션
+      </div>
+    </div>
+    <div id="tab_button_challengeMission" class="subtab">
+      <div>
+        도전미션
+      </div>
+    </div>
+    <!-- <div id="tab_button_chatting" class="subtab">
       <div>
         채팅
       </div>
-    </div>
+    </div> -->
     <div id="tab_button_viewTime" class="subtab">
       <div>
         시청
@@ -68,7 +78,9 @@
   <div id="table">
     <div id="balloonTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
     <div id="adballoonTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
-    <div id="chatTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
+    <div id="battleMissionTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
+    <div id="challengeMissionTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
+    <!-- <div id="chatTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div> -->
     <div id="ViewTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
   </div>
   <script defer>
@@ -82,6 +94,8 @@
         init();
       });
 
+      init();
+
       extensionSDK.chat.listen((action, message) => {
         window.user.receive(action, message)
       })
@@ -92,10 +106,22 @@
     }
 
     setInterval(() => {
-      window.user.receive('VIEW_TIME', {
+      // window.user.receive('VIEW_TIME', {
+      //   userId: 'ckdtjs505',
+      //   userNickname: 'sonia',
+      //   viewTime: '15시간 23분'
+      // })
+
+      window.user.receive('BATTLE_MISSION_GIFTED', {
         userId: 'ckdtjs505',
         userNickname: 'sonia',
-        viewTime: '15시간 23분'
+        count: 5
+      })
+
+      window.user.receive('CHALLENGE_MISSION_GIFTED', {
+        userId: 'ckdtjs505',
+        userNickname: 'sonia',
+        count: 8
       })
     }, 5000)
   </script>

@@ -8,18 +8,24 @@ class User {
 
 		this.balloonModel = new BalloonModal([]);
 		this.adballoonModel = new AdballoonModal([]);
-		this.chatModel = new ChatModal([]);
+		// this.chatModel = new ChatModal([]);
+		this.battleMissionModel = new BattleMissionModal([]);
+		this.challengeMissionModel = new ChallengeMissionModal([]);
 		this.viewModel = new ViewModal([]);
 
 		this.ballonTable = new BalloonTable(this.balloonModel);
 		this.adballonTable = new AdballoonTable(this.adballoonModel);
-		this.chatTable = new ChatTable(this.chatModel);
+		this.battleMissionTable = new BattleMissionTable(this.battleMissionModel)
+		this.challengeMissionTable = new ChallengeMissionTable(this.challengeMissionModel)
+		// this.chatTable = new ChatTable(this.chatModel);
 		this.viewTable = new ViewTable(this.viewModel);
 
 		this.ballonTable.create();
 		this.adballonTable.create();
-		this.chatTable.create();
+		// this.chatTable.create();
 		this.viewTable.create();
+		this.battleMissionTable.create();
+		this.challengeMissionTable.create();
 
 		this.addEvent();
 	}
@@ -51,13 +57,21 @@ class User {
 				document.querySelector('#adballoonTable').style.display = 'block';
 				this.adballonTable.setRowData(this.adballoonModel.data);
 				break;
-			case 'tab_button_chatting':
-				document.querySelector('#chatTable').style.display = 'block';
-				this.chatTable.setRowData(this.chatModel.data);
-				break;
+			// case 'tab_button_chatting':
+			// 	document.querySelector('#chatTable').style.display = 'block';
+			// 	this.chatTable.setRowData(this.chatModel.data);
+			// 	break;
 			case 'tab_button_viewTime':
 				document.querySelector('#ViewTable').style.display = 'block';
 				this.viewTable.setRowData(this.viewModel.data);
+				break;
+			case 'tab_button_battleMission':
+				document.querySelector('#battleMissionTable').style.display = 'block';
+				this.battleMissionTable.setRowData(this.battleMissionModel.data);
+				break;
+			case 'tab_button_challengeMission':
+				document.querySelector('#challengeMissionTable').style.display = 'block';
+				this.challengeMissionTable.setRowData(this.battleMissionModel.data);
 				break;
 		}
 	}
@@ -74,13 +88,22 @@ class User {
 				this.adballonTable.setRowData(this.adballoonModel.data);
 				break;
 			case 'MESSAGE':
-				this.chatModel.add(message);
-				this.chatTable.setRowData(this.chatModel.data);
+				// this.chatModel.add(message);
+				// this.chatTable.setRowData(this.chatModel.data);
 				break;
 			case 'VIEW_TIME':
 				this.viewModel.add(message);
 				this.viewTable.setRowData(this.viewModel.data);
 				break;
+			case 'BATTLE_MISSION_GIFTED':
+				this.battleMissionModel.add(message);
+				this.battleMissionTable.setRowData(this.battleMissionModel.data);
+				break;
+			case 'CHALLENGE_MISSION_GIFTED':
+				this.challengeMissionModel.add(message);
+				this.challengeMissionTable.setRowData(this.challengeMissionModel.data);
+				break;
+			
 		}
 	}
 }
