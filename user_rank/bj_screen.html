@@ -83,7 +83,7 @@
       });
 
       extensionSDK.chat.listen((action, message) => {
-        console.log(action, message)
+        window.user.receive(action, message)
       })
 
       extensionSDK.broadcast.listen((action, message, formId) => {
@@ -92,24 +92,6 @@
     }
 
     setInterval(() => {
-      //  `https://bj.afreecatv.com/${`ckdtjs505`}`
-      window.user.receive('BALLOON_GIFTED', {
-        userId: 'ckdtjs505',
-        userNickname: 'sonia',
-        count: 20,
-      })
-
-      window.user.receive('ADBALLOON_GIFTED', {
-        userId: 'ckdtjs505',
-        userNickname: 'sonia',
-        count: 10,
-      })
-
-      window.user.receive('MESSAGE', {
-        userId: 'ckdtjs505',
-        userNickname: 'sonia',
-      })
-
       window.user.receive('VIEW_TIME', {
         userId: 'ckdtjs505',
         userNickname: 'sonia',

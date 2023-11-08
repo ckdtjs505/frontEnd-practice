@@ -10,10 +10,6 @@ class BalloonModal extends Model {
 		this.totalCount = 0;
 	}
 
-	set(val) {
-		super.set(val);
-	}
-
 	add(addVal) {
 		let check = false;
 		this.totalCount = this.totalCount + addVal.count;
