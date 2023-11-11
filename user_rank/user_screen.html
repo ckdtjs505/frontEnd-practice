@@ -1,122 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap"
-      rel="stylesheet"
-    />
-    <script src="./module/enterprise.min.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css"/>
-      <link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-balham.css"/>
-    
-    <link rel="stylesheet" href="./assets/main.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap"
+    rel="stylesheet" />
+  <script src="./module/enterprise.min.js"></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-balham.css" />
+
+  <link rel="stylesheet" href="./assets/main.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
 
-    <style>
-      .attribution {
-        font-size: 11px;
-        text-align: center;
-      }
-      .attribution a {
-        color: hsl(228, 45%, 44%);
-      }
-    </style>
-    <script src="https://static.afreecatv.com/asset/app/extension-helper/afreecatv-extension-sdk.js"></script>
-    <script src="./js/modal/model.js"></script>
-    <script src="./js/table/table.js"></script>
-  </head>
-  <body onload="onload()">
-    <script defer src="./js/user_main.js"></script>
+  <style>
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
 
-    <title>연습 용</title>
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+  </style>
+  <script src="https://static.afreecatv.com/asset/app/extension-helper/afreecatv-extension-sdk.js"></script>
+  <script src="./js/modal/model.js"></script>
+  <script src="./js/table/table.js"></script>
+</head>
 
-    <header>
-      <div id ="title"> 오늘의 유저 랭킹🥇 </div>
-    </header>
-    <div id="tab">
+<body onload="onload()">
+  <script defer src="./js/user_main.js"></script>
 
-      <div id="tab_button_balloon" class="subtab">
-        <div>
-          별풍선
-        </div>
-      </div>
-      <div id="tab_button_adballoon" class="subtab">
-        <div>
-          애드벌룬
-        </div>
-      </div>
-      <div id="tab_button_chatting" class="subtab">
-        <div>
-          채팅
-        </div>
-      </div>
-      <div id="tab_button_viewTime" class="subtab">
-        <div>
-          시청
-        </div>
+  <title>유저 랭킹🏆</title>
+  <header>
+    <div id="title"> 유저 랭킹🏆 
+    </div>
+    
+  </header>
+
+  <div id="userRank">
+    <div>
+      <span id="first"> 🥇귀요미 </span>
+      <span id="second"> 🥈짭구형2↑  </span>
+      <span id="third"> 🥉짭뉴다 </span>
+    </div>
+  </div>
+  <div id="tab">
+
+    <div id="tab_button_balloon" class="subtab">
+      <div>
+        별풍선
       </div>
     </div>
-
-    <div id="table">
-      <div id="balloonTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
-      <div id="adballoonTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
-      <div id="chatTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
-      <div id="ViewTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
+    <div id="tab_button_adballoon" class="subtab">
+      <div>
+        애드벌룬
+      </div>
     </div>
-    <script defer>
-      const onload = () => {
-        const SDK = window.AFREECA.ext;
-        window.extensionSDK = SDK();
-        function init() {
-          window.user = new User();
-        }
-        extensionSDK.handleInitialization((userInfo, broadInfo, playerInfo) => {
-          init();
-        });
+    <div id="tab_button_battleMission" class="subtab">
+      <div>
+        배틀미션
+      </div>
+    </div>
+    <div id="tab_button_challengeMission" class="subtab">
+      <div>
+        도전미션
+      </div>
+    </div>
+    <!-- <div id="tab_button_chatting" class="subtab">
+      <div>
+        채팅
+      </div>
+    </div> -->
+    <div id="tab_button_viewTime" class="subtab" style="display: none;">
+      <div>
+        시청
+      </div>
+    </div>
+  </div>
 
-        extensionSDK.chat.listen((action, message) => {
-          console.log(action, message)
-        })
-
-        extensionSDK.broadcast.listen((action, message, formId) => {
-          // game.receiver(message);
-        });
+  <div id="table">
+    <div id="balloonTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
+    <div id="adballoonTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
+    <div id="battleMissionTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
+    <div id="challengeMissionTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
+    <!-- <div id="chatTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div> -->
+    <div id="ViewTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
+  </div>
+  <script defer>
+    const onload = () => {
+      const SDK = window.AFREECA.ext;
+      window.extensionSDK = SDK();
+      function init() {
+        window.user = new User();
       }
+      extensionSDK.handleInitialization((userInfo, broadInfo, playerInfo) => {
+        init();
+      });
 
-      setInterval( () => {
-        //  `https://bj.afreecatv.com/${`ckdtjs505`}`
-        window.user.receive( 'BALLOON_GIFTED', {
-          userId : 'ckdtjs505',
-          userNickname: 'sonia',
-          count: 20,
-        })
+      // init();
 
-        window.user.receive('ADBALLOON_GIFTED', {
-          userId: 'ckdtjs505',
-          userNickname : 'sonia',
-          count: 10,
-        })
+      extensionSDK.chat.listen((action, message) => {
+        window.user.receive(action, message)
+      })
 
-        window.user.receive('MESSAGE', {
-          userId: 'ckdtjs505',
-          userNickname: 'sonia',
-        })
+      extensionSDK.broadcast.listen((action, message, formId) => {
+        // game.receiver(message);
+      });
+    }
 
-        window.user.receive('VIEW_TIME', {
-          userId: 'ckdtjs505',
-          userNickname: 'sonia',
-          viewTime : '15시간 23분'
-        })
-      }, 5000)
-    </script>
-  </body>
+    setTimeout(() => {
+      // window.user.receive('VIEW_TIME', {
+      //   userId: 'ckdtjs505',
+      //   userNickname: 'sonia',
+      //   viewTime: '15시간 23분'
+      // })
+
+    
+      window.user.receive('BALLOON_GIFTED', {
+        userId: 'jsp021',
+        userNickname: '귀요미',
+        count: 10
+      })
+
+      window.user.receive('BALLOON_GIFTED', {
+        userId: 'y1026',
+        userNickname: '짭구형2↑',
+        count: 7
+      })
+
+      window.user.receive('BALLOON_GIFTED', {
+        userId: 'arinbbidol',
+        userNickname: '짭뉴다',
+        count: 4
+      })
+
+      window.user.receive('CHALLENGE_MISSION_GIFTED', {
+        userId: 'ckdtjs505',
+        userNickname: 'sonia',
+        count: 8
+      })
+    }, 5000)
+  </script>
+</body>
+
 </html>

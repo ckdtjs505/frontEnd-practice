@@ -39,16 +39,15 @@
   <title>유저 랭킹🏆</title>
   <header>
     <div id="title"> 유저 랭킹🏆 
-      <div id="titleTip"> (현재 방송 기준)</div>
     </div>
     
   </header>
 
   <div id="userRank">
     <div>
-      <span id="first"> 🥇SONIA  </span>
-      <span id="second"> 🥈귀요미  </span>
-      <span id="third"> 🥉특이한친구 </span>
+      <span id="first"> 🥇귀요미 </span>
+      <span id="second"> 🥈짭구형2↑  </span>
+      <span id="third"> 🥉짭뉴다 </span>
     </div>
   </div>
   <div id="tab">
@@ -78,7 +77,7 @@
         채팅
       </div>
     </div> -->
-    <div id="tab_button_viewTime" class="subtab">
+    <div id="tab_button_viewTime" class="subtab" style="display: none;">
       <div>
         시청
       </div>
@@ -115,25 +114,38 @@
       });
     }
 
-    // setInterval(() => {
-    //   // window.user.receive('VIEW_TIME', {
-    //   //   userId: 'ckdtjs505',
-    //   //   userNickname: 'sonia',
-    //   //   viewTime: '15시간 23분'
-    //   // })
+    setTimeout(() => {
+      // window.user.receive('VIEW_TIME', {
+      //   userId: 'ckdtjs505',
+      //   userNickname: 'sonia',
+      //   viewTime: '15시간 23분'
+      // })
 
-    //   window.user.receive('BATTLE_MISSION_GIFTED', {
-    //     userId: 'ckdtjs505',
-    //     userNickname: 'sonia',
-    //     count: 5
-    //   })
+    
+      window.user.receive('BALLOON_GIFTED', {
+        userId: 'jsp021',
+        userNickname: '귀요미',
+        count: 10
+      })
 
-    //   window.user.receive('CHALLENGE_MISSION_GIFTED', {
-    //     userId: 'ckdtjs505',
-    //     userNickname: 'sonia',
-    //     count: 8
-    //   })
-    // }, 5000)
+      window.user.receive('BALLOON_GIFTED', {
+        userId: 'y1026',
+        userNickname: '짭구형2↑',
+        count: 7
+      })
+
+      window.user.receive('BALLOON_GIFTED', {
+        userId: 'arinbbidol',
+        userNickname: '짭뉴다',
+        count: 4
+      })
+
+      window.user.receive('CHALLENGE_MISSION_GIFTED', {
+        userId: 'ckdtjs505',
+        userNickname: 'sonia',
+        count: 8
+      })
+    }, 5000)
   </script>
 </body>
 
