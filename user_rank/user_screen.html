@@ -45,9 +45,9 @@
 
   <div id="userRank">
     <div>
-      <span id="first"> 🥇귀요미 </span>
+      <!-- <span id="first"> 🥇귀요미 </span>
       <span id="second"> 🥈짭구형2↑  </span>
-      <span id="third"> 🥉짭뉴다 </span>
+      <span id="third"> 🥉짭뉴다 </span> -->
     </div>
   </div>
   <div id="tab">
@@ -72,16 +72,7 @@
         도전미션
       </div>
     </div>
-    <!-- <div id="tab_button_chatting" class="subtab">
-      <div>
-        채팅
-      </div>
-    </div> -->
-    <div id="tab_button_viewTime" class="subtab" style="display: none;">
-      <div>
-        시청
-      </div>
-    </div>
+
   </div>
 
   <div id="table">
@@ -89,8 +80,6 @@
     <div id="adballoonTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
     <div id="battleMissionTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
     <div id="challengeMissionTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
-    <!-- <div id="chatTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div> -->
-    <div id="ViewTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
   </div>
   <script defer>
     const onload = () => {
@@ -103,7 +92,7 @@
         init();
       });
 
-      // init();
+      init();
 
       extensionSDK.chat.listen((action, message) => {
         window.user.receive(action, message)
@@ -111,6 +100,7 @@
 
       extensionSDK.broadcast.listen((action, message, formId) => {
         // game.receiver(message);
+        window.broadNumber;
       });
     }
 
@@ -145,7 +135,7 @@
         userNickname: 'sonia',
         count: 8
       })
-    }, 5000)
+    }, 3000)
   </script>
 </body>
 
