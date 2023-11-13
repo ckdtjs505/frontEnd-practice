@@ -1,12 +1,12 @@
-class User {
-	constructor() {
+class Main {
+	constructor(extensionSDK) {
+		this.extensionSDK = extensionSDK;
 		console.log('create user');
 		this.balloon = document.querySelector('#tab_button_balloon');
 		this.adballoon = document.querySelector('#tab_button_adballoon');
 		this.chatting = document.querySelector('#tab_button_chatting');
 		this.viewTime = document.querySelector('#tab_button_viewTime');
 
-		;
 		this.balloonModel = new BalloonModal(JSON.parse(localStorage.getItem(`${window.broadNumber || 0}_balloon`)) || []);
 		this.adballoonModel = new AdballoonModal(JSON.parse(localStorage.getItem(`${window.broadNumber || 0}_adballoon`)) || []);
 		this.battleMissionModel = new BattleMissionModal(JSON.parse(localStorage.getItem(`${window.broadNumber || 0}_battleMission`)) || []);
@@ -22,7 +22,6 @@ class User {
 		this.adballonTable.create();
 		this.battleMissionTable.create();
 		this.challengeMissionTable.create();
-
 		this.topThreeModel.createUI()
 		this.addEvent();
 	}
@@ -63,6 +62,47 @@ class User {
 				this.challengeMissionTable.setRowData(this.challengeMissionModel.data);
 				break;
 		}
+	}
+
+}
+
+
+class UserScreen extends Main {
+	constructor() { 
+		super();
+	}
+
+	receiveUser(action, message){
+		this.balloonModel = new BalloonModal(message['BALLOON_GIFTED'] || []);
+		this.ballonTable.setRowData(this.balloonModel.data);
+		this.adballoonModel = new AdballoonModal(message['ADBALLOON_GIFTED'] || []);
+		this.adballonTable.setRowData(this.adballoonModel.data);
+		this.battleMissionModel = new BattleMissionModal(message['BATTLE_MISSION_GIFTED'] || []);
+		this.battleMissionTable.setRowData(this.battleMissionModel.data);
+		this.challengeMissionModel = new ChallengeMissionModal(message['CHALLENGE_MISSION_GIFTED'] || []);
+		this.challengeMissionTable.setRowData(this.challengeMissionModel.data);
+		this.topThreeModel = new TopThreeModal(message['TOP_THREE'] || []);
+		this.topThreeModel.createUI()
+	}
+}
+
+class BJscreen extends Main {
+	constructor(sdk) { 
+		super(sdk);
+		this.sendUser();
+	}
+
+	sendUser(){
+		if(this.timer) clearInterval(this.timer);
+		this.timer = setInterval( (() => {
+			this.extensionSDK.broadcast.send('USER_RANK', {
+				'BALLOON_GIFTED': this.balloonModel.data,
+				'ADBALLOON_GIFTED': this.adballoonModel.data,
+				'BATTLE_MISSION_GIFTED': this.battleMissionModel.data,
+				'CHALLENGE_MISSION_GIFTED': this.challengeMissionModel.data,
+				'TOP_THREE': this.topThreeModel.data
+			})
+		}), 2000) 
 	}
 
 	receive(action, message) {

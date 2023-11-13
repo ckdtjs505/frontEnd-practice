@@ -79,39 +79,22 @@
     <div id="adballoonTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
     <div id="battleMissionTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
     <div id="challengeMissionTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
-    <!-- <div id="chatTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div> -->
-    <div id="ViewTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
   </div>
   <script defer>
     const onload = () => {
       const SDK = window.AFREECA.ext;
       window.extensionSDK = SDK();
-      function init() {
-        window.user = new User();
-      }
       extensionSDK.handleInitialization((userInfo, broadInfo, playerInfo) => {
-        init();
+        window.broadNumber = broadInfo.broadNo;
+        window.user = new BJscreen(extensionSDK);
       });
-
-      init();
 
       extensionSDK.chat.listen((action, message) => {
         window.user.receive(action, message)
       })
-
-      extensionSDK.broadcast.listen((action, message, formId) => {
-        // game.receiver(message);
-      });
     }
 
     setTimeout(() => {
-      // window.user.receive('VIEW_TIME', {
-      //   userId: 'ckdtjs505',
-      //   userNickname: 'sonia',
-      //   viewTime: '15시간 23분'
-      // })
-
-    
       window.user.receive('BALLOON_GIFTED', {
         userId: 'jsp021',
         userNickname: '귀요미',
@@ -135,7 +118,7 @@
         userNickname: 'sonia',
         count: 8
       })
-    }, 5000)
+    }, 3000)
   </script>
 </body>
 

@@ -86,56 +86,16 @@
       const SDK = window.AFREECA.ext;
       window.extensionSDK = SDK();
       function init() {
-        window.user = new User();
+        window.user = new UserScreen();
       }
       extensionSDK.handleInitialization((userInfo, broadInfo, playerInfo) => {
         init();
       });
 
-      init();
-
-      extensionSDK.chat.listen((action, message) => {
-        window.user.receive(action, message)
-      })
-
       extensionSDK.broadcast.listen((action, message, formId) => {
-        // game.receiver(message);
-        window.broadNumber;
+        window.user.receiveUser(action, message)
       });
     }
-
-    setTimeout(() => {
-      // window.user.receive('VIEW_TIME', {
-      //   userId: 'ckdtjs505',
-      //   userNickname: 'sonia',
-      //   viewTime: '15시간 23분'
-      // })
-
-    
-      window.user.receive('BALLOON_GIFTED', {
-        userId: 'jsp021',
-        userNickname: '귀요미',
-        count: 10
-      })
-
-      window.user.receive('BALLOON_GIFTED', {
-        userId: 'y1026',
-        userNickname: '짭구형2↑',
-        count: 7
-      })
-
-      window.user.receive('BALLOON_GIFTED', {
-        userId: 'arinbbidol',
-        userNickname: '짭뉴다',
-        count: 4
-      })
-
-      window.user.receive('CHALLENGE_MISSION_GIFTED', {
-        userId: 'ckdtjs505',
-        userNickname: 'sonia',
-        count: 8
-      })
-    }, 3000)
   </script>
 </body>
 
