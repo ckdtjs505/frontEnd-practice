@@ -9,9 +9,8 @@
     rel="stylesheet" />
   <script src="./module/enterprise.min.js"></script>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-balham.css" />
-
+  <link rel="stylesheet" href="./styles/ag-grid.css" />
+  <link rel="stylesheet" href="./styles/ag-theme-balham.css" />
   <link rel="stylesheet" href="./assets/main.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -93,32 +92,6 @@
         window.user.receive(action, message)
       })
     }
-
-    setTimeout(() => {
-      window.user.receive('BALLOON_GIFTED', {
-        userId: 'jsp021',
-        userNickname: '귀요미',
-        count: 10
-      })
-
-      window.user.receive('BALLOON_GIFTED', {
-        userId: 'y1026',
-        userNickname: '짭구형2↑',
-        count: 7
-      })
-
-      window.user.receive('BALLOON_GIFTED', {
-        userId: 'arinbbidol',
-        userNickname: '짭뉴다',
-        count: 4
-      })
-
-      window.user.receive('CHALLENGE_MISSION_GIFTED', {
-        userId: 'ckdtjs505',
-        userNickname: 'sonia',
-        count: 8
-      })
-    }, 3000)
   </script>
 </body>
 
