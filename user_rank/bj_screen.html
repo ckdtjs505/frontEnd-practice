@@ -75,17 +75,21 @@
         window.broadNumber = broadInfo.broadNo;
         window.user = new BJscreen(extensionSDK);
       });
-      // window.user = new BJscreen(extensionSDK);
+      window.user = new BJscreen(extensionSDK);
 
       extensionSDK.chat.listen((action, message) => {
         window.user.receive(action, message)
       })
     
-      window.user.receive('IN', {
-          userId: "jsp021(2)",
-          userNickname: "jsp021"
-        })
+      setTimeout( () => {
 
+        window.user.receive('IN', { 
+          userList : [ {
+            userId: "jsp021",
+            userNickname: "jsp021(2)"
+          }]
+        })
+      }, 100)
 
       setTimeout(() => {
         window.user.receive('BALLOON_GIFTED', {
@@ -119,10 +123,30 @@
         })
 
          window.user.receive('OUT', {
-          userId: "jsp021(2)",
-          userNickname: "jsp021"
+          userList : [ {
+            userId: "jsp021",
+            userNickname: "jsp021(2)"
+          }]
         })
-      }, 3000)
+      }, 5000)
+
+      setTimeout( () => {
+        window.user.receive('IN', {
+          userList : [ {
+            userId: "jsp021",
+            userNickname: "jsp021(2)"
+          }]
+        })
+      }, 6000)
+
+      setTimeout( () => {
+        window.user.receive('OUT', {
+          userList : [ {
+            userId: "jsp021",
+            userNickname: "jsp021(2)"
+          }]
+        })
+      }, 8000)
     }
 
 

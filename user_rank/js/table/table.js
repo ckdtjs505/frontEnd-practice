@@ -14,6 +14,9 @@ class Table {
 class ViewTable extends Table {
 	constructor() {
 		super()
+		this.interval = setInterval( () => {
+			
+		}, 1000)
 		this.target = document.getElementById('viewTable');
 		this.gridOptions = {
 			// each entry here represents one column
@@ -40,14 +43,61 @@ class ViewTable extends Table {
 					},
 				},
 				{ field: 'userNickname', headerName: '닉네임', maxWidth: 100},
-				{ field: 'viewTime',  headerName: '시청시간', maxWidth: 70,  
-					cellRenderer: ( ({data: {  InTimeStamp }}) => { 
-						let result; 
-						setInterval(() => {
-							result = new Date() - InTimeStamp
-						}, 1000 ); 
-						return  result;
-					})  },			
+				{
+					field: 'isView',  headerName: '시청중', maxWidth: 100,  
+					cellRenderer: ({ data: { InTimeStamp, OutTimeStamp } }) => {
+						// 현재 시간을 가져옵니다.
+						if( InTimeStamp &&  !OutTimeStamp ){
+							return `YES`;
+						}else {
+							return 'NO';
+						}
+					},
+				},
+				{ field: 'intTimeStamp',  headerName: '입장시간', maxWidth: 100,  
+					cellRenderer: ({ data: { InTimeStamp } }) => {
+						// 현재 시간을 가져옵니다.
+						return `${InTimeStamp.toLocaleTimeString("ko-KR", {
+							hour12: false,
+							hour: "2-digit",
+							minute: "2-digit",
+							second: "2-digit"
+						})}`;
+					}, 
+				},
+				{ field: 'intTimeStamp',  headerName: '퇴장시간', maxWidth: 100,  
+					cellRenderer: ({ data: { OutTimeStamp } }) => {
+						// 현재 시간을 가져옵니다.
+						return `${OutTimeStamp?.toLocaleTimeString("ko-KR", {
+							hour12: false,
+							hour: "2-digit",
+							minute: "2-digit",
+							second: "2-digit"
+						}) || '-'}`;
+					}, 
+				},
+				{
+					field: 'viewTime', headerName: '총시청시간', maxWidth:100,
+					cellRenderer: ({ data: { InTimeStamp, OutTimeStamp, viewTime } }) => {
+						// 현재 시간을 가져옵니다.
+						if( viewTime ){
+							const millis = viewTime;
+
+							const seconds = Math.round(millis / 1000);
+							const minutes = Math.floor(seconds / 60);
+							const hours = Math.floor(minutes / 60)
+							if(hours){
+								return `${hours}시${minutes}분${seconds}초`
+							}else if(minutes ){
+								return `${minutes}분${seconds}초`; // 2시간 03분 45초
+							}else {
+								return `${seconds}초`; // 2시간 03분 45초
+							}
+						}
+
+						return '-';
+					}, 
+				}			
 			],
 
 			// default col def properties get applied to all columns

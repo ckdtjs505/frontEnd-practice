@@ -24,8 +24,9 @@ class ViewModel extends Model {
 				if( type === 'IN'){
 					return {
 						...val,
-						viewTime: val.viewTime + val.OutTimeStamp  ,
-						InTimeStamp: new Date()
+						viewTime: val.viewTime,
+						InTimeStamp: new Date(),
+						OutTimeStamp: null
 					}
 				}else if( type === 'OUT'){
 					
