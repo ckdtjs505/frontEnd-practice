@@ -13,6 +13,7 @@ class Table {
 class SupportTable extends Table {
 	constructor() {
 		super();
+		this.target = document.getElementById('supportTable');
 		this.gridOptions = {
 			// each entry here represents one column
 			columnDefs: [
@@ -37,9 +38,17 @@ class SupportTable extends Table {
 						)}/${userId}/${userId}.jpg" onclick="window.open('https://bj.afreecatv.com/${userId}')" alt="">`;
 					},
 				},
-				{ field: 'userNickname', headerName: '닉네임', maxWidth: 100 },
-				{ field: 'count', headerName: '선물개수', maxWidth: 90 },
-				{ field: 'sendCount', headerName: '선물횟수', maxWidth: 90 },
+				{ field: 'userNickname', headerName: '닉네임', maxWidth: 100},
+				{ field: 'count', headerName: '총개수', maxWidth: 70},
+				{ field: 'balloonCount',  headerName: '별풍선', maxWidth: 70,  
+					cellRenderer: ( ({data: {balloonCount  }}) => {  return balloonCount ? balloonCount : 0 })  },
+				{ field: 'adBalloonCount', headerName: '애드벌룬', maxWidth: 70,
+					cellRenderer: ( ({data: {adBalloonCount  }}) => {  return adBalloonCount ? adBalloonCount : 0 })  },
+				{ field: 'battleMissionCount', headerName: '도전미션', maxWidth: 70,	
+					cellRenderer: ( ({data: {battleMissionCount  }}) => {  return battleMissionCount ? battleMissionCount : 0 })  },
+				{ field: 'challengeMissionCount', headerName: '대결미션', maxWidth: 70,
+					cellRenderer: ( ({data: {challengeMissionCount  }}) => {  return challengeMissionCount ? challengeMissionCount : 0 })  },
+				{ field: 'sendCount', headerName: '총횟수', maxWidth: 70 },
 				{
 					field: 'sendPercent',
 					headerName: '선물개수비율',
@@ -69,6 +78,7 @@ class SupportTable extends Table {
 
 			// default col def properties get applied to all columns
 			defaultColDef: { sortable: true, resizable: true },
+			// defaultValue: 0,
 			paginationPageSize: 10,
 			animateRows: true, // have rows animate to new positions when sorted
 

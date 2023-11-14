@@ -2,27 +2,15 @@ class Main {
 	constructor(extensionSDK) {
 		this.extensionSDK = extensionSDK;
 		console.log('create user');
-		this.balloon = document.querySelector('#tab_button_balloon');
-		this.adballoon = document.querySelector('#tab_button_adballoon');
-		this.chatting = document.querySelector('#tab_button_chatting');
+		this.support = document.querySelector('#tab_button_support')
 		this.viewTime = document.querySelector('#tab_button_viewTime');
 
-		this.balloonModel = new BalloonModal(JSON.parse(localStorage.getItem(`${window.broadNumber || 0}_balloon`)) || []);
-		this.adballoonModel = new AdballoonModal(JSON.parse(localStorage.getItem(`${window.broadNumber || 0}_adballoon`)) || []);
-		this.battleMissionModel = new BattleMissionModal(JSON.parse(localStorage.getItem(`${window.broadNumber || 0}_battleMission`)) || []);
-		this.challengeMissionModel = new ChallengeMissionModal(JSON.parse(localStorage.getItem(`${window.broadNumber || 0}_challengeMission`)) || []);
-		this.topThreeModel = new TopThreeModal(JSON.parse(localStorage.getItem(`${window.broadNumber || 0}_topThreeModal`)) || []);
+		this.supportModel = new SupportModal(JSON.parse(localStorage.getItem(`${window.broadNumber || 0}_support`)) || []);
+		
+		this.supportTable = new SupportTable(this.supportModel);
+		this.supportTable.create();
 
-		this.ballonTable = new BalloonTable(this.balloonModel);
-		this.adballonTable = new AdballoonTable(this.adballoonModel);
-		this.battleMissionTable = new BattleMissionTable(this.battleMissionModel)
-		this.challengeMissionTable = new ChallengeMissionTable(this.challengeMissionModel)
-
-		this.ballonTable.create();
-		this.adballonTable.create();
-		this.battleMissionTable.create();
-		this.challengeMissionTable.create();
-		this.topThreeModel.createUI()
+		this.supportModel.createUI()
 		this.addEvent();
 	}
 
@@ -45,21 +33,9 @@ class Main {
 
 	createContent(typeId) {
 		switch (typeId) {
-			case 'tab_button_balloon':
-				document.querySelector('#balloonTable').style.display = 'block';
-				this.ballonTable.setRowData(this.balloonModel.data);
-				break;
-			case 'tab_button_adballoon':
-				document.querySelector('#adballoonTable').style.display = 'block';
-				this.adballonTable.setRowData(this.adballoonModel.data);
-				break;
-			case 'tab_button_battleMission':
-				document.querySelector('#battleMissionTable').style.display = 'block';
-				this.battleMissionTable.setRowData(this.battleMissionModel.data);
-				break;
-			case 'tab_button_challengeMission':
-				document.querySelector('#challengeMissionTable').style.display = 'block';
-				this.challengeMissionTable.setRowData(this.challengeMissionModel.data);
+			case 'tab_button_support':
+				document.querySelector('#supportTable').style.display = 'block';
+				this.supportTable.setRowData(this.supportModel.data);
 				break;
 		}
 	}
@@ -73,16 +49,10 @@ class UserScreen extends Main {
 	}
 
 	receiveUser(action, message){
-		this.balloonModel = new BalloonModal(message['BALLOON_GIFTED'] || []);
-		this.ballonTable.setRowData(this.balloonModel.data);
-		this.adballoonModel = new AdballoonModal(message['ADBALLOON_GIFTED'] || []);
-		this.adballonTable.setRowData(this.adballoonModel.data);
-		this.battleMissionModel = new BattleMissionModal(message['BATTLE_MISSION_GIFTED'] || []);
-		this.battleMissionTable.setRowData(this.battleMissionModel.data);
-		this.challengeMissionModel = new ChallengeMissionModal(message['CHALLENGE_MISSION_GIFTED'] || []);
-		this.challengeMissionTable.setRowData(this.challengeMissionModel.data);
-		this.topThreeModel = new TopThreeModal(message['TOP_THREE'] || []);
-		this.topThreeModel.createUI()
+		console.log(action, message)
+		this.supportModel = new SupportModal(message.data || []);
+		this.supportTable.setRowData(this.supportModel.data);
+		this.supportModel.createUI()
 	}
 }
 
@@ -96,11 +66,7 @@ class BJscreen extends Main {
 		if(this.timer) clearInterval(this.timer);
 		this.timer = setInterval( (() => {
 			this.extensionSDK.broadcast.send('USER_RANK', {
-				'BALLOON_GIFTED': this.balloonModel.data,
-				'ADBALLOON_GIFTED': this.adballoonModel.data,
-				'BATTLE_MISSION_GIFTED': this.battleMissionModel.data,
-				'CHALLENGE_MISSION_GIFTED': this.challengeMissionModel.data,
-				'TOP_THREE': this.topThreeModel.data
+				...this.supportModel
 			})
 		}), 2000) 
 	}
@@ -109,26 +75,15 @@ class BJscreen extends Main {
 		// 데이터를 저장하고
 		switch (action) {
 			case 'BALLOON_GIFTED':
-				this.balloonModel.add(message);
-				this.topThreeModel.add(message);
-				this.ballonTable.setRowData(this.balloonModel.data);
-				break;
 			case 'ADBALLOON_GIFTED':
-				this.adballoonModel.add(message);
-				this.topThreeModel.add(message);
-				this.adballonTable.setRowData(this.adballoonModel.data);
-				break;
 			case 'BATTLE_MISSION_GIFTED':
-				this.battleMissionModel.add(message);
-				this.topThreeModel.add(message);
-				this.battleMissionTable.setRowData(this.battleMissionModel.data);
-				break;
 			case 'CHALLENGE_MISSION_GIFTED':
-				this.challengeMissionModel.add(message);
-				this.topThreeModel.add(message);
-				this.challengeMissionTable.setRowData(this.challengeMissionModel.data);
+				this.supportModel.add(message, action);
+				// this.topThreeModel.add(message);
+				this.supportTable.setRowData(this.supportModel.data);
 				break;
 		}
-		this.topThreeModel.createUI()
+
+		// this.topThreeModel.createUI()
 	}
 }

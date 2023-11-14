@@ -51,7 +51,13 @@
   </div>
   <div id="tab">
 
-    <div id="tab_button_balloon" class="subtab">
+    <div id="tab_button_support" class="subtab">
+      <div>
+        후원
+      </div>
+    </div>
+
+    <!-- <div id="tab_button_balloon" class="subtab">
       <div>
         별풍선
       </div>
@@ -70,14 +76,15 @@
       <div>
         도전미션
       </div>
-    </div>
+    </div> -->
   </div>
 
   <div id="table">
-    <div id="balloonTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
+    <div id="supportTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
+    <!-- <div id="balloonTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
     <div id="adballoonTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
     <div id="battleMissionTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
-    <div id="challengeMissionTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
+    <div id="challengeMissionTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div> -->
   </div>
   <script defer>
     const onload = () => {
@@ -91,7 +98,41 @@
       extensionSDK.chat.listen((action, message) => {
         window.user.receive(action, message)
       })
+    
+      setTimeout(() => {
+        window.user.receive('BALLOON_GIFTED', {
+          userId: 'jsp021',
+          userNickname: '귀요미',
+          count: 10
+        })
+
+        window.user.receive('BALLOON_GIFTED', {
+          userId: 'y1026',
+          userNickname: '짭구형2↑',
+          count: 7
+        })
+
+        window.user.receive('BALLOON_GIFTED', {
+          userId: 'arinbbidol',
+          userNickname: '짭뉴다',
+          count: 4
+        })
+
+        window.user.receive('CHALLENGE_MISSION_GIFTED', {
+          userId: 'ckdtjs505',
+          userNickname: 'sonia',
+          count: 8
+        })
+
+        window.user.receive('CHALLENGE_MISSION_GIFTED', {
+          userId: 'ckdtjs505',
+          userNickname: 'sonia',
+          count: 8
+        })
+      }, 3000)
     }
+
+
   </script>
 </body>
 
