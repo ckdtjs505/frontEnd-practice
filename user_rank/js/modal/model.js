@@ -7,6 +7,72 @@ class Model {
 			this.totalCount = this.totalCount + count;
 		})
 	}
+}
+
+class ViewModel extends Model {
+	constructor(data){
+		super(data)	
+	}
+
+	add(addVal, type){
+		let check = false;
+
+		this.data = this.data.map( (val) => {
+			if (val.userId === addVal.userId) {
+				check = true;
+				
+				if( type === 'IN'){
+					return {
+						...val,
+						viewTime: val.viewTime + val.OutTimeStamp  ,
+						InTimeStamp: new Date()
+					}
+				}else if( type === 'OUT'){
+					
+					return {
+						...val,
+						viewTime: val.viewTime + (new Date()  - val.InTimeStamp),
+						OutTimeStamp: new Date()
+					}
+				}
+			}
+			return val;
+		})
+
+		// IN
+		// viewTime: 0,
+		// InTimestamp: 12:18
+		// OUT 
+		// viewTime: InTimestamp - OutTimeStamp; // 42분
+		// InTimestamp: 12:18
+		// OutTimeStamp: 12:50
+
+		// IN 
+		// viewTime: 42분 
+		// InTimestamp: 12:50
+		// OutTimeStamp: 0
+
+		// OUT 
+		// viewTime: 42 +  (InTimestamp - OutTimeStamp)
+		// InTimestamp: 12:18
+		// OutTimeStamp
+
+
+		if (check === false && type === 'IN') {
+			this.data.push({
+				...addVal,
+				viewTime: 0,
+				InTimeStamp: new Date(),
+			});
+		}
+	}
+}
+
+
+class SupportModal extends Model {
+	constructor(data) {
+		super(data);
+	}
 
 	add(addVal, type) {
 		let check = false;
@@ -94,18 +160,6 @@ class Model {
 		this.data.sort( (a, b) => {
 			return  b.count - a.count; 
 		})
-	}
-}
-
-class SupportModal extends Model {
-	constructor(data) {
-		super(data);
-
-	}
-
-	add(addVal, type){
-		super.add(addVal, type);
-
 
 		localStorage.setItem(`${window.broadNumber || 0}_support`, JSON.stringify(this.data));
 	}

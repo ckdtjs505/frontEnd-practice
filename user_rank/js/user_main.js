@@ -6,10 +6,13 @@ class Main {
 		this.viewTime = document.querySelector('#tab_button_viewTime');
 
 		this.supportModel = new SupportModal(JSON.parse(localStorage.getItem(`${window.broadNumber || 0}_support`)) || []);
-		
-		this.supportTable = new SupportTable(this.supportModel);
-		this.supportTable.create();
+		this.viewModel = new ViewModel([]); // localstroage로 재구현
 
+		this.supportTable = new SupportTable(this.supportModel);
+		this.viewTable = new ViewTable(this.viewModel);
+
+		this.supportTable.create();
+		this.viewTable.create();
 		this.supportModel.createUI()
 		this.addEvent();
 	}
@@ -37,6 +40,10 @@ class Main {
 				document.querySelector('#supportTable').style.display = 'block';
 				this.supportTable.setRowData(this.supportModel.data);
 				break;
+			case 'tab_button_viewTime':
+				document.querySelector('#viewTable').style.display = 'block';
+				this.viewTable.setRowData(this.viewModel.data);
+				break;
 		}
 	}
 
@@ -59,7 +66,7 @@ class UserScreen extends Main {
 class BJscreen extends Main {
 	constructor(sdk) { 
 		super(sdk);
-		this.sendUser();
+		// this.sendUser();
 	}
 
 	sendUser(){
@@ -68,7 +75,7 @@ class BJscreen extends Main {
 			this.extensionSDK.broadcast.send('USER_RANK', {
 				...this.supportModel
 			})
-		}), 2000) 
+		}), 5000) 
 	}
 
 	receive(action, message) {
@@ -82,8 +89,15 @@ class BJscreen extends Main {
 				// this.topThreeModel.add(message);
 				this.supportTable.setRowData(this.supportModel.data);
 				break;
+			case 'IN':
+			case 'OUT':
+				this.viewModel.add(message.userList[0], action);
+				this.viewTable.setRowData(this.viewModel.data);
+				break;
 		}
 
 		// this.topThreeModel.createUI()
 	}
 }
+
+

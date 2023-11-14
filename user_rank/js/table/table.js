@@ -10,6 +10,76 @@ class Table {
 	}
 }
 
+
+class ViewTable extends Table {
+	constructor() {
+		super()
+		this.target = document.getElementById('viewTable');
+		this.gridOptions = {
+			// each entry here represents one column
+			columnDefs: [
+				{
+					lockPosition: 'left',
+					valueGetter: 'node.rowIndex+1',
+					cellClass: 'locked-col',
+					minWidth: 40,
+					maxWidth: 40,
+					suppressNavigable: true,
+					sortable: false,
+				},
+				{
+					field: 'broadcastStation',
+					headerName: '',
+					maxWidth: 49,
+					sortable: false,
+					cellRenderer: ({ data: { userId } }) => {
+						return `<img style="width:25px; height:25px; border-radius: 50%;" src="//profile.img.afreecatv.com/LOGO/${userId.substring(
+							0,
+							2
+						)}/${userId}/${userId}.jpg" onclick="window.open('https://bj.afreecatv.com/${userId}')" alt="">`;
+					},
+				},
+				{ field: 'userNickname', headerName: '닉네임', maxWidth: 100},
+				{ field: 'viewTime',  headerName: '시청시간', maxWidth: 70,  
+					cellRenderer: ( ({data: {  InTimeStamp }}) => { 
+						let result; 
+						setInterval(() => {
+							result = new Date() - InTimeStamp
+						}, 1000 ); 
+						return  result;
+					})  },			
+			],
+
+			// default col def properties get applied to all columns
+			defaultColDef: { sortable: true, resizable: true },
+			// defaultValue: 0,
+			paginationPageSize: 10,
+			animateRows: true, // have rows animate to new positions when sorted
+
+			noRowsOverlayComponent: class {
+				init(params) {
+					this.eGui = document.createElement('div');
+					this.eGui.innerHTML = `<div>
+							<div>  ${params.noRowsMessageFunc()} </div>
+						</div>`;
+				}
+				
+				getGui() {
+					return this.eGui;
+				}
+			
+				refresh(params) {
+					return false;
+				}
+			},
+			noRowsOverlayComponentParams: {
+			noRowsMessageFunc: () =>
+				"BJ를 후원하여 유저 랭킹에 들어보아요!"
+			}
+		};
+	}
+}
+
 class SupportTable extends Table {
 	constructor() {
 		super();

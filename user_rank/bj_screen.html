@@ -56,35 +56,16 @@
         후원
       </div>
     </div>
-
-    <!-- <div id="tab_button_balloon" class="subtab">
+    <div id="tab_button_viewTime" class="subtab">
       <div>
-        별풍선
+        시청
       </div>
     </div>
-    <div id="tab_button_adballoon" class="subtab">
-      <div>
-        애드벌룬
-      </div>
-    </div>
-    <div id="tab_button_battleMission" class="subtab">
-      <div>
-        배틀미션
-      </div>
-    </div>
-    <div id="tab_button_challengeMission" class="subtab">
-      <div>
-        도전미션
-      </div>
-    </div> -->
   </div>
 
   <div id="table">
     <div id="supportTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
-    <!-- <div id="balloonTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
-    <div id="adballoonTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
-    <div id="battleMissionTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
-    <div id="challengeMissionTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div> -->
+    <div id="viewTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
   </div>
   <script defer>
     const onload = () => {
@@ -94,11 +75,18 @@
         window.broadNumber = broadInfo.broadNo;
         window.user = new BJscreen(extensionSDK);
       });
+      // window.user = new BJscreen(extensionSDK);
 
       extensionSDK.chat.listen((action, message) => {
         window.user.receive(action, message)
       })
     
+      window.user.receive('IN', {
+          userId: "jsp021(2)",
+          userNickname: "jsp021"
+        })
+
+
       setTimeout(() => {
         window.user.receive('BALLOON_GIFTED', {
           userId: 'jsp021',
@@ -128,6 +116,11 @@
           userId: 'ckdtjs505',
           userNickname: 'sonia',
           count: 8
+        })
+
+         window.user.receive('OUT', {
+          userId: "jsp021(2)",
+          userNickname: "jsp021"
         })
       }, 3000)
     }
