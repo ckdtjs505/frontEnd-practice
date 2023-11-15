@@ -41,25 +41,6 @@ class ViewModel extends Model {
 			return val;
 		})
 
-		// IN
-		// viewTime: 0,
-		// InTimestamp: 12:18
-		// OUT 
-		// viewTime: InTimestamp - OutTimeStamp; // 42분
-		// InTimestamp: 12:18
-		// OutTimeStamp: 12:50
-
-		// IN 
-		// viewTime: 42분 
-		// InTimestamp: 12:50
-		// OutTimeStamp: 0
-
-		// OUT 
-		// viewTime: 42 +  (InTimestamp - OutTimeStamp)
-		// InTimestamp: 12:18
-		// OutTimeStamp
-
-
 		if (check === false && type === 'IN') {
 			this.data.push({
 				...addVal,
@@ -68,6 +49,8 @@ class ViewModel extends Model {
 				inOutCount : 1
 			});
 		}
+
+		localStorage.setItem(`${window.broadNumber || 0}_view`, JSON.stringify(this.data));
 	}
 }
 
@@ -207,7 +190,7 @@ class ChatModal extends Model {
 				sendCount: 1,
 			});
 		}
-
-		localStorage.setItem('chat', JSON.stringify(this.data));
+		
+		localStorage.setItem(`${window.broadNumber || 0}_chat`, JSON.stringify(this.data));
 	}
 }

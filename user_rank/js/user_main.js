@@ -6,8 +6,8 @@ class Main {
 		this.viewTime = document.querySelector('#tab_button_viewTime');
 		
 		this.supportModel = new SupportModal(JSON.parse(localStorage.getItem(`${window.broadNumber || 0}_support`)) || []);
-		this.viewModel = new ViewModel([]); // localstroage로 재구현
-		this.chatModel = new ChatModal([]);
+		this.viewModel = new ViewModel(JSON.parse(localStorage.getItem(`${window.broadNumber || 0}_view`)) || []);
+		this.chatModel = new ChatModal(JSON.parse(localStorage.getItem(`${window.broadNumber || 0}_chat`)) || []);
 
 		this.supportTable = new SupportTable(this.supportModel);
 		this.viewTable = new ViewTable(this.viewModel);
@@ -74,7 +74,7 @@ class UserScreen extends Main {
 class BJscreen extends Main {
 	constructor(sdk) { 
 		super(sdk);
-		// this.sendUser();
+		this.sendUser();
 	}
 
 	sendUser(){
