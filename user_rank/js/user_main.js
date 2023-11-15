@@ -66,20 +66,21 @@ class UserScreen extends Main {
 	receiveUser(action, message){
 		console.log(action, message)
 
-		if( message['SUPPORT'] ){
-			this.supportModel = new SupportModal(message['SUPPORT'].data || []);
-			this.supportTable.setRowData(this.supportModel.data);
-			this.supportModel.createUI()
-		}
-		
-		if ( message['CHAT']){
-			this.chatModel = new ChatModal(message['CHAT'].data || []);
-			this.chatTable.setRowData(this.chatModel.data);
-		}
-		
-		if ( message['VIEW']){
-			this.viewModel = new ViewModel(message['VIEW'].data || []);
-			this.viewTable.setRowData(this.viewModel.data);
+		switch( action ){
+			case 'SUPPORT':
+				this.supportModel = new SupportModal(message|| []);
+				this.supportTable.setRowData(this.supportModel.data);
+				this.supportModel.createUI()
+				break;
+			case 'CHAT':
+				this.chatModel = new ChatModal(message || []);
+				this.chatTable.setRowData(this.chatModel.data);
+				break;
+
+			case 'VIEW':
+				this.viewModel = new ViewModel(message || []);
+				this.viewTable.setRowData(this.viewModel.data);
+				break;
 		}
 	}
 }
@@ -93,18 +94,22 @@ class BJscreen extends Main {
 	sendUser(){
 		if(this.timer) clearInterval(this.timer);
 		this.timer = setInterval( (() => {
-			this.extensionSDK.broadcast.send('USER_RANK', {
+			this.extensionSDK.broadcast.send('SUPPORT', [
+				...this.supportModel.data.slice(0,5)
+			])
 
-				'SUPPORT': {
-					...this.supportModel
-				}, 
-				'CHAT': {
-					...this.chatModel
-				},	
-				'VIEW' : {
-					...this.viewModel
-				}
-			})
+			setTimeout( () => {
+				this.extensionSDK.broadcast.send('CHAT', [
+					...this.chatModel.data.slice(0,5)
+				])
+			}, 1000)
+
+			setTimeout( () => {
+				this.extensionSDK.broadcast.send('VIEW', [
+					...this.viewModel.data.slice(0,5)
+				])
+			}, 2000)
+
 		}), 5000) 
 	}
 
@@ -120,15 +125,21 @@ class BJscreen extends Main {
 				break;
 			case 'IN':
 			case 'OUT':
-				this.viewModel.add(message.userList[0], action);
+				this.viewModel.add({
+					userId : message.userList[0].userId,
+					userNickname : message.userList[0].userNickname
+				}, action);
 				this.viewTable.setRowData(this.viewModel.data);
 				break;
 			case 'MESSAGE':
-				this.chatModel.add(message);
+				this.chatModel.add({
+					userId : message.userId,
+					message : message.message,
+					userNickname : message.userNickname
+				});
 				this.chatTable.setRowData(this.chatModel.data);
 		}
 
-		// this.topThreeModel.createUI()
 	}
 }
 

@@ -214,6 +214,7 @@ class ViewTable extends Table {
 				{ field: 'intTimeStamp',  headerName: '입장시간', maxWidth: 100,  
 					cellRenderer: ({ data: { InTimeStamp } }) => {
 						if( InTimeStamp ){
+							InTimeStamp = new Date(InTimeStamp);
 							const seconds = InTimeStamp.getSeconds();
 							const minutes = InTimeStamp.getMinutes();
 							const hours = InTimeStamp.getHours();
@@ -233,6 +234,7 @@ class ViewTable extends Table {
 				{ field: 'intTimeStamp',  headerName: '퇴장시간', maxWidth: 100,  
 					cellRenderer: ({ data: { OutTimeStamp } }) => {
 						if( OutTimeStamp ){
+							OutTimeStamp = new Date(OutTimeStamp);
 							const seconds = OutTimeStamp.getSeconds();
 							const minutes = OutTimeStamp.getMinutes();
 							const hours = OutTimeStamp.getHours();
