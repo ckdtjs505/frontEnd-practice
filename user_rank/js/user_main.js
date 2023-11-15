@@ -65,9 +65,22 @@ class UserScreen extends Main {
 
 	receiveUser(action, message){
 		console.log(action, message)
-		this.supportModel = new SupportModal(message.data || []);
-		this.supportTable.setRowData(this.supportModel.data);
-		this.supportModel.createUI()
+
+		if( message['SUPPORT'] ){
+			this.supportModel = new SupportModal(message['SUPPORT'].data || []);
+			this.supportTable.setRowData(this.supportModel.data);
+			this.supportModel.createUI()
+		}
+		
+		if ( message['CHAT']){
+			this.chatModel = new ChatModal(message['CHAT'].data || []);
+			this.chatTable.setRowData(this.chatModel.data);
+		}
+		
+		if ( message['VIEW']){
+			this.viewModel = new ViewModel(message['VIEW'].data || []);
+			this.viewTable.setRowData(this.viewModel.data);
+		}
 	}
 }
 
@@ -81,7 +94,16 @@ class BJscreen extends Main {
 		if(this.timer) clearInterval(this.timer);
 		this.timer = setInterval( (() => {
 			this.extensionSDK.broadcast.send('USER_RANK', {
-				...this.supportModel
+
+				'SUPPORT': {
+					...this.supportModel
+				}, 
+				'CHAT': {
+					...this.chatModel
+				},	
+				'VIEW' : {
+					...this.viewModel
+				}
 			})
 		}), 5000) 
 	}
