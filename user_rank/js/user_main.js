@@ -4,15 +4,19 @@ class Main {
 		console.log('create user');
 		this.support = document.querySelector('#tab_button_support')
 		this.viewTime = document.querySelector('#tab_button_viewTime');
-
+		
 		this.supportModel = new SupportModal(JSON.parse(localStorage.getItem(`${window.broadNumber || 0}_support`)) || []);
 		this.viewModel = new ViewModel([]); // localstroage로 재구현
+		this.chatModel = new ChatModal([]);
 
 		this.supportTable = new SupportTable(this.supportModel);
 		this.viewTable = new ViewTable(this.viewModel);
+		this.chatTable = new ChatTable(this.chatModel);
 
 		this.supportTable.create();
 		this.viewTable.create();
+		this.chatTable.create();
+
 		this.supportModel.createUI()
 		this.addEvent();
 	}
@@ -43,6 +47,10 @@ class Main {
 			case 'tab_button_viewTime':
 				document.querySelector('#viewTable').style.display = 'block';
 				this.viewTable.setRowData(this.viewModel.data);
+				break;
+			case 'tab_button_chatting':
+				document.querySelector('#chatTable').style.display = 'block';
+				this.chatTable.setRowData(this.chatModel.data);
 				break;
 		}
 	}
@@ -86,7 +94,6 @@ class BJscreen extends Main {
 			case 'BATTLE_MISSION_GIFTED':
 			case 'CHALLENGE_MISSION_GIFTED':
 				this.supportModel.add(message, action);
-				// this.topThreeModel.add(message);
 				this.supportTable.setRowData(this.supportModel.data);
 				break;
 			case 'IN':
@@ -94,6 +101,9 @@ class BJscreen extends Main {
 				this.viewModel.add(message.userList[0], action);
 				this.viewTable.setRowData(this.viewModel.data);
 				break;
+			case 'MESSAGE':
+				this.chatModel.add(message);
+				this.chatTable.setRowData(this.chatModel.data);
 		}
 
 		// this.topThreeModel.createUI()

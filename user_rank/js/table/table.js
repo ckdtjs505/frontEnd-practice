@@ -10,126 +10,6 @@ class Table {
 	}
 }
 
-
-class ViewTable extends Table {
-	constructor() {
-		super()
-		this.interval = setInterval( () => {
-			
-		}, 1000)
-		this.target = document.getElementById('viewTable');
-		this.gridOptions = {
-			// each entry here represents one column
-			columnDefs: [
-				{
-					lockPosition: 'left',
-					valueGetter: 'node.rowIndex+1',
-					cellClass: 'locked-col',
-					minWidth: 40,
-					maxWidth: 40,
-					suppressNavigable: true,
-					sortable: false,
-				},
-				{
-					field: 'broadcastStation',
-					headerName: '',
-					maxWidth: 49,
-					sortable: false,
-					cellRenderer: ({ data: { userId } }) => {
-						return `<img style="width:25px; height:25px; border-radius: 50%;" src="//profile.img.afreecatv.com/LOGO/${userId.substring(
-							0,
-							2
-						)}/${userId}/${userId}.jpg" onclick="window.open('https://bj.afreecatv.com/${userId}')" alt="">`;
-					},
-				},
-				{ field: 'userNickname', headerName: '닉네임', maxWidth: 100},
-				{
-					field: 'isView',  headerName: '시청중', maxWidth: 100,  
-					cellRenderer: ({ data: { InTimeStamp, OutTimeStamp } }) => {
-						// 현재 시간을 가져옵니다.
-						if( InTimeStamp &&  !OutTimeStamp ){
-							return `YES`;
-						}else {
-							return 'NO';
-						}
-					},
-				},
-				{ field: 'intTimeStamp',  headerName: '입장시간', maxWidth: 100,  
-					cellRenderer: ({ data: { InTimeStamp } }) => {
-						// 현재 시간을 가져옵니다.
-						return `${InTimeStamp.toLocaleTimeString("ko-KR", {
-							hour12: false,
-							hour: "2-digit",
-							minute: "2-digit",
-							second: "2-digit"
-						})}`;
-					}, 
-				},
-				{ field: 'intTimeStamp',  headerName: '퇴장시간', maxWidth: 100,  
-					cellRenderer: ({ data: { OutTimeStamp } }) => {
-						// 현재 시간을 가져옵니다.
-						return `${OutTimeStamp?.toLocaleTimeString("ko-KR", {
-							hour12: false,
-							hour: "2-digit",
-							minute: "2-digit",
-							second: "2-digit"
-						}) || '-'}`;
-					}, 
-				},
-				{
-					field: 'viewTime', headerName: '총시청시간', maxWidth:100,
-					cellRenderer: ({ data: { InTimeStamp, OutTimeStamp, viewTime } }) => {
-						// 현재 시간을 가져옵니다.
-						if( viewTime ){
-							const millis = viewTime;
-
-							const seconds = Math.round(millis / 1000);
-							const minutes = Math.floor(seconds / 60);
-							const hours = Math.floor(minutes / 60)
-							if(hours){
-								return `${hours}시${minutes}분${seconds}초`
-							}else if(minutes ){
-								return `${minutes}분${seconds}초`; // 2시간 03분 45초
-							}else {
-								return `${seconds}초`; // 2시간 03분 45초
-							}
-						}
-
-						return '-';
-					}, 
-				}			
-			],
-
-			// default col def properties get applied to all columns
-			defaultColDef: { sortable: true, resizable: true },
-			// defaultValue: 0,
-			paginationPageSize: 10,
-			animateRows: true, // have rows animate to new positions when sorted
-
-			noRowsOverlayComponent: class {
-				init(params) {
-					this.eGui = document.createElement('div');
-					this.eGui.innerHTML = `<div>
-							<div>  ${params.noRowsMessageFunc()} </div>
-						</div>`;
-				}
-				
-				getGui() {
-					return this.eGui;
-				}
-			
-				refresh(params) {
-					return false;
-				}
-			},
-			noRowsOverlayComponentParams: {
-			noRowsMessageFunc: () =>
-				"BJ를 후원하여 유저 랭킹에 들어보아요!"
-			}
-		};
-	}
-}
-
 class SupportTable extends Table {
 	constructor() {
 		super();
@@ -226,30 +106,203 @@ class SupportTable extends Table {
 	}
 }
 
-class BalloonTable extends SupportTable {
+class ChatTable extends Table {
 	constructor() {
 		super();
-		this.target = document.getElementById('balloonTable');
+		this.target = document.getElementById('chatTable');
+		this.gridOptions = {
+			// each entry here represents one column
+			columnDefs: [
+				{
+					lockPosition: 'left',
+					valueGetter: 'node.rowIndex+1',
+					cellClass: 'locked-col',
+					minWidth: 40,
+					maxWidth: 40,
+					suppressNavigable: true,
+					sortable: false,
+				},
+				{
+					field: 'broadcastStation',
+					headerName: '',
+					maxWidth: 49,
+					sortable: false,
+					cellRenderer: ({ data: { userId } }) => {
+						return `<img style="width:25px; height:25px; border-radius: 50%;" src="//profile.img.afreecatv.com/LOGO/${userId.substring(
+							0,
+							2
+						)}/${userId}/${userId}.jpg" onclick="window.open('https://bj.afreecatv.com/${userId}')" alt="">`;
+					},
+				},
+				{ field: 'userNickname', headerName: '닉네임', maxWidth: 100 },
+				{ field: 'sendCount', headerName: '채팅수', maxWidth: 90 },
+			],
+
+			// default col def properties get applied to all columns
+			defaultColDef: { sortable: true, resizable: true },
+			paginationPageSize: 10,
+			// rowSelection: 'multiple', // al paginationPageSize: 10, low rows to be selected
+			// animateRows: true, // have rows animate to new positions when sorted
+			// onCellClicked: (params) => {
+			// 	console.log('cell was clicked', params);
+			// },
+			noRowsOverlayComponent: class {
+				init(params) {
+					this.eGui = document.createElement('div');
+					this.eGui.innerHTML = `<div>
+							<div>  ${params.noRowsMessageFunc()} </div>
+						</div>`;
+				}
+				
+				getGui() {
+					return this.eGui;
+				}
+			
+				refresh(params) {
+					return false;
+				}
+			},
+			noRowsOverlayComponentParams: {
+			noRowsMessageFunc: () =>
+				"BJ를 후원하여 유저 랭킹에 들어보아요!"
+			}
+		};
 	}
 }
 
-class AdballoonTable extends SupportTable {
-	constructor() {
-		super();
-		this.target = document.getElementById('adballoonTable');
-	}
-}
 
-class BattleMissionTable extends SupportTable {
+class ViewTable extends Table {
 	constructor() {
-		super();
-		this.target = document.getElementById('battleMissionTable');
-	}
-}
+		super()
+		this.target = document.getElementById('viewTable');
+		this.gridOptions = {
+			// each entry here represents one column
+			columnDefs: [
+				{
+					lockPosition: 'left',
+					valueGetter: 'node.rowIndex+1',
+					cellClass: 'locked-col',
+					minWidth: 40,
+					maxWidth: 40,
+					suppressNavigable: true,
+					sortable: false,
+				},
+				{
+					field: 'broadcastStation',
+					headerName: '',
+					maxWidth: 49,
+					sortable: false,
+					cellRenderer: ({ data: { userId } }) => {
+						return `<img style="width:25px; height:25px; border-radius: 50%;" src="//profile.img.afreecatv.com/LOGO/${userId.substring(
+							0,
+							2
+						)}/${userId}/${userId}.jpg" onclick="window.open('https://bj.afreecatv.com/${userId}')" alt="">`;
+					},
+				},
+				{ field: 'userNickname', headerName: '닉네임', maxWidth: 100},
+				{
+					field: 'isView',  headerName: '시청중', maxWidth: 100,  
+					cellRenderer: ({ data: { InTimeStamp, OutTimeStamp } }) => {
+						// 현재 시간을 가져옵니다.
+						if( InTimeStamp &&  !OutTimeStamp ){
+							return `YES`;
+						}else {
+							return 'NO';
+						}
+					},
+				},
+				{ field: 'intTimeStamp',  headerName: '입장시간', maxWidth: 100,  
+					cellRenderer: ({ data: { InTimeStamp } }) => {
+						if( InTimeStamp ){
+							const seconds = InTimeStamp.getSeconds();
+							const minutes = InTimeStamp.getMinutes();
+							const hours = InTimeStamp.getHours();
 
-class ChallengeMissionTable extends SupportTable {
-	constructor() {
-		super();
-		this.target = document.getElementById('challengeMissionTable');
+							if(hours){
+								return `${hours}시${minutes}분${seconds}초`
+							}else if(minutes ){
+								return `${minutes}분${seconds}초`; // 2시간 03분 45초
+							}else {
+								return `${seconds}초`; // 2시간 03분 45초
+							}
+							
+						}
+						return `-`;
+					}, 
+				},
+				{ field: 'intTimeStamp',  headerName: '퇴장시간', maxWidth: 100,  
+					cellRenderer: ({ data: { OutTimeStamp } }) => {
+						if( OutTimeStamp ){
+							const seconds = OutTimeStamp.getSeconds();
+							const minutes = OutTimeStamp.getMinutes();
+							const hours = OutTimeStamp.getHours();
+
+							if(hours){
+								return `${hours}시${minutes}분${seconds}초`
+							}else if(minutes ){
+								return `${minutes}분${seconds}초`; // 2시간 03분 45초
+							}else {
+								return `${seconds}초`; // 2시간 03분 45초
+							}
+							
+						}
+						return `-`;
+					}, 
+				},
+				{
+					field: 'viewTime', headerName: '총시청시간', maxWidth:100,
+					cellRenderer: ({ data: { viewTime } }) => {
+						// 현재 시간을 가져옵니다.
+						if( viewTime ){
+							const millis = viewTime;
+							const seconds = Math.round(millis / 1000);
+							const minutes = Math.floor(seconds / 60);
+							const hours = Math.floor(minutes / 60)
+
+							if(hours){
+								return `${hours}시${minutes}분${seconds}초`
+							}else if(minutes ){
+								return `${minutes}분${seconds}초`; // 2시간 03분 45초
+							}else {
+								return `${seconds}초`; // 2시간 03분 45초
+							}
+						}
+
+						return '-';
+					}, 
+				},
+				{
+					field: 'inOutCount', headerName: '입장수', maxWidth:70,
+				}
+
+			],
+
+			// default col def properties get applied to all columns
+			defaultColDef: { sortable: true, resizable: true },
+			// defaultValue: 0,
+			paginationPageSize: 10,
+			animateRows: true, // have rows animate to new positions when sorted
+
+			noRowsOverlayComponent: class {
+				init(params) {
+					this.eGui = document.createElement('div');
+					this.eGui.innerHTML = `<div>
+							<div>  ${params.noRowsMessageFunc()} </div>
+						</div>`;
+				}
+				
+				getGui() {
+					return this.eGui;
+				}
+			
+				refresh(params) {
+					return false;
+				}
+			},
+			noRowsOverlayComponentParams: {
+			noRowsMessageFunc: () =>
+				"BJ를 후원하여 유저 랭킹에 들어보아요!"
+			}
+		};
 	}
 }

@@ -26,7 +26,8 @@ class ViewModel extends Model {
 						...val,
 						viewTime: val.viewTime,
 						InTimeStamp: new Date(),
-						OutTimeStamp: null
+						OutTimeStamp: null,
+						inOutCount: val.inOutCount + 1
 					}
 				}else if( type === 'OUT'){
 					
@@ -64,6 +65,7 @@ class ViewModel extends Model {
 				...addVal,
 				viewTime: 0,
 				InTimeStamp: new Date(),
+				inOutCount : 1
 			});
 		}
 	}
@@ -177,5 +179,35 @@ class SupportModal extends Model {
 			}
 		}).join('')}
 	`
+	}
+}
+
+class ChatModal extends Model {
+	constructor(data) {
+		super(data);
+	}
+
+	add(addVal) {
+		let check = false;
+
+		this.data = this.data.map((val) => {
+			if (val.userId === addVal.userId) {
+				check = true;
+				return {
+					...val,
+					sendCount: val.sendCount + 1,
+				};
+			}
+			return val;
+		});
+
+		if (check === false) {
+			this.data.push({
+				...addVal,
+				sendCount: 1,
+			});
+		}
+
+		localStorage.setItem('chat', JSON.stringify(this.data));
 	}
 }
