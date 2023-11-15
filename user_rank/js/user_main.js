@@ -17,7 +17,6 @@ class Main {
 		this.viewTable.create();
 		this.chatTable.create();
 
-		// this.supportModel.createUI()
 		this.addEvent();
 	}
 

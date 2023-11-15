@@ -102,7 +102,7 @@ class SupportTable extends Table {
 			},
 			noRowsOverlayComponentParams: {
 			noRowsMessageFunc: () =>
-				"BJ를 후원하여 유저 랭킹에 들어보아요!"
+				"BJ를 후원하여 유저 랭킹에 들어보아요! <br> BJ가 프로그램을 실행중에만 집계가 되요!"
 			}
 		};
 	}
@@ -169,7 +169,7 @@ class ChatTable extends Table {
 			},
 			noRowsOverlayComponentParams: {
 			noRowsMessageFunc: () =>
-				"BJ를 후원하여 유저 랭킹에 들어보아요!"
+				"BJ에게 채팅을 입력해보세요! <br> BJ가 프로그램을 실행중에만 집계가 되요!"
 			}
 		};
 	}
@@ -208,7 +208,7 @@ class ViewTable extends Table {
 				},
 				{ field: 'userNickname', headerName: '닉네임', maxWidth: 100},
 				{
-					field: 'isView',  headerName: '시청중', maxWidth: 50,  
+					field: 'isView',  headerName: '시청중', maxWidth: 60,  
 					cellRenderer: ({ data: { InTimeStamp, OutTimeStamp } }) => {
 						// 현재 시간을 가져옵니다.
 						if( InTimeStamp &&  !OutTimeStamp ){
@@ -217,6 +217,28 @@ class ViewTable extends Table {
 							return 'NO';
 						}
 					},
+				},
+				{
+					field: 'viewTime', headerName: '총시청시간', maxWidth:100,
+					cellRenderer: ({ data: { viewTime } }) => {
+						// 현재 시간을 가져옵니다.
+						if( viewTime ){
+							const millis = viewTime;
+							const seconds = Math.round(millis / 1000);
+							const minutes = Math.floor(seconds / 60);
+							const hours = Math.floor(minutes / 60)
+
+							if(hours){
+								return `${hours}시${minutes}분${seconds}초`
+							}else if(minutes ){
+								return `${minutes}분${seconds}초`; // 2시간 03분 45초
+							}else {
+								return `${seconds}초`; // 2시간 03분 45초
+							}
+						}
+
+						return '-';
+					}, 
 				},
 				{ field: 'intTimeStamp',  headerName: '입장시간', maxWidth: 100,  
 					cellRenderer: ({ data: { InTimeStamp } }) => {
@@ -259,28 +281,6 @@ class ViewTable extends Table {
 					}, 
 				},
 				{
-					field: 'viewTime', headerName: '총시청시간', maxWidth:100,
-					cellRenderer: ({ data: { viewTime } }) => {
-						// 현재 시간을 가져옵니다.
-						if( viewTime ){
-							const millis = viewTime;
-							const seconds = Math.round(millis / 1000);
-							const minutes = Math.floor(seconds / 60);
-							const hours = Math.floor(minutes / 60)
-
-							if(hours){
-								return `${hours}시${minutes}분${seconds}초`
-							}else if(minutes ){
-								return `${minutes}분${seconds}초`; // 2시간 03분 45초
-							}else {
-								return `${seconds}초`; // 2시간 03분 45초
-							}
-						}
-
-						return '-';
-					}, 
-				},
-				{
 					field: 'inOutCount', headerName: '입장수', maxWidth:70,
 				}
 
@@ -310,7 +310,7 @@ class ViewTable extends Table {
 			},
 			noRowsOverlayComponentParams: {
 			noRowsMessageFunc: () =>
-				"BJ를 후원하여 유저 랭킹에 들어보아요!"
+				"BJ가 프로그램을 실행중에만 집계가 되요!"
 			}
 		};
 	}
