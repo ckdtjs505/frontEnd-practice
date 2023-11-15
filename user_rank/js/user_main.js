@@ -17,7 +17,7 @@ class Main {
 		this.viewTable.create();
 		this.chatTable.create();
 
-		this.supportModel.createUI()
+		// this.supportModel.createUI()
 		this.addEvent();
 	}
 
@@ -64,13 +64,11 @@ class UserScreen extends Main {
 	}
 
 	receiveUser(action, message){
-		console.log(action, message)
-
 		switch( action ){
 			case 'SUPPORT':
 				this.supportModel = new SupportModal(message|| []);
 				this.supportTable.setRowData(this.supportModel.data);
-				this.supportModel.createUI()
+				// this.supportModel.createUI()
 				break;
 			case 'CHAT':
 				this.chatModel = new ChatModal(message || []);

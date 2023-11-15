@@ -25,6 +25,7 @@ class SupportTable extends Table {
 					maxWidth: 40,
 					suppressNavigable: true,
 					sortable: false,
+					pinned: true
 				},
 				{
 					field: 'broadcastStation',
@@ -37,6 +38,7 @@ class SupportTable extends Table {
 							2
 						)}/${userId}/${userId}.jpg" onclick="window.open('https://bj.afreecatv.com/${userId}')" alt="">`;
 					},
+					pinned: true
 				},
 				{ field: 'userNickname', headerName: '닉네임', maxWidth: 100},
 				{ field: 'count', headerName: '총개수', maxWidth: 70},
@@ -121,6 +123,8 @@ class ChatTable extends Table {
 					maxWidth: 40,
 					suppressNavigable: true,
 					sortable: false,
+					pinned: true
+
 				},
 				{
 					field: 'broadcastStation',
@@ -133,8 +137,9 @@ class ChatTable extends Table {
 							2
 						)}/${userId}/${userId}.jpg" onclick="window.open('https://bj.afreecatv.com/${userId}')" alt="">`;
 					},
+					pinned: true,
 				},
-				{ field: 'userNickname', headerName: '닉네임', maxWidth: 100 },
+				{ field: 'userNickname', headerName: '닉네임', maxWidth: 100},
 				{ field: 'sendCount', headerName: '채팅수', maxWidth: 90 },
 			],
 
@@ -186,6 +191,7 @@ class ViewTable extends Table {
 					maxWidth: 40,
 					suppressNavigable: true,
 					sortable: false,
+					pinned: true
 				},
 				{
 					field: 'broadcastStation',
@@ -198,10 +204,11 @@ class ViewTable extends Table {
 							2
 						)}/${userId}/${userId}.jpg" onclick="window.open('https://bj.afreecatv.com/${userId}')" alt="">`;
 					},
+					pinned: true
 				},
 				{ field: 'userNickname', headerName: '닉네임', maxWidth: 100},
 				{
-					field: 'isView',  headerName: '시청중', maxWidth: 100,  
+					field: 'isView',  headerName: '시청중', maxWidth: 50,  
 					cellRenderer: ({ data: { InTimeStamp, OutTimeStamp } }) => {
 						// 현재 시간을 가져옵니다.
 						if( InTimeStamp &&  !OutTimeStamp ){

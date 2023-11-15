@@ -1,6 +1,5 @@
 html {
   height: 100vh;
-  zoom : 0.9
 }
 body {
   background: radial-gradient(
@@ -175,12 +174,5 @@ body::-webkit-scrollbar {
 }
 #third{
 
-}
-
-.ag-header-cell-label {
-  flex-direction: column
-}
-.ag-cell-not-inline-editing.ag-cell-normal-height{
-  text-align: center;
 }
 
