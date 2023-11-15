@@ -50,6 +50,10 @@ class ViewModel extends Model {
 			});
 		}
 
+		this.data.sort( (a, b) => {
+			return  b.viewTime - a.viewTime; 
+		})
+
 		localStorage.setItem(`${window.broadNumber || 0}_view`, JSON.stringify(this.data));
 	}
 }
@@ -190,7 +194,11 @@ class ChatModal extends Model {
 				sendCount: 1,
 			});
 		}
-		
+
+		this.data.sort( (a, b) => {
+			return  b.sendCount - a.sendCount; 
+		})
+
 		localStorage.setItem(`${window.broadNumber || 0}_chat`, JSON.stringify(this.data));
 	}
 }
