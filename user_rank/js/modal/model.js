@@ -54,6 +54,8 @@ class ViewModel extends Model {
 			return  b.viewTime - a.viewTime; 
 		})
 
+		this.data = this.data.splice(0,99);
+
 		localStorage.setItem(`${window.broadNumber || 0}_view`, JSON.stringify(this.data));
 	}
 }
@@ -150,6 +152,7 @@ class SupportModal extends Model {
 		this.data.sort( (a, b) => {
 			return  b.count - a.count; 
 		})
+		this.data = this.data.splice(0,99);
 
 		localStorage.setItem(`${window.broadNumber || 0}_support`, JSON.stringify(this.data));
 	}
@@ -179,23 +182,19 @@ class ChatModal extends Model {
 		let hateWordCount = 0;
 		let goodWordCount = 0;
 		if( this.hateWord ){
-			hateWordCount = this.hateWord.reduce( (prev, curr) => {
-				if( addVal.message.includes(curr) ) {
-					return 1
-				}else {
-					return 0
+			this.hateWord.forEach( (word) => {
+				if( addVal.message.includes(word.trim()) ) {
+					hateWordCount = 1;
 				}
-			}, 0)
+			})
 		}
 
 		if( this.goodWord ){
-			goodWordCount = this.goodWord.reduce( (prev, curr) => {
-				if( addVal.message.includes(curr) ) {
-					return 1
-				}else {
-					return 0
+			this.goodWord.forEach( (word) => {
+				if( addVal.message.includes(word.trim()) ) {
+					goodWordCount = 1;
 				}
-			}, 0)
+			})
 		}
 
 		this.data = this.data.map((val) => {
@@ -223,15 +222,16 @@ class ChatModal extends Model {
 		this.data.sort( (a, b) => {
 			return  b.sendCount - a.sendCount; 
 		})
+		this.data = this.data.splice(0,99);
 
 		localStorage.setItem(`${window.broadNumber || 0}_chat`, JSON.stringify(this.data));
 	}
 
 	setHateWord(word){
-		this.hateWord = word || [];
+		this.hateWord = word.split(',') || [];
 	}
 
 	setGoodWord(word){
-		this.goodWord = word || [];
+		this.goodWord = word.split(',') || [];
 	}
 }

@@ -142,7 +142,7 @@ class BJscreen extends Main {
 			if(typeof hateWord === "string"){
 				localStorage.setItem('hateWord' , hateWord)
 				Noti.alert('부정 채팅 단어가 저장되었습니다.')
-				this.chatModel.setHateWord(hateWord.split(','))
+				this.chatModel.setHateWord(hateWord)
 			}
 			
 		})
@@ -156,9 +156,12 @@ class BJscreen extends Main {
 			if(typeof goodWord === "string"){
 				localStorage.setItem('goodWord' , goodWord);
 				Noti.alert('긍정 채팅 단어가 저장되었습니다.')
-				this.chatModel.setGoodWord(goodWord.split(','))
+				this.chatModel.setGoodWord(goodWord)
 			}
 		})
+
+		this.chatModel.setHateWord( localStorage.getItem('hateWord'));
+		this.chatModel.setGoodWord( localStorage.getItem('goodWord'));
 	}
 
 	sendUser(){
