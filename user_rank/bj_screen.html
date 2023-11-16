@@ -27,9 +27,6 @@
       color: hsl(228, 45%, 44%);
     }
 
-    html{
-      zoom : 0.9
-    }
   </style>
   <script src="https://static.afreecatv.com/asset/app/extension-helper/afreecatv-extension-sdk.js"></script>
   <script src="./js/modal/model.js"></script>
@@ -39,11 +36,10 @@
 <body onload="onload()">
   <script defer src="./js/user_main.js"></script>
 
-  <title>유저 랭킹🏆</title>
-  <header>
+  <title >유저 랭킹🏆</title>
+  <header >
     <div id="title"> 유저 랭킹🏆 
     </div>
-    
   </header>
 
   <div id="userRank">
@@ -53,8 +49,7 @@
       <span id="third"> 🥉짭뉴다 </span> -->
     </div>
   </div>
-  <div id="tab">
-
+  <div id="tab" >
     <div id="tab_button_support" class="subtab">
       <div>
         후원
@@ -73,9 +68,9 @@
   </div>
 
   <div id="table">
-    <div id="supportTable" class="subTable ag-theme-balham-dark" style="height: 560px; display: none;"></div>
-    <div id="viewTable" class="subTable ag-theme-balham-dark" style="height: 560px; display: none;"></div>
-    <div id="chatArea" class="subTable" style="display: none; flex-direction:column; text-align: center;">
+    <div id="supportTable" class="subTable ag-theme-balham-dark" style="height: 530px; display: none;"></div>
+    <div id="viewTable" class="subTable ag-theme-balham-dark" style="height: 530px; display: none;"></div>
+    <div id="chatArea" class="subTable area" style="display: none; flex-direction:column; text-align: center;">
       <div> 
         <label for="goodWord" style="color : white"> 긍정채팅 </label>
         <input id="goodWord" type="text" placeholder="좋아요, 사랑해요, 사랑">
@@ -86,9 +81,12 @@
         <input id="hateWord" type="text" placeholder="야발, 미친, 또라이">
         <button class="btn-hover color-8" id="hateWordBtn" >저장</button>
       </div>
-      <div id="chatTable" class="ag-theme-balham-dark" style="height: 500px; margin-top: 1rem; "></div>
+      <div id="chatTable" class="ag-theme-balham-dark" style="height: 450px; margin-top: 1rem; "></div>
     </div>
   </div>
+
+  <div class="notification-container" style="display: none;" ></div>
+
   <script defer>
     const onload = () => {
       const SDK = window.AFREECA.ext;

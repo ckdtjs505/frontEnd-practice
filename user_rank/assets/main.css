@@ -24,7 +24,6 @@ body::-webkit-scrollbar {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 10px 0 0;
   justify-content: center;
 }
 
@@ -33,6 +32,10 @@ body::-webkit-scrollbar {
   height: 2rem;
   text-align: center;
   color: gray;
+}
+
+.area {
+  margin-top: -0.4rem;
 }
 
 .active {
@@ -130,7 +133,7 @@ body::-webkit-scrollbar {
 }
 
 #title {
-  color: rgba(245, 245, 245, 0.64);
+  color: white;
   width : 80%;
   font-size: 1.7rem;
   margin: 1rem auto 1rem;
@@ -219,4 +222,22 @@ input {
   margin-top: 10px;
   border-radius: 5px;
   width: 10;
+}
+
+.notification-container {
+  background: rgba(75, 53, 119, 0.8) ;
+  border-radius: 10px ;
+  border: solid 1px #1c1c1f;
+  padding: 15px 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 1rem;
+  color: white;
+  transition: transform 0.3s ease-in-out;
+}
+
+.notification-container.show {
+  transform: translate(-50%, -70%);
+  /* transform: translateY(-50px); */
 }

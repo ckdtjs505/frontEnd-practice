@@ -12,7 +12,7 @@ class Table {
 
 class SupportTable extends Table {
 	constructor() {
-		super();
+		super(); 
 		this.target = document.getElementById('supportTable');
 		this.gridOptions = {
 			// each entry here represents one column
@@ -145,14 +145,9 @@ class ChatTable extends Table {
 				{ field: 'hateWordCount', headerName: '부정채팅', maxWidth: 90 },
 			],
 
-			// default col def properties get applied to all columns
 			defaultColDef: { sortable: true, resizable: true },
 			paginationPageSize: 10,
-			// rowSelection: 'multiple', // al paginationPageSize: 10, low rows to be selected
-			// animateRows: true, // have rows animate to new positions when sorted
-			// onCellClicked: (params) => {
-			// 	console.log('cell was clicked', params);
-			// },
+
 			noRowsOverlayComponent: class {
 				init(params) {
 					this.eGui = document.createElement('div');
@@ -183,7 +178,6 @@ class ViewTable extends Table {
 		super()
 		this.target = document.getElementById('viewTable');
 		this.gridOptions = {
-			// each entry here represents one column
 			columnDefs: [
 				{
 					lockPosition: 'left',

@@ -59,6 +59,26 @@ class Main {
 }
 
 
+
+class Noti {
+	constructor(params) { 
+		this.timer;
+	}
+	static alert(text){
+		const alertBox = document.querySelector('.notification-container');
+		alertBox.innerHTML = text;
+		alertBox.classList.add('show');
+		alertBox.style.display = 'block'
+
+		if(this.timer) clearTimeout(this.timer)
+		this.timer = setTimeout( () => {
+			alertBox.classList.remove('show');
+		alertBox.style.display = 'none'
+			
+		}, 2000)
+	}
+}
+
 class UserScreen extends Main {
 	constructor() { 
 		super();
@@ -69,7 +89,6 @@ class UserScreen extends Main {
 			case 'SUPPORT':
 				this.supportModel = new SupportModal(message|| []);
 				this.supportTable.setRowData(this.supportModel.data);
-				// this.supportModel.createUI()
 				break;
 			case 'CHAT':
 				this.chatModel = new ChatModal(message || []);
@@ -114,10 +133,15 @@ class BJscreen extends Main {
 		document.querySelector('#goodWord').value = localStorage.getItem('goodWord')
 		
 		document.querySelector('#hateWordBtn').addEventListener( 'click', ()=> {
-			const hateWord = document.querySelector('#hateWord').value ;
-			if(!hateWord) return;
+			const hateWord = document.querySelector('#hateWord').value ;	
+
+			if(!hateWord) {
+				Noti.alert('부정 채팅 단어가 없습니다')
+				return;
+			} 
 			if(typeof hateWord === "string"){
 				localStorage.setItem('hateWord' , hateWord)
+				Noti.alert('부정 채팅 단어가 저장되었습니다.')
 				this.chatModel.setHateWord(hateWord.split(','))
 			}
 			
@@ -125,9 +149,13 @@ class BJscreen extends Main {
 
 		document.querySelector('#goodWordBtn').addEventListener( 'click', ()=> {
 			const goodWord = document.querySelector('#goodWord').value ;
-			if(!goodWord) return;
+			if(!goodWord){
+				Noti.alert('긍정 채팅 단어가 없습니다')
+				return;
+			}
 			if(typeof goodWord === "string"){
 				localStorage.setItem('goodWord' , goodWord);
+				Noti.alert('긍정 채팅 단어가 저장되었습니다.')
 				this.chatModel.setGoodWord(goodWord.split(','))
 			}
 		})
@@ -184,5 +212,4 @@ class BJscreen extends Main {
 
 	}
 }
-
 
