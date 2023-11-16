@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap"
     rel="stylesheet" />
   <script src="./module/enterprise.min.js"></script>
-
+  <link rel="stylesheet" href="./assets/reset.css" />
   <link rel="stylesheet" href="./styles/ag-grid.css" />
   <link rel="stylesheet" href="./styles/ag-theme-balham.css" />
   <link rel="stylesheet" href="./assets/main.css" />
@@ -73,9 +73,21 @@
   </div>
 
   <div id="table">
-    <div id="supportTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
-    <div id="viewTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
-    <div id="chatTable" class="subTable ag-theme-balham-dark" style="height: 500px; display: none;"></div>
+    <div id="supportTable" class="subTable ag-theme-balham-dark" style="height: 560px; display: none;"></div>
+    <div id="viewTable" class="subTable ag-theme-balham-dark" style="height: 560px; display: none;"></div>
+    <div id="chatArea" class="subTable" style="display: none; flex-direction:column; text-align: center;">
+      <div> 
+        <label for="goodWord" style="color : white"> 긍정채팅 </label>
+        <input id="goodWord" type="text" placeholder="좋아요, 사랑해요, 사랑">
+        <button class="btn-hover color-8" id="goodWordBtn" >저장</button>
+      </div>
+      <div> 
+        <label for="hateWord" style="color : white"> 부정채팅 </label>
+        <input id="hateWord" type="text" placeholder="야발, 미친, 또라이">
+        <button class="btn-hover color-8" id="hateWordBtn" >저장</button>
+      </div>
+      <div id="chatTable" class="ag-theme-balham-dark" style="height: 500px; margin-top: 1rem; "></div>
+    </div>
   </div>
   <script defer>
     const onload = () => {

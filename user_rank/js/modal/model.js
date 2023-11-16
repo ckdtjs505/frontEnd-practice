@@ -176,6 +176,27 @@ class ChatModal extends Model {
 
 	add(addVal) {
 		let check = false;
+		let hateWordCount = 0;
+		let goodWordCount = 0;
+		if( this.hateWord ){
+			hateWordCount = this.hateWord.reduce( (prev, curr) => {
+				if( addVal.message.includes(curr) ) {
+					return 1
+				}else {
+					return 0
+				}
+			}, 0)
+		}
+
+		if( this.goodWord ){
+			goodWordCount = this.goodWord.reduce( (prev, curr) => {
+				if( addVal.message.includes(curr) ) {
+					return 1
+				}else {
+					return 0
+				}
+			}, 0)
+		}
 
 		this.data = this.data.map((val) => {
 			if (val.userId === addVal.userId) {
@@ -183,6 +204,8 @@ class ChatModal extends Model {
 				return {
 					...val,
 					sendCount: val.sendCount + 1,
+					hateWordCount: val.hateWordCount + hateWordCount,
+					goodWordCount: val.goodWordCount + goodWordCount,
 				};
 			}
 			return val;
@@ -192,6 +215,8 @@ class ChatModal extends Model {
 			this.data.push({
 				...addVal,
 				sendCount: 1,
+				hateWordCount: hateWordCount,
+				goodWordCount: goodWordCount,
 			});
 		}
 
@@ -200,5 +225,13 @@ class ChatModal extends Model {
 		})
 
 		localStorage.setItem(`${window.broadNumber || 0}_chat`, JSON.stringify(this.data));
+	}
+
+	setHateWord(word){
+		this.hateWord = word || [];
+	}
+
+	setGoodWord(word){
+		this.goodWord = word || [];
 	}
 }

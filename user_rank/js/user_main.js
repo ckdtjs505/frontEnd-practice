@@ -18,6 +18,8 @@ class Main {
 		this.chatTable.create();
 
 		this.addEvent();
+
+		document.querySelector('#tab_button_support').click();
 	}
 
 	addEvent() {
@@ -86,6 +88,49 @@ class BJscreen extends Main {
 	constructor(sdk) { 
 		super(sdk);
 		this.sendUser();
+	}
+
+	createContent(typeId) {
+		switch (typeId) {
+			case 'tab_button_support':
+				document.querySelector('#supportTable').style.display = 'block';
+				this.supportTable.setRowData(this.supportModel.data);
+				break;
+			case 'tab_button_viewTime':
+				document.querySelector('#viewTable').style.display = 'block';
+				this.viewTable.setRowData(this.viewModel.data);
+				break;
+			case 'tab_button_chatting':
+				document.querySelector('#chatArea').style.display = 'block';
+				this.chatTable.setRowData(this.chatModel.data);
+				break;
+		}
+	}
+
+	addEvent() {
+		super.addEvent();
+		// 탭 클릭시 동작
+		document.querySelector('#hateWord').value = localStorage.getItem('hateWord')
+		document.querySelector('#goodWord').value = localStorage.getItem('goodWord')
+		
+		document.querySelector('#hateWordBtn').addEventListener( 'click', ()=> {
+			const hateWord = document.querySelector('#hateWord').value ;
+			if(!hateWord) return;
+			if(typeof hateWord === "string"){
+				localStorage.setItem('hateWord' , hateWord)
+				this.chatModel.setHateWord(hateWord.split(','))
+			}
+			
+		})
+
+		document.querySelector('#goodWordBtn').addEventListener( 'click', ()=> {
+			const goodWord = document.querySelector('#goodWord').value ;
+			if(!goodWord) return;
+			if(typeof goodWord === "string"){
+				localStorage.setItem('goodWord' , goodWord);
+				this.chatModel.setGoodWord(goodWord.split(','))
+			}
+		})
 	}
 
 	sendUser(){
