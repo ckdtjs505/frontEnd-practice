@@ -154,6 +154,13 @@ class SupportModal extends Model {
 		})
 		this.data = this.data.splice(0,99);
 
+		this.data = this.data.map( (ele) => {
+			return {
+					...ele,
+					sendPercent: [ele.count / this.totalCount]
+				}
+		} )
+
 		localStorage.setItem(`${window.broadNumber || 0}_support`, JSON.stringify(this.data));
 	}
 
@@ -168,7 +175,7 @@ class SupportModal extends Model {
 				return`<span id="third"> 🥉${ele.userNickname} </span>`
 			}
 		}).join('')}
-	`
+	`pt
 	}
 }
 
@@ -227,11 +234,11 @@ class ChatModal extends Model {
 		localStorage.setItem(`${window.broadNumber || 0}_chat`, JSON.stringify(this.data));
 	}
 
-	setHateWord(word){
-		this.hateWord = word.split(',') || [];
+	setHateWord(word = ''){
+		if(word) this.hateWord = word.split(',') || [];
 	}
 
-	setGoodWord(word){
-		this.goodWord = word.split(',') || [];
+	setGoodWord(word = ''){
+		if(word) this.goodWord = word.split(',') || [];
 	}
 }
