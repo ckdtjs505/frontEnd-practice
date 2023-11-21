@@ -5,9 +5,9 @@ class Main {
 		this.support = document.querySelector('#tab_button_support')
 		this.viewTime = document.querySelector('#tab_button_viewTime');
 		
-		this.supportModel = new SupportModal(JSON.parse(localStorage.getItem(`${window.broadNumber || 0}_support`)) || []);
-		this.viewModel = new ViewModel(JSON.parse(localStorage.getItem(`${window.broadNumber || 0}_view`)) || []);
-		this.chatModel = new ChatModal(JSON.parse(localStorage.getItem(`${window.broadNumber || 0}_chat`)) || []);
+		this.supportModel = new SupportModal(JSON.parse(localStorage.getItem(`USER_RANK_${window.broadNumber || 0}_support`)) || []);
+		this.viewModel = new ViewModel(JSON.parse(localStorage.getItem(`USER_RANK_${window.broadNumber || 0}_view`)) || []);
+		this.chatModel = new ChatModal(JSON.parse(localStorage.getItem(`USER_RANK_${window.broadNumber || 0}_chat`)) || []);
 
 		this.supportTable = new SupportTable(this.supportModel);
 		this.viewTable = new ViewTable(this.viewModel);
@@ -129,8 +129,8 @@ class BJscreen extends Main {
 	addEvent() {
 		super.addEvent();
 		// 탭 클릭시 동작
-		document.querySelector('#hateWord').value = localStorage.getItem('hateWord')
-		document.querySelector('#goodWord').value = localStorage.getItem('goodWord')
+		document.querySelector('#hateWord').value = localStorage.getItem('USER_RANK_hateWord')
+		document.querySelector('#goodWord').value = localStorage.getItem('USER_RANK_goodWord')
 		
 		document.querySelector('#hateWordBtn').addEventListener( 'click', ()=> {
 			const hateWord = document.querySelector('#hateWord').value ;	
@@ -140,7 +140,7 @@ class BJscreen extends Main {
 				return;
 			} 
 			if(typeof hateWord === "string"){
-				localStorage.setItem('hateWord' , hateWord)
+				localStorage.setItem('USER_RANK_hateWord' , hateWord)
 				Noti.alert('부정 채팅 단어가 저장되었습니다.')
 				this.chatModel.setHateWord(hateWord)
 			}
@@ -154,14 +154,14 @@ class BJscreen extends Main {
 				return;
 			}
 			if(typeof goodWord === "string"){
-				localStorage.setItem('goodWord' , goodWord);
+				localStorage.setItem('USER_RANK_goodWord' , goodWord);
 				Noti.alert('긍정 채팅 단어가 저장되었습니다.')
 				this.chatModel.setGoodWord(goodWord)
 			}
 		})
 
-		this.chatModel.setHateWord( localStorage.getItem('hateWord'));
-		this.chatModel.setGoodWord( localStorage.getItem('goodWord'));
+		this.chatModel.setHateWord( localStorage.getItem('USER_RANK_hateWord'));
+		this.chatModel.setGoodWord( localStorage.getItem('USER_RANK_goodWord'));
 	}
 
 	sendUser(){
