@@ -261,9 +261,9 @@ class ViewTable extends Table {
 						// 현재 시간을 가져옵니다.
 						if( viewTime ){
 							const millis = viewTime;
-							const seconds = (millis / 1000 ) % 60 ;
-							const minutes = ((millis / (1000 * 60 )) % 60 );
-							const hours = ((millis / (1000 * 60 *60 )) % 24 );
+							const hours = String(Math.floor((millis/ (1000 * 60 *60 )) % 24 )); // 시
+							const minutes = String(Math.floor((millis  / (1000 * 60 )) % 60 )); // 분
+							const seconds = String(Math.floor((millis / 1000 ) % 60)) // 초;
 
 							if(hours){
 								return `${hours}시${minutes}분${seconds}초`

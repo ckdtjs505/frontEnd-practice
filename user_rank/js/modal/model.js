@@ -174,8 +174,7 @@ class SupportModal extends Model {
 			}else if(idx === 2){
 				return`<span id="third"> 🥉${ele.userNickname} </span>`
 			}
-		}).join('')}
-	`pt
+		}).join('')}`
 	}
 }
 
