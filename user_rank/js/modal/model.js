@@ -56,7 +56,7 @@ class ViewModel extends Model {
 
 		this.data = this.data.splice(0,99);
 
-		localStorage.setItem(`${window.broadNumber || 0}_view`, JSON.stringify(this.data));
+		localStorage.setItem(`USER_RANK_${window.broadNumber || 0}_view`, JSON.stringify(this.data));
 	}
 }
 
@@ -161,7 +161,7 @@ class SupportModal extends Model {
 				}
 		} )
 
-		localStorage.setItem(`${window.broadNumber || 0}_support`, JSON.stringify(this.data));
+		localStorage.setItem(`USER_RANK_${window.broadNumber || 0}_support`, JSON.stringify(this.data));
 	}
 
 	createUI(){
@@ -175,7 +175,7 @@ class SupportModal extends Model {
 				return`<span id="third"> 🥉${ele.userNickname} </span>`
 			}
 		}).join('')}
-	`pt
+	`
 	}
 }
 
@@ -231,7 +231,7 @@ class ChatModal extends Model {
 		})
 		this.data = this.data.splice(0,99);
 
-		localStorage.setItem(`${window.broadNumber || 0}_chat`, JSON.stringify(this.data));
+		localStorage.setItem(`USER_RANK_${window.broadNumber || 0}_chat`, JSON.stringify(this.data));
 	}
 
 	setHateWord(word = ''){
