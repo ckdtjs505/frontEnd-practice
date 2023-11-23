@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- displays site properly based on user's device -->
@@ -11,14 +13,12 @@
       sizes="32x32"
       href="./images/favicon-32x32.png"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap"
-      rel="stylesheet"
-    />
 
+    <link rel="stylesheet" href="https://assets.ubuntu.com/v1/vanilla-framework-version-4.5.0.min.css" />
+    
     <link rel="stylesheet" href="./assets/main.css" />
 
-    <title>Frontend Mentor | Rock, Paper, Scissors</title>
+    <title>세팅 페이지</title>
 
     <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
     <style>
@@ -29,10 +29,129 @@
       .attribution a {
         color: hsl(228, 45%, 44%);
       }
+
+      html{
+        color:  white;
+      }
+
+
+      .settingIcon{
+        width: 1rem;
+        height: 1rem;
+        margin-left: auto;
+        margin-right: 0.5rem;
+        margin-top: 0.5rem;
+        background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.817.639a7.572 7.572 0 013.649 2.109l-.668 1.849c.212.297.396.615.55.95l1.936.346c.193.669.296 1.376.296 2.107 0 .731-.103 1.438-.296 2.107l-1.936.346a5.876 5.876 0 01-.55.95l.668 1.85a7.572 7.572 0 01-3.65 2.108l-1.268-1.504a5.956 5.956 0 01-1.096 0l-1.268 1.504a7.572 7.572 0 01-3.65-2.109l.668-1.849a5.876 5.876 0 01-.55-.95l-1.936-.346A7.584 7.584 0 01.42 8c0-.731.103-1.438.296-2.107l1.936-.346c.154-.335.338-.653.55-.95l-.668-1.85A7.572 7.572 0 016.184.64l1.268 1.504a5.956 5.956 0 011.096 0L9.817.639zm.496 1.737L9.19 3.709l-.78-.072a4.456 4.456 0 00-.41-.02l-.206.006-.204.014-.78.072-1.124-1.333-.222.096c-.346.159-.675.35-.984.57l-.194.144.593 1.64-.455.64a4.384 4.384 0 00-.287.463l-.122.244-.327.713-1.713.305-.017.12a6.128 6.128 0 00-.029.343L1.92 8c0 .232.014.462.04.689l.016.119 1.713.306.327.713c.076.165.162.325.258.48l.151.227.455.64-.593 1.639.194.145c.31.22.638.411.984.57l.222.095 1.123-1.332.78.072c.136.013.273.02.411.02l.206-.006.204-.014.78-.072 1.123 1.332.224-.095c.345-.159.674-.35.983-.57l.193-.145-.592-1.639.455-.64c.105-.148.201-.303.287-.463l.122-.244.327-.713 1.712-.306.018-.12c.013-.113.022-.227.029-.342L14.08 8c0-.232-.014-.462-.04-.689l-.017-.12-1.712-.305-.327-.713a4.368 4.368 0 00-.258-.48l-.151-.227-.455-.64.592-1.64-.193-.144c-.309-.22-.638-.411-.983-.57l-.224-.096zM8 5a3 3 0 110 6 3 3 0 010-6zm0 1.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z' fill='white'  fill-rule='nonzero'/%3E%3C/svg%3E");
+      }
+
+      #joinUserList {
+        width: 300px;
+        height: 150px;
+        text-align: center;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+  
     </style>
-    <script defer src="https://static.afreecatv.com/asset/app/extension-helper/afreecatv-extension-sdk.js"></script>
-  </head>
-  <body>
+    <title>Setting</title>
+
+    <script>
+        const _submit = () => {
+            const $setting = document.setting;
+            if(!$setting.joinBalloonCount.value ){
+                alert('no 2')
+                return;
+            }else {
+              window.settingInfo = {
+                maximumCapacity : Number($setting.maximumCapacity.value),
+                joinBalloonCount : Number($setting.joinBalloonCount.value),
+                rounds : Number($setting.rounds.value),
+              }
+
+              document.getElementById('$maximumCapacity').innerText = settingInfo.maximumCapacity;
+              _remove();
+            }
+        }
+        const _remove = () => {
+          document.getElementById('modal').style.display = 'none'
+        }
+
+        const _show = () => {
+          document.getElementById('modal').style.display = 'flex'
+        }
+
+        const _start = () => {
+          joinUserList
+          document.getElementById('joinUserList').style.display = "none"
+          document.getElementById('gameBox').style.display = 'block';
+          
+          console.log('시작하기')
+        }
+        
+    </script>
+      <script defer src="./js/rockScissorsPaper.js"></script>
+      <script defer src="./js/bj_sreen_main.js"></script>
+</head>
+<body>
+  <div id="settingIcon" class="settingIcon" onclick="_show()"></div>
+
+  <div class="p-modal" id="modal">
+    <section class="p-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
+      <header class="p-modal__header">
+        <h2 class="p-modal__title" id="modal-title">Setting</h2>
+        <button class="p-modal__close" aria-label="Close active modal"  onClick="_remove()">Close</button>
+      </header>
+      <form name="setting" >
+        <div>
+            <label for="maximumCapacity">참여인원 </label>
+            <select name="maximumCapacity" id="maximumCapacity">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+
+        <div>
+            <label  for="joinBalloonCount">참가 별풍선수 </label>
+            <div>
+              <input name="joinBalloonCount" id="joinBalloonCount" style=" width: 100%" value="10"></input>
+            </div>
+        </div>
+
+        <div>
+            <label  for="rounds">경기수 </label>
+            <select name="rounds" id="rounds">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div style="text-align: center;">
+          <button type="button"  onclick="_submit()" style="margin: auto;"> 저장하기</button>
+        </div>
+    </form>
+    </section>
+  </div>
+
+  <section id="joinUserList">
+    <div> 참여인원 ( <span id="joinCnt"> 0 </span> / <span id="$maximumCapacity"> 0 </span>) </div>
+    
+    <ol style="width: 5rem; height: 10rem; margin: auto;">
+        <li>TEST</li>
+    </ol>
+
+    <button type="submit" onclick="_start()" style="margin-top: 0.5rem;"> 시작하기 </button>
+  </section>
+
+
+  <section id="gameBox" style="display: none;" >
     <div class="score_box">
       <div class="score_title">ROCK<br />PAPER<br />SCISSORS</div>
       <div class="score_value_box" style="display: none;">
@@ -91,32 +210,8 @@
 
     </div>
 
-    <script defer src="./js/rockScissorsPaper.js"></script>
-    <script defer src="./js/bj_sreen_main.js"></script>
-    <script >
 
-      setTimeout( () => {
-        const SDK = window.AFREECA.ext;
-        window.extensionSDK = SDK();
-        function init() {
-            window.game = new bjRSP();
-        }
-        extensionSDK.handleInitialization((userInfo, broadInfo, playerInfo) => {
-          init();
-        });
-  
-        // extensionSDK.broadcast.listen( (action, message, formId) => {
-        //   console.log(action,message, formId)
-        // });
+  </section>
 
-        extensionSDK.broadcast.listen( (action, message, formId) => {
-          console.log(action,message, formId)
-          game.receiver(action, message, formId);
-        });
-
-      }, 1000)
-
-    </script>
-
-  </body>
+</body>
 </html>
