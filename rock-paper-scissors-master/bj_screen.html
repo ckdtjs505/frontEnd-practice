@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- displays site properly based on user's device -->
@@ -11,14 +13,10 @@
       sizes="32x32"
       href="./images/favicon-32x32.png"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap"
-      rel="stylesheet"
-    />
 
     <link rel="stylesheet" href="./assets/main.css" />
 
-    <title>Frontend Mentor | Rock, Paper, Scissors</title>
+    <title>세팅 페이지</title>
 
     <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
     <style>
@@ -29,94 +27,78 @@
       .attribution a {
         color: hsl(228, 45%, 44%);
       }
+
+      html{
+        color:  white;
+      }
+
+      form {
+        width: 300px;
+        height: 150px;
+        text-align: center;
+        /* 상하좌우 정중앙 정렬하기 */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
     </style>
-    <script defer src="https://static.afreecatv.com/asset/app/extension-helper/afreecatv-extension-sdk.js"></script>
-  </head>
-  <body>
-    <div class="score_box">
-      <div class="score_title">ROCK<br />PAPER<br />SCISSORS</div>
-      <div class="score_value_box" style="display: none;">
-        Score
-        <div class="value">0</div>
-      </div>
-    </div>
+    <title>Setting</title>
 
-    <div class="content-step-one">
-      <div class="paper">
-        <img src="./images/icon-paper.svg" alt="" />
-      </div>
-      <div class="scissors">
-        <img src="./images/icon-scissors.svg" alt="" />
-      </div>
-      <div class="rock">
-        <img src="./images/icon-rock.svg" alt="" />
-      </div>
-    </div>
+    <script>
+        const _submit = () => {
+            const $setting = document.setting;
+            if(!$setting.joinBalloonCount.value ){
+                alert('no 2')
+                return;
+            }else {
+              window.settingInfo = {
+                maximumCapacity : Number($setting.maximumCapacity.value),
+                joinBalloonCount : Number($setting.joinBalloonCount.value),
+                rounds : Number($setting.rounds.value),
+              }
 
-    <div class="content-step-two" style="display: none;">
-      <div class="user-pick">
-        YOU PICKED
-        <div class="user-value paper">
-          <img src="./images/icon-paper.svg" alt="" />
-        </div>
-      </div>
-
-      <div class="content-step-three">
-        <div>YOU LOSE</div>
-        <button>PLAY AGAIN</button>
-      </div>
-
-      <div class="computer-pick">
-        THE HOUSE PICKED
-        <div class="computer-value none">
-          <img src="./images/icon-scissors.svg" alt="" />
-        </div>
-      </div>
-    </div>
-
-    <div class="over" style="display: none;">
-      <div class="rules">
-        <div class="rules_header">
-          <div>RULES</div>
-          <button class="rules_off_Button">x</button>
-        </div>
-        <img src="./images/image-rules.svg" alt="" />
-      </div>
-    </div>
-
-    <div class="rules_on_Button">Rules</div>
-
-    <div id="resultBox" style="color: white; display: flex; flex-direction: column; justify-content: space-between; margin: 0.5rem;" > 
-      <div id="alert"></div>
-
-    </div>
-
-    <script defer src="./js/rockScissorsPaper.js"></script>
-    <script defer src="./js/bj_sreen_main.js"></script>
-    <script >
-
-      setTimeout( () => {
-        const SDK = window.AFREECA.ext;
-        window.extensionSDK = SDK();
-        function init() {
-            window.game = new bjRSP();
+              // 제출 후에는 숨김 처리 
+              // document.setting.style.display = 'none'
+            }
         }
-        extensionSDK.handleInitialization((userInfo, broadInfo, playerInfo) => {
-          init();
-        });
-  
-        // extensionSDK.broadcast.listen( (action, message, formId) => {
-        //   console.log(action,message, formId)
-        // });
-
-        extensionSDK.broadcast.listen( (action, message, formId) => {
-          console.log(action,message, formId)
-          game.receiver(action, message, formId);
-        });
-
-      }, 1000)
-
     </script>
+</head>
+<body>
+  <section>
+    <form name="setting" >
+        <div>
+            <label for="maximumCapacity">참여인원 </label>
+            <select name="maximumCapacity" id="maximumCapacity">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
 
-  </body>
+        <div>
+            <label  for="joinBalloonCount">참가 별풍선수 </label>
+            <input name="joinBalloonCount" id="joinBalloonCount" style="width: 35px;"></input>
+        </div>
+
+        <div>
+            <label  for="rounds">경기수 </label>
+            <select name="rounds" id="rounds">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <input type="button" value="진행하기" onclick="_submit()">
+    </form>
+  </section>
+
+  <section id="joinUserList">
+
+  </section>
+</body>
 </html>

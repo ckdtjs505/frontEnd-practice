@@ -50,21 +50,21 @@
     <title>Setting</title>
 
     <script>
-        const _submit = () => {
-            const $setting = document.setting;
-            if(!$setting.joinBalloonCount.value ){
-                alert('no count')
-                return;
-            }else {
-                $setting.submit();
-            }
-        }
+      const searchParams = new URLSearchParams(window.location.search);
+      const settingInfo = {
+        maximumCapacity : Number(searchParams.get('maximumCapacity')),
+        joinBalloonCount : Number(searchParams.get('joinBalloonCount')),
+        rounds : Number(searchParams.get('rounds'))
+      }
+
+
     </script>
 </head>
 <body>
-    <form name="setting" action="./bj_screen.html">
+    <form name="setting">
         <div>
-            참여자 목록
+            <div> 참여자 ( <span id="joinCnt"> 0 </span> / <span id="maximumCapacity"> 0 </span>) </div>
+            
             <ol>
                 <li> 오창선</li>
                 <li> 오창선</li>
@@ -74,5 +74,11 @@
             <input type="submit" > 시작하기 </input>
         </div>
     </form>
+
+    <script>
+      document.getElementById('maximumCapacity').innerText = settingInfo.maximumCapacity;
+
+      
+    </script>
 </body>
 </html>
