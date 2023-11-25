@@ -12,26 +12,19 @@ const info = {
 
 
 class Main {
-
     constructor() {
-        
         this.setting = new Setting();
         this.joinUser = new JoinUser();
-        this.game = new Game();
+        this.game = new bjRSP();
         this.eventBind();
-
         // 세팅페이지 띄워줌
-        this.setting.show();
+        this.setting.start();
     }
 
-
-
     eventBind(){
-
         // 셋팅쪽 
         document.getElementById('settingIcon').addEventListener('click', () => {
             this.setting.start();
-            
         })
 
         document.getElementById('closeModal').addEventListener('click', ()=>{
@@ -41,7 +34,8 @@ class Main {
         document.getElementById('settingSave').addEventListener('click', ()=>{
             this.setting.save();
 
-            this.joinUser.setting( settingInfo );
+            document.getElementById('joinUserIcon').style.display = "block";
+            this.joinUser.setting( this.setting.settingInfo.maximumCapacity );
             this.joinUser.start();
         })
 
@@ -62,15 +56,32 @@ class Main {
                 // 그이외 모집중이 아닌 경우에는
                 this.joinUser.finish();
             }
-
         })
         
+
+        document.querySelector('#reloadIcon').addEventListener( 'click', () => {
+            document.querySelectorAll(".content-step-one div").forEach( ele => ele.style.background = '')
+
+            // window.extensionSDK.broadcast.send('result', {
+            //     state : 'init',
+            // });
+
+            setTimeout( () => {
+                window.location.reload()
+            },1000)
+        })
     }
 
 }
 
-
-class Setting {
+class Setting {  
+    constructor(){
+        this.settingInfo = {
+            maximumCapacity : 1,
+            joinBalloonCount : 1,
+            rounds : 1,
+        }
+    }
 
     start(){
         document.getElementById('modal').style.display = 'flex';
@@ -88,22 +99,34 @@ class Setting {
             alert('no 2')
             return;
         }else {
-            window.settingInfo = {
+
+
+            this.settingInfo = {
                 maximumCapacity : Number($setting.maximumCapacity.value),
                 joinBalloonCount : Number($setting.joinBalloonCount.value),
                 rounds : Number($setting.rounds.value),
             }
 
+            $setting.joinBalloonCount.disabled = true;
+            $setting.maximumCapacity.disabled = true;
+            $setting.rounds.disabled = true;
+            document.querySelector("#settingSave").disabled = true;
+
+            document.getElementById('closeModal').style.display = 'block';
             this.finish();
         }
     }
 }
 
 class JoinUser {
+    constructor(){
+        this.userList = [];
+    }
+
 
     setting(value){
-        document.getElementById('$maximumCapacity').innerText = value.maximumCapacity;
-
+        document.getElementById('$maximumCapacity').innerText = value;
+        this.maximumCapacity = value;
     }
 
     start(){
@@ -112,21 +135,50 @@ class JoinUser {
     }
 
     finish(){
-        document.querySelector('#joinUser').style.display = 'none';
+        document.querySelector('#joinUser').style.display = 'none';       
+    }
+
+    addUser(message){
+        message = {
+            userId  : 'ckdtjs505',
+            userNickname : "soina"
+        }
+
+        if(this.userList.length === this.maximumCapacity ){
+            return;
+        }
+
+        if(this.userList.includes(message.userNickname)){
+            return;
+        }
+
+        this.userList.push(message.userNickname)
+
+        document.querySelector('#joinCnt').innerText = this.userList.length;
+        document.createElement('li').innerText = 
+        document.querySelector("#joinUserList").innerHTML = `${this.userList.map( (nickname) => {
+            return `<li> ${nickname}</li>`
+        }).join('')}`
+        
     }
 
     recruiting(){
-        document.querySelector('#recruitBtn').innerHTML = '모집완료하기'
+        // document.querySelector('#recruitBtn').innerHTML = '모집완료하기'
 
-        this.recruited();
+        // this.recruited();
     }
 
     recruited(){
 
-        info.state = STATE.RECRUIT_FINISH
+        info.state = STATE.RECRUIT_FINISH;
 
         document.querySelector('#recruitBtn').innerHTML = '모집완료'
-        this.finish();
+
+        document.querySelector('#recruitBtn').disabled = true;
+
+        document.querySelector('#joinUserModal').style.display = 'block'; 
+
+        this.finish(); 
     }
     
 }

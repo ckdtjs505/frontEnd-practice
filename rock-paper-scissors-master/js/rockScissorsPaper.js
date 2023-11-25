@@ -5,13 +5,25 @@ class rockScissorsPaper {
     this.gameResult = null;
     this.computerValue = null;
     this.selectValue = null;
-<<<<<<< HEAD:rock-paper-scissors-master/js/rockScissorsPaper.js
     
-=======
->>>>>>> 1ef3851e6187ebf90953c1d0024fcd8a74b4bd8d:rock-paper-scissors-master/js/main.js
     this.build();
     this.eventBind();
+  }
 
+  build() {
+    this.stepOne = document.querySelector(".content-step-one");
+    this.stepTwo = document.querySelector(".content-step-two");
+
+    document.querySelector('.rules_on_Button').style.display = 'none'
+    this.scoreDom = document.querySelector(".value");
+    this.setScore();
+  }
+
+  ready(){
+    // this.stepOne.style.display = 'none'
+  }
+
+  eventBind() {
     window.addEventListener('message', ({data}) => {
       // console.log(data)
       
@@ -30,22 +42,6 @@ class rockScissorsPaper {
       
     })
 
-    const button = document.createElement('button');
-    button.innerHTML = '새로고침'
-    button.addEventListener('click', ()=> document.location.reload())
-    document.body.prepend( button )
-  }
-
-  build() {
-    this.stepOne = document.querySelector(".content-step-one");
-    this.stepTwo = document.querySelector(".content-step-two");
-
-    document.querySelector('.rules_on_Button').style.display = 'none'
-    this.scoreDom = document.querySelector(".value");
-    this.setScore();
-  }
-
-  eventBind() {
     // 가위 바위 보 클릭시
     this.stepOne.querySelectorAll("div").forEach(btn => {
       btn.addEventListener("click", e => {
@@ -55,11 +51,6 @@ class rockScissorsPaper {
         // 선택한 값만 그래이로
         e.currentTarget.style.background = 'gray'
         this.selectValue = e.currentTarget.className
-<<<<<<< HEAD:rock-paper-scissors-master/js/rockScissorsPaper.js
-
-        // this.send(e.currentTarget.className);
-=======
->>>>>>> 1ef3851e6187ebf90953c1d0024fcd8a74b4bd8d:rock-paper-scissors-master/js/main.js
       });
     });
 
@@ -74,21 +65,12 @@ class rockScissorsPaper {
     });
 
     // PLAY AGAIN BUTTON 클릭시 - stepOne 화면 재노출
-<<<<<<< HEAD:rock-paper-scissors-master/js/rockScissorsPaper.js
-    // this.stepTwo.querySelector(".content-step-three button").addEventListener("click", () => {
-    //   this.stepOne.style.display = "flex";
-    //   this.stepTwo.style.display = "none";
-    //   document.querySelectorAll(".content-step-one div").forEach( ele => ele.style.background = '')
-    //   console.log("click");
-    // });
-=======
     this.stepTwo.querySelector(".content-step-three button").addEventListener("click", () => {
       this.stepOne.style.display = "flex";
       this.stepTwo.style.display = "none";
       document.querySelectorAll(".content-step-one div").forEach( ele => ele.style.background = '')
       console.log("click");
     });
->>>>>>> 1ef3851e6187ebf90953c1d0024fcd8a74b4bd8d:rock-paper-scissors-master/js/main.js
   }
 
   /**
@@ -104,14 +86,6 @@ class rockScissorsPaper {
     if (user === result) {
       return 0;
     } else {
-<<<<<<< HEAD:rock-paper-scissors-master/js/rockScissorsPaper.js
-      // 진경우
-      if( (user === 'rock' && result === 'paper') || (user === 'scissors' && result === 'rock') || (user === 'paper' && result === 'scissors') ){
-        return -1;
-      }else if( (user === 'rock' && result === 'scissors') || (user === 'scissors' && result === 'paper') || (user === 'paper' && result === 'rock')) {
-        return 1;
-      } 
-=======
       switch (this.computerValue) {
         case "rock":
           if (value === "paper") {
@@ -132,7 +106,6 @@ class rockScissorsPaper {
             return -1;
           }
       }
->>>>>>> 1ef3851e6187ebf90953c1d0024fcd8a74b4bd8d:rock-paper-scissors-master/js/main.js
     }
   };
 
@@ -153,22 +126,13 @@ class rockScissorsPaper {
     console.log( this.selectValue )
 
     // 유저가 선택한 값 UI 노출
-<<<<<<< HEAD:rock-paper-scissors-master/js/rockScissorsPaper.js
-    this.stepTwo.querySelector(".user-value").classList.add = this.selectValue;
-    this.stepTwo.querySelector(".user-value img").src = `./images/icon-${this.selectValue === 'scissor' ?'scissors' : this.selectValue }.svg`;
-
-    this.gameResult = result;
-=======
     this.stepTwo.querySelector(".user-value").classList.add = value;
     this.stepTwo.querySelector(".user-value img").src = `./images/icon-${value === 'scissor' ?'scissors' : value }.svg`;
->>>>>>> 1ef3851e6187ebf90953c1d0024fcd8a74b4bd8d:rock-paper-scissors-master/js/main.js
 
     // 결과 값 노출
     this.stepTwo.querySelector(".content-step-three div").innerText = this.showResultNumToStr(
       result
     );
-
-    
 
     // 컴퓨터가 선택한 값 UI 노출
     this.stepTwo.querySelector(".computer-value").classList.add = this.computerValue;

@@ -28,7 +28,8 @@ body::-webkit-scrollbar {
   padding: 0.5rem;
   max-width: 600px;
   margin: auto;
-  /* margin-top: 3rem; */
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
   font-size: 1.5rem;
   line-height: 1.5rem;
   color: white;

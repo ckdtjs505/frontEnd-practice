@@ -6,7 +6,8 @@ class bjRSP extends rockScissorsPaper {
         const resultBox = document.querySelector('#resultBox')
 
         const endButton = document.createElement('button')
-        endButton.innerText = '제출하기'
+        endButton.style.marginTop = '5rem'
+        endButton.innerText = '완료'
         resultBox.append(endButton);
         endButton.addEventListener('click', () => {
             
@@ -17,29 +18,16 @@ class bjRSP extends rockScissorsPaper {
                     select : this.selectValue 
                 });
 
-                const alert = document.querySelector('#alert');
-                alert.innerHTML = '이긴사람이 없습니다?... 혼자 한건아닌가요?'
+                // const alert = document.querySelector('#alert');
+                // alert.innerHTML = '이긴사람이 없습니다?... 혼자 한건아닌가요?'
             }else {
-                const alert = document.querySelector('#alert');
-                alert.innerHTML = '선택된 값이 없습니다.'
+                // const alert = document.querySelector('#alert');
+                // alert.innerHTML = '선택된 값이 없습니다.'
             }
 
         })
 
-        const initButton = document.createElement('button');
-        initButton.innerText = '다시 하기'
         this.selectValue = null
-        resultBox.append(initButton);
-        initButton.addEventListener('click', () => {
-            document.querySelectorAll(".content-step-one div").forEach( ele => ele.style.background = '')
-            window.extensionSDK.broadcast.send('result', {
-                state : 'init',
-            });
-
-            setTimeout( () => {
-                window.location.reload()
-            },1000)
-        })
     }
 
 
