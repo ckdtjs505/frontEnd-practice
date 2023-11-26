@@ -25,21 +25,10 @@ class rockScissorsPaper {
 
   eventBind() {
     window.addEventListener('message', ({data}) => {
-      // console.log(data)
-      
-      // if(data && data?.data?.event === "result_game"){
-      //   // 컴퓨터 선택값
-      //   this.computerValue = data.data.args[0];
-      //   // 기존 UI 미노출
-      //   this.stepOne.style.display = "none";
-      //   // 결과값 노출
-      //   this.showStepTwoUI(this.selectValue);
-      // }
       if( data && data.cmd === 'msg'){
         document.querySelector(".chat_value").innerText = data.data.message
         document.querySelector(".chat_id").innerText = data.data.nickname
       }
-      
     })
 
     // 가위 바위 보 클릭시
