@@ -181,7 +181,7 @@
 
     <div class="rules_on_Button">Rules</div>
 
-    <div id="resultBox" style="color: white; display: flex; /*! flex-direction: column; */ justify-content: center; /*! margin: 0.5rem; */text-align: center;" > 
+    <div id="resultBox" style="color: white;display: flex; /*! flex-direction: column; */justify-content: center; /*! margin: 0.5rem; */text-align: center;flex-direction: column;" > 
       <div id="alert"></div>
     </div>
 
@@ -195,15 +195,16 @@
         window.extensionSDK = SDK();
         function init() {
           console.log('init')
-          window.main = new Main();
+          window.main = new BJScreenMain();
         }
+        
         extensionSDK.handleInitialization((userInfo, broadInfo, playerInfo) => {
           init();
         });
   
         extensionSDK.broadcast.listen( (action, message, formId) => {
           console.log(action,message, formId)
-          game.receiver(message);
+          window.main.receive(action, message);
         });
 
         extensionSDK.chat.listen((action, message) => {

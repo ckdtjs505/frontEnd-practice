@@ -4,9 +4,10 @@ class userRSP extends rockScissorsPaper {
     }
 
     receiver(value){
+        console.log(value)
         if( value.state === 'init' ) {
             window.location.reload()
-        }else if( value.state === 'result') {
+        }else if( value.state === 'BJ_CHOICE') {
             // 컴퓨터 선택값
             this.computerValue = value.select;
             // 기존 UI 미노출
@@ -15,7 +16,8 @@ class userRSP extends rockScissorsPaper {
             this.showStepTwoUI(value.select);
 
             if( this.gameResult === 1) {
-                window.extensionSDK.broadcast.send('user_result', {
+                window.extensionSDK.broadcast.send('USER_RESULT', {
+                    // 본인 아이디 입력 
                     value : this.score
                 });
             }

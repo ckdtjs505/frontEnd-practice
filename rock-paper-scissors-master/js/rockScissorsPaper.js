@@ -52,6 +52,7 @@ class rockScissorsPaper {
         e.currentTarget.style.background = 'gray'
         this.selectValue = e.currentTarget.className
       });
+
     });
 
     // Rules 버튼 클릭시
@@ -65,12 +66,12 @@ class rockScissorsPaper {
     });
 
     // PLAY AGAIN BUTTON 클릭시 - stepOne 화면 재노출
-    this.stepTwo.querySelector(".content-step-three button").addEventListener("click", () => {
-      this.stepOne.style.display = "flex";
-      this.stepTwo.style.display = "none";
-      document.querySelectorAll(".content-step-one div").forEach( ele => ele.style.background = '')
-      console.log("click");
-    });
+    // this.stepTwo.querySelector(".content-step-three button").addEventListener("click", () => {
+    //   this.stepOne.style.display = "flex";
+    //   this.stepTwo.style.display = "none";
+    //   document.querySelectorAll(".content-step-one div").forEach( ele => ele.style.background = '')
+    //   console.log("click");
+    // });
   }
 
   /**
