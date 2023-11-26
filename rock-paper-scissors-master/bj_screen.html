@@ -74,6 +74,8 @@
 
     </style>
     <title>Setting</title>
+    <script src="https://static.afreecatv.com/asset/app/extension-helper/afreecatv-extension-sdk.js"></script>
+
     <script defer src="./js/rockScissorsPaper.js"></script>
     <script defer src="./js/bj_sreen_main.js"></script>
 </head>
@@ -105,7 +107,7 @@
             </div>
         </div>
 
-        <div>
+        <!-- <div>
             <label  for="rounds">경기수 </label>
             <select name="rounds" id="rounds">
                 <option value="1">1</option>
@@ -114,7 +116,7 @@
                 <option value="4">4</option>
                 <option value="5">5</option>
             </select>
-        </div>
+        </div> -->
         <div style="text-align: center;">
           <button id="settingSave" type="button"  style="margin: auto;"> 저장하기</button>
         </div>
@@ -217,8 +219,8 @@
         const SDK = window.AFREECA.ext;
         window.extensionSDK = SDK();
         function init() {
-
-          const main = new Main();
+          console.log('init')
+          window.main = new Main();
         }
         extensionSDK.handleInitialization((userInfo, broadInfo, playerInfo) => {
           init();
@@ -229,12 +231,28 @@
           game.receiver(message);
         });
 
+        extensionSDK.chat.listen((action, message) => {
+          window.main.receive(action, message)
+        })   
 
-      }, 1000)
+        setTimeout( () => {
+          window.main.receive('BALLOON_GIFTED', {
+            userId: 'jsp021',
+            userNickname: '귀요미',
+            count: 10
+          })
+          window.main.receive('BALLOON_GIFTED', {
+            userId: 'jsp022',
+            userNickname: '귀요미1',
+            count: 10
+          })
+          window.main.receive('BALLOON_GIFTED', {
+            userId: 'jsp023',
+            userNickname: '귀요미2',
+            count: 10
+          })
+        },6000)
 
-      setTimeout( () => {
-
-        const main = new Main();
       }, 1000)
   </script>
 </body>

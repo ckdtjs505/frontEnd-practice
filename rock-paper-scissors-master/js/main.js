@@ -21,6 +21,14 @@ class Main {
         this.setting.start();
     }
 
+    receive(action, message){
+        switch (action) {
+			case 'BALLOON_GIFTED':
+                this.joinUser.addUser(message, this.setting.settingInfo.joinBalloonCount );
+				break;
+        }
+    }
+
     eventBind(){
         // 셋팅쪽 
         document.getElementById('settingIcon').addEventListener('click', () => {
@@ -79,7 +87,7 @@ class Setting {
         this.settingInfo = {
             maximumCapacity : 1,
             joinBalloonCount : 1,
-            rounds : 1,
+            // rounds : 1,
         }
     }
 
@@ -104,12 +112,12 @@ class Setting {
             this.settingInfo = {
                 maximumCapacity : Number($setting.maximumCapacity.value),
                 joinBalloonCount : Number($setting.joinBalloonCount.value),
-                rounds : Number($setting.rounds.value),
+                // rounds : Number($setting.rounds.value),
             }
 
             $setting.joinBalloonCount.disabled = true;
             $setting.maximumCapacity.disabled = true;
-            $setting.rounds.disabled = true;
+            // $setting.rounds.disabled = true;
             document.querySelector("#settingSave").disabled = true;
 
             document.getElementById('closeModal').style.display = 'block';
@@ -138,10 +146,10 @@ class JoinUser {
         document.querySelector('#joinUser').style.display = 'none';       
     }
 
-    addUser(message){
-        message = {
-            userId  : 'ckdtjs505',
-            userNickname : "soina"
+    addUser(message, joinBalloonCount){
+
+        if( message.count != joinBalloonCount){
+            return;
         }
 
         if(this.userList.length === this.maximumCapacity ){

@@ -27,14 +27,14 @@ class rockScissorsPaper {
     window.addEventListener('message', ({data}) => {
       // console.log(data)
       
-      if(data && data?.data?.event === "result_game"){
-        // 컴퓨터 선택값
-        this.computerValue = data.data.args[0];
-        // 기존 UI 미노출
-        this.stepOne.style.display = "none";
-        // 결과값 노출
-        this.showStepTwoUI(this.selectValue);
-      }
+      // if(data && data?.data?.event === "result_game"){
+      //   // 컴퓨터 선택값
+      //   this.computerValue = data.data.args[0];
+      //   // 기존 UI 미노출
+      //   this.stepOne.style.display = "none";
+      //   // 결과값 노출
+      //   this.showStepTwoUI(this.selectValue);
+      // }
       if( data && data.cmd === 'msg'){
         document.querySelector(".chat_value").innerText = data.data.message
         document.querySelector(".chat_id").innerText = data.data.nickname
@@ -111,8 +111,8 @@ class rockScissorsPaper {
 
   // 결과값 저장 및 노출
   setScore() {
-    localStorage.setItem("score", this.score);
-    this.scoreDom.innerHTML = localStorage.getItem("score");
+    // localStorage.setItem("score", this.score);
+    // this.scoreDom.innerHTML = localStorage.getItem("score");
   }
 
   // 가위 바위보 결과값 노출
