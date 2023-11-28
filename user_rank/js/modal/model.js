@@ -27,6 +27,7 @@ class ViewModel extends Model {
 						viewTime: val.viewTime,
 						InTimeStamp: new Date(),
 						OutTimeStamp: null,
+						isVeiw: true,
 						inOutCount: val.inOutCount + 1
 					}
 				}else if( type === 'OUT'){
@@ -34,6 +35,7 @@ class ViewModel extends Model {
 					return {
 						...val,
 						viewTime: val.viewTime + (new Date()  - val.InTimeStamp),
+						isView: false,
 						OutTimeStamp: new Date()
 					}
 				}
@@ -46,6 +48,7 @@ class ViewModel extends Model {
 				...addVal,
 				viewTime: 0,
 				InTimeStamp: new Date(),
+				isView: true,
 				inOutCount : 1
 			});
 		}
@@ -117,6 +120,9 @@ class SupportModal extends Model {
 					this.data.push({
 						...addVal,
 						balloonCount : addVal.count,
+						adBalloonCount : 0,
+						battleMissionCount : 0,
+						challengeMissionCount : 0,
 						sendCount: 1,
 						sendPercent: [addVal.count / this.totalCount],
 					});
@@ -125,6 +131,9 @@ class SupportModal extends Model {
 					this.data.push({
 						...addVal,
 						adBalloonCount : addVal.count,
+						balloonCount : 0,
+						battleMissionCount : 0,
+						challengeMissionCount : 0,
 						sendCount: 1,
 						sendPercent: [addVal.count / this.totalCount],
 					});
@@ -132,6 +141,9 @@ class SupportModal extends Model {
 				case 'BATTLE_MISSION_GIFTED':
 					this.data.push({
 						...addVal,
+						balloonCount : 0,
+						adBalloonCount : 0,
+						challengeMissionCount : 0,
 						battleMissionCount : addVal.count,
 						sendCount: 1,
 						sendPercent: [addVal.count / this.totalCount],
@@ -140,7 +152,10 @@ class SupportModal extends Model {
 				case 'CHALLENGE_MISSION_GIFTED':
 					this.data.push({
 						...addVal,
+						balloonCount : 0,
+						adBalloonCount : 0,
 						challengeMissionCount : addVal.count,
+						battleMissionCount : 0,
 						sendCount: 1,
 						sendPercent: [addVal.count / this.totalCount],
 					});
@@ -160,6 +175,8 @@ class SupportModal extends Model {
 					sendPercent: [ele.count / this.totalCount]
 				}
 		} )
+
+		console.log(this.data)
 
 		localStorage.setItem(`USER_RANK_${window.broadNumber || 0}_support`, JSON.stringify(this.data));
 	}

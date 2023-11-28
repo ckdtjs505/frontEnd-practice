@@ -205,9 +205,9 @@ class ViewTable extends Table {
 				{ field: 'userNickname', headerName: '닉네임', maxWidth: 100},
 				{
 					field: 'isView',  headerName: '시청중', maxWidth: 60,  
-					cellRenderer: ({ data: { InTimeStamp, OutTimeStamp } }) => {
+					cellRenderer: ({ data: { isView } }) => {
 						// 현재 시간을 가져옵니다.
-						if( InTimeStamp &&  !OutTimeStamp ){
+						if( isView ){
 							return `YES`;
 						}else {
 							return 'NO';
@@ -215,7 +215,7 @@ class ViewTable extends Table {
 					},
 				},
 
-				{ field: 'intTimeStamp',  headerName: '입장시간', maxWidth: 100,  
+				{ field: 'InTimeStamp',  headerName: '입장시간', maxWidth: 100,  
 					cellRenderer: ({ data: { InTimeStamp } }) => {
 						if( InTimeStamp ){
 							InTimeStamp = new Date(InTimeStamp);
@@ -232,10 +232,10 @@ class ViewTable extends Table {
 							}
 							
 						}
-						return `-`;
+						return InTimeStamp;
 					}, 
 				},
-				{ field: 'intTimeStamp',  headerName: '퇴장시간', maxWidth: 100,  
+				{ field: 'OutTimeStamp',  headerName: '퇴장시간', maxWidth: 100,  
 					cellRenderer: ({ data: { OutTimeStamp } }) => {
 						if( OutTimeStamp ){
 							OutTimeStamp = new Date(OutTimeStamp);
